@@ -1,6 +1,5 @@
 // This is the main file for the game logic and function
-//
-//all da nubs
+
 #include "game.h"
 #include "Framework\console.h"
 #include <iostream>
@@ -130,7 +129,7 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-    if (g_dElapsedTime > 10.0) // wait for 3 seconds to switch to game mode, else do nothing
+    if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
         g_eGameState = S_GAME;
 }
 
