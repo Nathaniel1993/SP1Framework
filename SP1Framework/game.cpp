@@ -1,5 +1,5 @@
 // This is the main file for the game logic and function
-//marcus here
+
 
 #include "game.h"
 #include "Framework\console.h"
