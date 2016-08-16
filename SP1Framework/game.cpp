@@ -11,6 +11,7 @@
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
+bool Caught = false;
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -193,11 +194,11 @@ void moveCharacter()
 }
 void moveEnemy()
 {
-	COORD c;
-	c.X = 5; 
+	COORD c = g_Console.getConsoleSize();
+	c.X = 5;
 	c.Y = 5;
 	
-	if (((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 3) || (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 3)
+	if (((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 3) && (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 3)
 	{
 		for (int i = 0; i < ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) || (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y)); i++)
 		{
@@ -219,17 +220,18 @@ void moveEnemy()
 			{
 				g_sEnemy.m_cLocation.X++;
 			}
-		}
-			/* (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X);*/
-			//g_sEnemy.m_cLocation.X += (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X);
-			//g_sEnemy.m_cLocation.Y += (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y);
-			
+		}	
 	}
-
+	
 	if ((g_sEnemy.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sEnemy.m_cLocation.Y == g_sChar.m_cLocation.Y))
 	{
-		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
+		/*g_Console.writeToBuffer(c, "Test lolololol ", 0x03);*/
+		Caught = true;
 	}
+	/*if (Caught == true)
+	{
+		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
+	}*/
 
 	//in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation);
 	//if (in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation))
@@ -280,14 +282,14 @@ void renderMap()
         0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
     };
 
-    COORD c;
+   /* COORD c;
     for (int i = 0; i < 12; ++i)
     {
         c.X = 5 * i;
         c.Y = i + 1;
         colour(colors[i]);
         g_Console.writeToBuffer(c, " °±²Û", colors[i]);
-    }
+    }*/
 }
 
 void renderCharacter()
@@ -305,8 +307,16 @@ void renderEnemy()
 {
 	//Draw location of Enemy
 	WORD charColor = 0x0C;
+	COORD c = g_Console.getConsoleSize();
+	c.X = 5;
+	c.Y = 5;
 
-	g_Console.writeToBuffer(g_sEnemy.m_cLocation, (char)7, charColor);
+	g_Console.writeToBuffer(g_sEnemy.m_cLocation, (char)97, charColor);
+
+	if (Caught == true)
+	{
+		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
+	}
 
 }
 
