@@ -15,8 +15,6 @@ double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool Caught = false;
 char map[80][30];
-int width = 0;
-int height = 0;
 
 
 // Game specific variables here
@@ -308,6 +306,8 @@ void renderMap()
 	//int width = 0;
 	//int height = 0;
 	ifstream file("map.txt");
+	int width = 0;
+	int height = 0;
 	COORD c;
 	if (file.is_open())
 	{
