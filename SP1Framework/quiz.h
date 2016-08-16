@@ -12,6 +12,5 @@ struct QuizQuestion
 };
 
 struct QuizQuestion stQuestion[30];
-struct QuizAnswer stAnswer[30];
 
 #endif
