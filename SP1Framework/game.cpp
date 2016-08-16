@@ -10,11 +10,14 @@
 #include <fstream>
 
 using namespace std;
-
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool Caught = false;
+char map[80][30];
+int width = 0;
+int height = 0;
+
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -87,6 +90,7 @@ void getInput( void )
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 }
+
 
 //--------------------------------------------------------------
 // Purpose  : Update function
@@ -164,24 +168,40 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y--;
         bSomethingHappened = true;
+		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		{
+			g_sChar.m_cLocation.Y++;
+		}
     }
     if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X--;
         bSomethingHappened = true;
+		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		{
+			g_sChar.m_cLocation.X++;
+		}
     }
     if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y++;
         bSomethingHappened = true;
+		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		{
+			g_sChar.m_cLocation.Y--;
+		}
     }
     if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X++;
         bSomethingHappened = true;
+		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		{
+			g_sChar.m_cLocation.X--;
+		}
     }
     if (g_abKeyPressed[K_SPACE])
     {
@@ -284,9 +304,9 @@ void renderMap()
 		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
-	char map[255][255];
-	int width = 0;
-	int height = 0;
+	//char map[255][255];
+	//int width = 0;
+	//int height = 0;
 	ifstream file("map.txt");
 	COORD c;
 	if (file.is_open())
