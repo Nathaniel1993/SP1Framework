@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "Ai.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -13,11 +14,12 @@ bool    g_abKeyPressed[K_COUNT];
 
 // Game specific variables here
 SGameChar   g_sChar;
+SGameEnemy  g_sEnemy; // Enemy
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
 // Console object
-Console g_Console(80, 25, "SP1 Framework");
+Console g_Console(80, 30, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -37,6 +39,10 @@ void init( void )
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+
+	g_sEnemy.m_cLocation.X = g_Console.getConsoleSize().X / 3; // enemy spawn location
+	g_sEnemy.m_cLocation.Y = g_Console.getConsoleSize().Y / 3;
+
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -146,7 +152,7 @@ void moveCharacter()
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
-
+	moveEnemy();
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
@@ -185,6 +191,53 @@ void moveCharacter()
         g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
     }
 }
+void moveEnemy()
+{
+	COORD c;
+	c.X = 5; 
+	c.Y = 5;
+	
+	if (((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 3) || (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 3)
+	{
+		for (int i = 0; i < ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) || (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y)); i++)
+		{
+			if (g_sChar.m_cLocation.Y < g_sEnemy.m_cLocation.Y)
+			{
+				g_sEnemy.m_cLocation.Y--;
+
+			}
+			else if (g_sChar.m_cLocation.Y > g_sEnemy.m_cLocation.Y)
+			{
+				g_sEnemy.m_cLocation.Y++;
+			}
+
+			if (g_sChar.m_cLocation.X < g_sEnemy.m_cLocation.X)
+			{
+				g_sEnemy.m_cLocation.X--;
+			}
+			else if (g_sChar.m_cLocation.X > g_sEnemy.m_cLocation.X)
+			{
+				g_sEnemy.m_cLocation.X++;
+			}
+		}
+			/* (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X);*/
+			//g_sEnemy.m_cLocation.X += (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X);
+			//g_sEnemy.m_cLocation.Y += (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y);
+			
+	}
+
+	if ((g_sEnemy.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sEnemy.m_cLocation.Y == g_sChar.m_cLocation.Y))
+	{
+		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
+	}
+
+	//in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation);
+	//if (in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation))
+	//{
+	//	move_towards(g_sEnemy.m_cLocation, g_sChar.m_cLocation);
+	//}
+
+}
 void processUserInput()
 {
     // quits the game if player hits the escape key
@@ -216,6 +269,7 @@ void renderGame()
 {
     renderMap();        // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
+	renderEnemy();
 }
 
 void renderMap()
@@ -245,6 +299,15 @@ void renderCharacter()
         charColor = 0x0A;
     }
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+}
+
+void renderEnemy()
+{
+	//Draw location of Enemy
+	WORD charColor = 0x0C;
+
+	g_Console.writeToBuffer(g_sEnemy.m_cLocation, (char)7, charColor);
+
 }
 
 void renderFramerate()
