@@ -7,6 +7,9 @@
 #include <iomanip>
 #include <sstream>
 #include "Ai.h"
+#include <fstream>
+
+using namespace std;
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -277,19 +280,44 @@ void renderGame()
 void renderMap()
 {
     // Set up sample colours, and output shadings
-    const WORD colors[] = {
-        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-    };
+	const WORD colors[] = {
+		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
+		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
+	};
+	char map[255][255];
+	int width = 0;
+	int height = 0;
+	ifstream file("map.txt");
+	COORD c;
+	if (file.is_open())
+	{
+		while (height < 23)
+		{
+			while (width < 56)
+			{
+				file >> map[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
 
-   /* COORD c;
-    for (int i = 0; i < 12; ++i)
-    {
-        c.X = 5 * i;
-        c.Y = i + 1;
-        colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
-    }*/
+		file.close();
+		for (int y = 0;y < 23;y++)
+		{
+			c.Y = y;
+			for (int x = 0;x < 56;x++)
+			{
+				if (map[x][y] == 'i')
+				{
+					map[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, map[x][y]);
+
+			}
+		}
+	}
 }
 
 void renderCharacter()
