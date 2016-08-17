@@ -14,7 +14,7 @@ using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
-
+char MapSize[80][30];
 
 
 
@@ -331,7 +331,6 @@ void renderToScreen()
 
 void rendermap1()
 {
-
 	ifstream file("map1.txt");
 	int width = 0;
 	int height = 0;
@@ -368,7 +367,7 @@ void rendermap1()
 	}
 	renderCharacter();
 	renderEnemy();
-	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 0)
+	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 0)
 	{
 		clearScreen();
 		g_eGameState = S_MAP2;
@@ -378,7 +377,6 @@ void rendermap1()
 }
 void rendermap2()
 {
-
 	ifstream file("map2.txt");
 	int width = 0;
 	int height = 0;
@@ -415,7 +413,7 @@ void rendermap2()
 	}
 	renderEnemy();
 	renderCharacter();
-	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 29)
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 29)
 	{
 		clearScreen();
 		g_eGameState = S_MAP1;
