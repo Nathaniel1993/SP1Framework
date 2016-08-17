@@ -22,7 +22,10 @@ enum EKEYS
 enum EGAMESTATES
 {
     S_SPLASHSCREEN,
+	S_MENU,
     S_GAME,
+	S_MAP1,
+	S_MAP2,
     S_COUNT
 };
 
@@ -51,5 +54,22 @@ void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void moveEnemy();			// Moving enemies.
-
+void rendermap1();
+void rendermap2();
+void rendermap3();
+void rendermap4();
+void rendermap5();
+void rendermap6();
+void rendermap7();
+void rendermap8();
+void rendermap9();
+void map1();
+void map2();
+void map3();
+void map4();
+void map5();
+void map6();
+void map7();
+void map8();
+void map9();
 #endif // _GAME_H

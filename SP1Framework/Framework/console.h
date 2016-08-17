@@ -52,12 +52,12 @@ class Console
         
         //===================================================================================================
         // The functions below sets up the screen buffer and writes to the console with this data
-		COORD getConsoleSize() { return m_cConsoleSize; };  // Gets the console size
-		COORD getMaxConsoleSize() { return m_cMaxConsoleSize; };  // Gets the maximum allowable console size
-        void setConsoleTitle(LPCSTR lpConsoleTitle); // sets the console title
-        void setConsoleFont(SHORT width, SHORT height, LPCWSTR lpcwFontName); // sets the console font
-        void flushBufferToConsole(); // writes the contents of the buffer to the screen
-        void clearBuffer(WORD attribute = 0x0F); // clears the screen with this colour
+			COORD getConsoleSize() { return m_cConsoleSize; };  // Gets the console size
+			COORD getMaxConsoleSize() { return m_cMaxConsoleSize; };  // Gets the maximum allowable console size
+			void setConsoleTitle(LPCSTR lpConsoleTitle); // sets the console title
+			void setConsoleFont(SHORT width, SHORT height, LPCWSTR lpcwFontName); // sets the console font
+			void flushBufferToConsole(); // writes the contents of the buffer to the screen
+			void clearBuffer(WORD attribute = 0x0F); // clears the screen with this colour
 
         // writeToBuffer takes in a c-style string, c++ string, or a char
         // You will need to provide the coordinate to place the leftmost character
@@ -86,6 +86,10 @@ class Console
         void writeToConsole(const CHAR_INFO* lpBuffer);
 
         void shutDownConsole();
+};
+class Character
+{
+
 };
 
 #endif // _CONSOLE_H

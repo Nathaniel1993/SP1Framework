@@ -41,10 +41,19 @@ void init( void )
 
     // sets the initial state for the game
     g_eGameState = S_SPLASHSCREEN;
+	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
+	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
+	/*if (g_eGameState = S_MAP1)
+	{
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
+	}*/
 
-    g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
-    g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
-
+	/*if (g_eGameState = S_MAP2)
+	{
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y;
+	}*/
 	g_sEnemy.m_cLocation.X = g_Console.getConsoleSize().X / 3; // enemy spawn location
 	g_sEnemy.m_cLocation.Y = g_Console.getConsoleSize().Y / 3;
 
@@ -110,13 +119,16 @@ void update(double dt)
     g_dElapsedTime += dt;
     g_dDeltaTime = dt;
 
-    switch (g_eGameState)
-    {
-        case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
-            break;
-        case S_GAME: gameplay(); // gameplay logic when we are in the game
-            break;
-    }
+	switch (g_eGameState)
+	{
+	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen
+		break;
+	case S_GAME: gameplay(); // gameplay logic when we are in the game
+		break;
+	case S_MAP1: map1();
+		break;
+	case S_MAP2: map2();
+	}
 }
 //--------------------------------------------------------------
 // Purpose  : Render function is to update the console screen
@@ -135,6 +147,10 @@ void render()
             break;
         case S_GAME: renderGame();
             break;
+		case S_MAP1: rendermap1();
+			break;
+		case S_MAP2: rendermap2();
+			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -290,54 +306,35 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    renderMap();        // renders the map to the buffer first
+	//if (g_eGameState = S_MAP1)
+	//rendermap1();
+	//if (g_eGameState = S_MAP2)
+	//rendermap2();
+	renderMap();
     renderCharacter();  // renders the character into the buffer
+	moveCharacter();
 	renderEnemy();
 }
 
 void renderMap()
 {
-    // Set up sample colours, and output shadings
+	bool start = true;
+	bool check = false;
+	bool cleared = false;
+	// Set up sample colours, and output shadings
 	const WORD colors[] = {
 		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
-	//char map[255][255];
-	//int width = 0;
-	//int height = 0;
-	ifstream file("map.txt");
-	int width = 0;
-	int height = 0;
-	COORD c;
-	if (file.is_open())
-	{
-		while (height < 23)
-		{
-			while (width < 56)
-			{
-				file >> map[width][height];
-				width++;
-			}
-			height++;
-			width = 0;
-		}
+	rendermap1();
+}
+void map1()
+{
+	
+}
+void map2()
+{
 
-		file.close();
-		for (int y = 0;y < 23;y++)
-		{
-			c.Y = y;
-			for (int x = 0;x < 56;x++)
-			{
-				if (map[x][y] == 'i')
-				{
-					map[x][y] = ' ';
-				}
-				c.X = x;
-				g_Console.writeToBuffer(c, map[x][y]);
-
-			}
-		}
-	}
 }
 
 void renderCharacter()
@@ -390,4 +387,99 @@ void renderToScreen()
 {
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
+}
+
+void rendermap1()
+{
+
+	ifstream file("map1.txt");
+	int width = 0;
+	int height = 0;
+	COORD c;
+	moveCharacter();
+	moveEnemy();
+	if (file.is_open())
+	{
+		while (height < 30)
+		{
+			while (width < 80)
+			{
+				file >> map[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+
+		file.close();
+		for (int y = 0;y < 30;y++)
+		{
+			c.Y = y;
+			for (int x = 0;x < 80;x++)
+			{
+				if (map[x][y] == 'i')
+				{
+					map[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, map[x][y], 0x09);
+			}
+		}
+	}
+	renderCharacter();
+	renderEnemy();
+	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 0)
+	{
+		clearScreen;
+		g_eGameState = S_MAP2;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 1;
+	}
+}
+void rendermap2()
+{
+
+	ifstream file("map2.txt");
+	int width = 0;
+	int height = 0;
+	moveCharacter();
+	moveEnemy();
+	COORD c;
+	if (file.is_open())
+	{
+		while (height < 30)
+		{
+			while (width < 80)
+			{
+				file >> map[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+
+		file.close();
+		for (int y = 0;y < 30;y++)
+		{
+			c.Y = y;
+			for (int x = 0;x < 80;x++)
+			{
+				if (map[x][y] == 'i')
+				{
+					map[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, map[x][y], 0x09);
+			}
+		}
+	}
+	renderEnemy();
+	renderCharacter();
+	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 29)
+	{
+		clearScreen;
+		g_eGameState = S_MAP1;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
+	}
 }
