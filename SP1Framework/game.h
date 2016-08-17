@@ -15,7 +15,8 @@ enum EKEYS
     K_RIGHT,
     K_ESCAPE,
     K_SPACE,
-    K_COUNT
+    K_COUNT,
+	K_ENTER
 };
 
 // Enumeration for the different screen states
@@ -24,8 +25,7 @@ enum EGAMESTATES
     S_SPLASHSCREEN,
 	S_MENU,
     S_GAME,
-	S_MAP1,
-	S_MAP2,
+	S_MAP1, S_MAP2, S_MAP3, S_MAP4, S_MAP5, S_MAP6, S_MAP7, S_MAP8, S_MAP9,
     S_COUNT
 };
 
@@ -34,6 +34,11 @@ struct SGameChar
 {
     COORD m_cLocation;
     bool  m_bActive;
+};
+
+struct SGameEnemy
+{
+	COORD m_cLocation;
 };
 
 void init        ( void );      // initialize your variables, allocate memory, etc
@@ -53,7 +58,8 @@ void renderMap();           // renders the map to the buffer first
 void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
-void moveEnemy();			// Moving enemies.
+
+
 void rendermap1();
 void rendermap2();
 void rendermap3();
@@ -63,6 +69,7 @@ void rendermap6();
 void rendermap7();
 void rendermap8();
 void rendermap9();
+
 void map1();
 void map2();
 void map3();
@@ -72,4 +79,5 @@ void map6();
 void map7();
 void map8();
 void map9();
+
 #endif // _GAME_H

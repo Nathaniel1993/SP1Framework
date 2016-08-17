@@ -7,14 +7,15 @@
 #include <iomanip>
 #include <sstream>
 #include "Ai.h"
+#include "map.h"
 #include <fstream>
 
 using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
-bool Caught = false;
-char map[80][30];
+
+
 
 
 // Game specific variables here
@@ -96,6 +97,7 @@ void getInput( void )
     g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+
 }
 
 
@@ -174,7 +176,7 @@ void moveCharacter()
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
-	moveEnemy();
+
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
     if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
@@ -182,7 +184,7 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y--;
         bSomethingHappened = true;
-		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.Y++;
 		}
@@ -192,7 +194,7 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.X--;
         bSomethingHappened = true;
-		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.X++;
 		}
@@ -202,7 +204,7 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y++;
         bSomethingHappened = true;
-		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.Y--;
 		}
@@ -212,7 +214,7 @@ void moveCharacter()
         //Beep(1440, 30);
         g_sChar.m_cLocation.X++;
         bSomethingHappened = true;
-		if (map[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.X--;
 		}
@@ -229,54 +231,7 @@ void moveCharacter()
         g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
     }
 }
-void moveEnemy()
-{
-	COORD c = g_Console.getConsoleSize();
-	c.X = 5;
-	c.Y = 5;
-	
-	if (((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 3) && (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 3)
-	{
-		for (int i = 0; i < ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) || (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y)); i++)
-		{
-			if (g_sChar.m_cLocation.Y < g_sEnemy.m_cLocation.Y)
-			{
-				g_sEnemy.m_cLocation.Y--;
 
-			}
-			else if (g_sChar.m_cLocation.Y > g_sEnemy.m_cLocation.Y)
-			{
-				g_sEnemy.m_cLocation.Y++;
-			}
-
-			if (g_sChar.m_cLocation.X < g_sEnemy.m_cLocation.X)
-			{
-				g_sEnemy.m_cLocation.X--;
-			}
-			else if (g_sChar.m_cLocation.X > g_sEnemy.m_cLocation.X)
-			{
-				g_sEnemy.m_cLocation.X++;
-			}
-		}	
-	}
-	
-	if ((g_sEnemy.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sEnemy.m_cLocation.Y == g_sChar.m_cLocation.Y))
-	{
-		/*g_Console.writeToBuffer(c, "Test lolololol ", 0x03);*/
-		Caught = true;
-	}
-	/*if (Caught == true)
-	{
-		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
-	}*/
-
-	//in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation);
-	//if (in_range(g_sEnemy.m_cLocation, g_sChar.m_cLocation))
-	//{
-	//	move_towards(g_sEnemy.m_cLocation, g_sChar.m_cLocation);
-	//}
-
-}
 void processUserInput()
 {
     // quits the game if player hits the escape key
@@ -348,22 +303,7 @@ void renderCharacter()
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
 }
 
-void renderEnemy()
-{
-	//Draw location of Enemy
-	WORD charColor = 0x0C;
-	COORD c = g_Console.getConsoleSize();
-	c.X = 5;
-	c.Y = 5;
 
-	g_Console.writeToBuffer(g_sEnemy.m_cLocation, (char)97, charColor);
-
-	if (Caught == true)
-	{
-		g_Console.writeToBuffer(c, "Test lolololol ", 0x03);
-	}
-
-}
 
 void renderFramerate()
 {
@@ -397,14 +337,14 @@ void rendermap1()
 	int height = 0;
 	COORD c;
 	moveCharacter();
-	moveEnemy();
+	AiEnemy();
 	if (file.is_open())
 	{
 		while (height < 30)
 		{
 			while (width < 80)
 			{
-				file >> map[width][height];
+				file >> MapSize[width][height];
 				width++;
 			}
 			height++;
@@ -417,12 +357,12 @@ void rendermap1()
 			c.Y = y;
 			for (int x = 0;x < 80;x++)
 			{
-				if (map[x][y] == 'i')
+				if (MapSize[x][y] == 'i')
 				{
-					map[x][y] = ' ';
+					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, map[x][y], 0x09);
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
 			}
 		}
 	}
@@ -430,7 +370,7 @@ void rendermap1()
 	renderEnemy();
 	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 0)
 	{
-		clearScreen;
+		clearScreen();
 		g_eGameState = S_MAP2;
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 1;
@@ -443,7 +383,7 @@ void rendermap2()
 	int width = 0;
 	int height = 0;
 	moveCharacter();
-	moveEnemy();
+	AiEnemy();
 	COORD c;
 	if (file.is_open())
 	{
@@ -451,7 +391,7 @@ void rendermap2()
 		{
 			while (width < 80)
 			{
-				file >> map[width][height];
+				file >> MapSize[width][height];
 				width++;
 			}
 			height++;
@@ -464,12 +404,12 @@ void rendermap2()
 			c.Y = y;
 			for (int x = 0;x < 80;x++)
 			{
-				if (map[x][y] == 'i')
+				if (MapSize[x][y] == 'i')
 				{
-					map[x][y] = ' ';
+					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, map[x][y], 0x09);
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
 			}
 		}
 	}
@@ -477,7 +417,7 @@ void rendermap2()
 	renderCharacter();
 	if (g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 29)
 	{
-		clearScreen;
+		clearScreen();
 		g_eGameState = S_MAP1;
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
