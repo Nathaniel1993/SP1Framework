@@ -12,70 +12,43 @@ extern char MapSize[80][30];
 extern double aiTimeElapsed;
 extern double aiBounceTime;
 extern double aiDeltaTime;
-//extern double g_dElapsedTime;
-//extern double g_dBounceTime;
+
 bool Caught = false;
-//char Size[80][30];
+
 void AiEnemy()
 {
-	//enemyRight = g_sEnemy.m_cLocation.X++;
-	//enemyLeft = g_sEnemy.m_cLocation.X--;
-	//enemyUp = g_sEnemy.m_cLocation.Y--;
-	//enemyDown = g_sEnemy.m_cLocation.Y++;
 	if (aiBounceTime > aiTimeElapsed)
 	{
 		return;
 	}
 
-
-	bool Collision = false;
 	bool Detect = false;
-	bool idle = true;
 	unsigned int distance = 2;
-	
-	//if (idle == true)
-	//{
-	//	if (g_sEnemy.m_cLocation.X < (MapSizeSize[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y] == '#'))
-	//	{
-	//		g_sEnemy.m_cLocation.X++;
 
-	//	}
-	//	else
-	//	{
-	//		g_sEnemy.m_cLocation.X--;
-	//	}
-	//}
-	if (MapSize[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y] == '#')
-	{
-		Collision = true;
-	}
-	if (Collision != true)
-	{
-		if (
-			(((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) < 5) && ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) > 0)) ||
-			(((g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) < 5) && ((g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) > 0)) ||
-			(((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) > -5) && ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) < 0)) ||
-			(((g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) > -5) && ((g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) < 0))
-			)
-			//Lesser than 0
-			//Greater than -3
-			// -3 < x < 0
+	if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X > 0 )	//Detect Right  //Lesser than 0 
+		&& (g_sChar.m_cLocation.Y == g_sEnemy.m_cLocation.Y )												//Greater than -5
+		&& (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X <= 5))											// -5 < x < 0
 		{
-
-
 			Detect = true;
 		}
-	}
-
-	/*if ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) < 5)
+	if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X < 0) //Detect Left
+		&& (g_sChar.m_cLocation.Y == g_sEnemy.m_cLocation.Y)								  
+		&& (g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X >= -5))							 
 	{
 		Detect = true;
 	}
-	else if ((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) < 5)
+	if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y > 0) // Detect Down
+		&& (g_sChar.m_cLocation.X == g_sEnemy.m_cLocation.X)								  
+		&& (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y <= 5))							 
 	{
 		Detect = true;
-	}*/
-
+	}
+	if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y < 0) //Detect Up
+		&& (g_sChar.m_cLocation.X == g_sEnemy.m_cLocation.X)								  
+		&& (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y >= -5))							 
+	{
+		Detect = true;
+	}
 
 	if (Detect == true)
 	{
@@ -102,8 +75,7 @@ void AiEnemy()
 	{
 		Caught = true;
 	}
-	aiBounceTime = aiTimeElapsed + 0.4;
-	//g_dBounceTime = g_dElapsedTime + 0.6;
+	aiBounceTime = aiTimeElapsed + 0.2;
 }
 
 void renderEnemy()
