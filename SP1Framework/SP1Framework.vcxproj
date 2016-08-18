@@ -81,6 +81,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="guide.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="quiz.cpp" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="guide.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="quiz.h" />
   </ItemGroup>

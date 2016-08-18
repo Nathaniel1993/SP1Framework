@@ -97,7 +97,8 @@ void getInput( void )
     g_abKeyPressed[K_RIGHT]  = isKeyPressed(VK_RIGHT);
     g_abKeyPressed[K_SPACE]  = isKeyPressed(VK_SPACE);
     g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
-
+	g_abKeyPressed[K_ENTER] = isKeyPressed(VK_RETURN);
+	g_abKeyPressed[K_LEFTCONTROL] = isKeyPressed(VK_LCONTROL);
 }
 
 
@@ -125,11 +126,10 @@ void update(double dt)
 	{
 	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen
 		break;
+	case S_GUIDE: guide();
+		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	case S_MAP1: map1();
-		break;
-	case S_MAP2: map2();
 	}
 }
 //--------------------------------------------------------------
@@ -147,6 +147,8 @@ void render()
     {
         case S_SPLASHSCREEN: renderSplashScreen();
             break;
+		case S_GUIDE: renderguide();
+			break;
         case S_GAME: renderGame();
             break;
 		case S_MAP1: rendermap1();
@@ -160,8 +162,14 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-    if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
-        g_eGameState = S_GAME;
+	if (g_abKeyPressed[K_ENTER]) //starts game upon pressing 'enter' key
+	{
+		g_eGameState = S_GAME;
+	}
+	if (g_abKeyPressed[K_LEFTCONTROL]) // goes to guide upon 'left ctrl' key
+	{
+		g_eGameState = S_GUIDE;
+	}
 }
 
 void gameplay()            // gameplay logic
@@ -242,21 +250,53 @@ void processUserInput()
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
-    g_Console.clearBuffer(0x1F);
+    g_Console.clearBuffer(0x00);
 }
 
 void renderSplashScreen()  // renders the splash screen
 {
-    COORD c = g_Console.getConsoleSize();
-    c.Y /= 3;
-    c.X = c.X / 2 - 9;
-    g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
-    c.Y += 1;
-    c.X = g_Console.getConsoleSize().X / 2 - 20;
-    g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
-    c.Y += 1;
-    c.X = g_Console.getConsoleSize().X / 2 - 9;
-    g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
+	ifstream file("mainmenu.txt");
+	int width = 0;
+	int height = 0;
+	COORD c;
+	if (file.is_open())
+	{
+		while (height < 30)
+		{
+			while (width < 80)
+			{
+				file >> MapSize[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+
+		file.close();
+		for (int y = 0; y < 30; y++)
+		{
+			c.Y = y;
+			for (int x = 0; x < 80; x++)
+			{
+				if (MapSize[x][y] == 'i')
+				{
+					MapSize[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, MapSize[x][y]);
+			}
+		}
+	}
+    COORD l = g_Console.getConsoleSize();
+    l.Y = 25;
+    l.X = l.X / 2 - 20;
+    g_Console.writeToBuffer(l, "Press <Enter> to Start Game", 0x0B);
+    l.Y = 26;
+    l.X = g_Console.getConsoleSize().X / 2 - 20;
+    g_Console.writeToBuffer(l, "Press <Esc> In Game to Quit", 0x0B);
+	l.Y = 27;
+	l.X = g_Console.getConsoleSize().X / 2 - 20;
+	g_Console.writeToBuffer(l, "Press <Left Ctrl> to Open Guide", 0x0B);
 }
 
 void renderGame()
@@ -282,14 +322,6 @@ void renderMap()
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
 	rendermap1();
-}
-void map1()
-{
-	
-}
-void map2()
-{
-
 }
 
 void renderCharacter()

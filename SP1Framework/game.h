@@ -16,7 +16,9 @@ enum EKEYS
     K_ESCAPE,
     K_SPACE,
     K_COUNT,
-	K_ENTER
+	K_LEFTCONTROL,
+	K_ENTER,
+
 };
 
 // Enumeration for the different screen states
@@ -26,7 +28,8 @@ enum EGAMESTATES
 	S_MENU,
     S_GAME,
 	S_MAP1, S_MAP2, S_MAP3, S_MAP4, S_MAP5, S_MAP6, S_MAP7, S_MAP8, S_MAP9,
-    S_COUNT
+    S_COUNT,
+	S_GUIDE
 };
 
 // struct for the game character
@@ -58,7 +61,8 @@ void renderMap();           // renders the map to the buffer first
 void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
-
+void guide();				// guide menu logic
+void renderguide();         // renders the guide screen 
 
 void rendermap1();
 void rendermap2();
