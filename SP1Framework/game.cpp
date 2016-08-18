@@ -8,12 +8,14 @@
 #include <sstream>
 #include "Ai.h"
 #include "map.h"
+#include "Dice.h"
 #include <fstream>
 
 using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
+bool	diceRoll = false;
 char MapSize[80][31];
 
 double aiTimeElapsed ;
@@ -240,6 +242,7 @@ void moveCharacter()
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
         bSomethingHappened = true;
+
     }
 
     if (bSomethingHappened)
@@ -344,8 +347,6 @@ void renderCharacter()
     }
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
 }
-
-
 
 void renderFramerate()
 {
