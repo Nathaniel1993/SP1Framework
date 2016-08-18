@@ -14,7 +14,7 @@ using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
-char MapSize[80][30];
+char MapSize[80][31];
 
 double aiTimeElapsed ;
 double aiBounceTime ;
@@ -27,7 +27,7 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
 // Console object
-Console g_Console(80, 30, "SP1 Framework");
+Console g_Console(80, 31, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -162,6 +162,8 @@ void render()
 			break;
 		case S_MAP2: rendermap2();
 			break;
+		case S_MAP3:rendermap3();
+			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
     renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -268,7 +270,7 @@ void renderSplashScreen()  // renders the splash screen
 	COORD c;
 	if (file.is_open())
 	{
-		while (height < 30)
+		while (height < 31)
 		{
 			while (width < 80)
 			{
@@ -280,7 +282,7 @@ void renderSplashScreen()  // renders the splash screen
 		}
 
 		file.close();
-		for (int y = 0; y < 30; y++)
+		for (int y = 0; y < 31; y++)
 		{
 			c.Y = y;
 			for (int x = 0; x < 80; x++)
@@ -378,7 +380,7 @@ void rendermap1()
 	AiEnemy();
 	if (file.is_open())
 	{
-		while (height < 30)
+		while (height < 31)
 		{
 			while (width < 80)
 			{
@@ -390,7 +392,7 @@ void rendermap1()
 		}
 
 		file.close();
-		for (int y = 0;y < 30;y++)
+		for (int y = 0;y < 31;y++)
 		{
 			c.Y = y;
 			for (int x = 0;x < 80;x++)
@@ -406,12 +408,12 @@ void rendermap1()
 	}
 	renderCharacter();
 	renderEnemy();
-	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 0)
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
 	{
 		clearScreen();
 		g_eGameState = S_MAP2;
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 1;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
 	}
 }
 void rendermap2()
@@ -424,7 +426,7 @@ void rendermap2()
 	COORD c;
 	if (file.is_open())
 	{
-		while (height < 30)
+		while (height < 31)
 		{
 			while (width < 80)
 			{
@@ -436,7 +438,7 @@ void rendermap2()
 		}
 
 		file.close();
-		for (int y = 0;y < 30;y++)
+		for (int y = 0;y < 31;y++)
 		{
 			c.Y = y;
 			for (int x = 0;x < 80;x++)
@@ -446,17 +448,70 @@ void rendermap2()
 					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
 			}
 		}
 	}
 	renderEnemy();
 	renderCharacter();
-	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 29)
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X == 79 && g_sChar.m_cLocation.Y == 2)
 	{
 		clearScreen();
 		g_eGameState = S_MAP1;
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 79;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
 	}
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
+	{
+		clearScreen();
+		g_eGameState = S_MAP3;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 0;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+	}
+}
+void rendermap3()
+{
+	ifstream file("map3.txt");
+	int width = 0;
+	int height = 0;
+	moveCharacter();
+	AiEnemy();
+	COORD c;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> MapSize[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+
+		file.close();
+		for (int y = 0;y < 31;y++)
+		{
+			c.Y = y;
+			for (int x = 0;x < 80;x++)
+			{
+				if (MapSize[x][y] == 'i')
+				{
+					MapSize[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+			}
+		}
+	}
+	renderEnemy();
+	renderCharacter();
+	/*if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 30)
+	{
+	clearScreen();
+	g_eGameState = S_MAP1;
+	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
+	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
+	}*/
 }

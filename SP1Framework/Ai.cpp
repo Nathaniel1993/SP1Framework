@@ -7,7 +7,7 @@
 extern Console g_Console;
 extern SGameChar g_sChar;
 extern SGameEnemy g_sEnemy;
-extern char MapSize[80][30];
+extern char MapSize[80][31];
 
 extern double aiTimeElapsed;
 extern double aiBounceTime;
