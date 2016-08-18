@@ -56,7 +56,7 @@ void init( void )
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y;
 	}*/
 	g_sEnemy.m_cLocation.X = 20; // enemy spawn location
-	g_sEnemy.m_cLocation.Y = 23;
+	g_sEnemy.m_cLocation.Y = 24;
 
     g_sChar.m_bActive = true;
     // sets the width, height and the font name to use in the console
