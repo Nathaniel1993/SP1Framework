@@ -137,10 +137,6 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	case S_MAP1: map1();
-		break;
-	case S_MAP2: map2();
-		break;
 	}
 }
 //--------------------------------------------------------------
@@ -333,14 +329,6 @@ void renderMap()
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
 	rendermap1();
-}
-void map1()
-{
-	
-}
-void map2()
-{
-
 }
 
 void renderCharacter()
