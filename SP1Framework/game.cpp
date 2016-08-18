@@ -421,6 +421,7 @@ void rendermap2()
 	ifstream file("map2.txt");
 	int width = 0;
 	int height = 0;
+	processUserInput();
 	moveCharacter();
 	AiEnemy();
 	COORD c;
@@ -474,6 +475,7 @@ void rendermap3()
 	ifstream file("map3.txt");
 	int width = 0;
 	int height = 0;
+	processUserInput();
 	moveCharacter();
 	AiEnemy();
 	COORD c;
