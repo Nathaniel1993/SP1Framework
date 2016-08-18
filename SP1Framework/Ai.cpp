@@ -7,8 +7,10 @@
 extern Console g_Console;
 extern SGameChar g_sChar;
 extern SGameEnemy g_sEnemy;
+extern char MapSize[80][30];
+
 bool Caught = false;
-char Size[80][30];
+//char Size[80][30];
 void AiEnemy()
 {
 	//enemyRight = g_sEnemy.m_cLocation.X++;
@@ -19,6 +21,7 @@ void AiEnemy()
 	bool Collision = false;
 	bool Detect = false;
 	bool idle = true;
+	unsigned int distance = 2;
 	
 	//if (idle == true)
 	//{
@@ -32,31 +35,32 @@ void AiEnemy()
 	//		g_sEnemy.m_cLocation.X--;
 	//	}
 	//}
-	if (Size[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y] == '#')
+	if (MapSize[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y] == '#')
 	{
 		Collision = true;
 	}
 
-	if (((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 5) && (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 4)
+	if ((((g_sChar.m_cLocation.X - g_sEnemy.m_cLocation.X) <= 2) && (g_sChar.m_cLocation.Y - g_sEnemy.m_cLocation.Y) <= 2)||
+		(((g_sChar.m_cLocation.X + g_sEnemy.m_cLocation.X) <= 2) && (g_sChar.m_cLocation.Y + g_sEnemy.m_cLocation.Y) <= 2))
 	{
 		Detect = true;
 	}
 	if (Detect == true)
 	{
-		if (g_sChar.m_cLocation.Y < g_sEnemy.m_cLocation.Y && (Size[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y - 1] != '#'))
+		if (g_sChar.m_cLocation.Y < g_sEnemy.m_cLocation.Y && (MapSize[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y - 1] != '#'))
 		{
 			g_sEnemy.m_cLocation.Y--;
 		}
-		else if (g_sChar.m_cLocation.Y > g_sEnemy.m_cLocation.Y && (Size[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y + 1] != '#'))
+		else if (g_sChar.m_cLocation.Y > g_sEnemy.m_cLocation.Y && (MapSize[g_sEnemy.m_cLocation.X][g_sEnemy.m_cLocation.Y + 1] != '#'))
 		{
 			g_sEnemy.m_cLocation.Y++;
 		}
 
-		if (g_sChar.m_cLocation.X < g_sEnemy.m_cLocation.X && (Size[g_sEnemy.m_cLocation.X - 1][g_sEnemy.m_cLocation.Y] != '#'))
+		if (g_sChar.m_cLocation.X < g_sEnemy.m_cLocation.X && (MapSize[g_sEnemy.m_cLocation.X - 1][g_sEnemy.m_cLocation.Y] != '#'))
 		{
 			g_sEnemy.m_cLocation.X--;
 		}
-		else if (g_sChar.m_cLocation.X > g_sEnemy.m_cLocation.X && (Size[g_sEnemy.m_cLocation.X + 1][g_sEnemy.m_cLocation.Y] != '#'))
+		else if (g_sChar.m_cLocation.X > g_sEnemy.m_cLocation.X && (MapSize[g_sEnemy.m_cLocation.X + 1][g_sEnemy.m_cLocation.Y] != '#'))
 		{
 			g_sEnemy.m_cLocation.X++;
 		}
