@@ -448,7 +448,7 @@ void rendermap2()
 					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0B);
 			}
 		}
 	}
@@ -458,14 +458,14 @@ void rendermap2()
 	{
 		clearScreen();
 		g_eGameState = S_MAP1;
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 79;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 80;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
 	}
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
 	{
 		clearScreen();
 		g_eGameState = S_MAP3;
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 0;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
 	}
 }
@@ -507,11 +507,11 @@ void rendermap3()
 	}
 	renderEnemy();
 	renderCharacter();
-	/*if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.X == 72 && g_sChar.m_cLocation.Y == 30)
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X == 79 && g_sChar.m_cLocation.Y == 28)
 	{
-	clearScreen();
-	g_eGameState = S_MAP1;
-	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 8;
-	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
-	}*/
+		clearScreen();
+		g_eGameState = S_MAP2;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 80;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+	}
 }
