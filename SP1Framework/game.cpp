@@ -318,6 +318,7 @@ void renderGame()
     renderCharacter();  // renders the character into the buffer
 	moveCharacter();
 	renderEnemy();
+	renderEnemy2();
 }
 
 void renderMap()
@@ -377,7 +378,7 @@ void rendermap1()
 	int height = 0;
 	COORD c;
 	moveCharacter();
-	AiEnemy();
+	//AiEnemy();
 	if (file.is_open())
 	{
 		while (height < 31)
@@ -423,7 +424,7 @@ void rendermap2()
 	int height = 0;
 	processUserInput();
 	moveCharacter();
-	AiEnemy();
+	//AiEnemy();
 	COORD c;
 	if (file.is_open())
 	{
@@ -477,7 +478,7 @@ void rendermap3()
 	int height = 0;
 	processUserInput();
 	moveCharacter();
-	AiEnemy();
+	//AiEnemy();
 	COORD c;
 	if (file.is_open())
 	{
