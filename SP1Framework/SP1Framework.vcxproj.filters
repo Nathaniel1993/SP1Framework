@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Framework">
       <UniqueIdentifier>{37c19c94-9502-4b2b-b3f1-70fa908b49af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Enemies">
+      <UniqueIdentifier>{78d6fd4d-5efa-4fbc-8a8d-af84674915da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dice">
+      <UniqueIdentifier>{46077277-4166-47d2-9697-304ab9aaccc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +47,18 @@
     </ClCompile>
     <ClCompile Include="guide.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Completed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map1Enemy1.cpp">
+      <Filter>Source Files\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Dice.cpp">
+      <Filter>Source Files\Dice</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +83,31 @@
     <ClInclude Include="guide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Dice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="defeat.txt">
+      <Filter>Source Files\Framework</Filter>
+    </Text>
+    <Text Include="dice1.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="dice2.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="dice3.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="dice4.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="dice5.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="dice6.txt">
+      <Filter>Source Files\Dice</Filter>
+    </Text>
   </ItemGroup>
 </Project>

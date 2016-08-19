@@ -78,21 +78,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="Completed.cpp" />
+    <ClCompile Include="Dice.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="guide.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Map1Enemy1.cpp" />
     <ClCompile Include="quiz.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h" />
+    <ClInclude Include="Dice.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="quiz.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="defeat.txt" />
+    <Text Include="dice1.txt" />
+    <Text Include="dice2.txt" />
+    <Text Include="dice3.txt" />
+    <Text Include="dice4.txt" />
+    <Text Include="dice5.txt" />
+    <Text Include="dice6.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
