@@ -1,7 +1,8 @@
 #include "map.h"
 #include "Completed.h"
 int g_MapNo;
-void rendermaps()
+extern WORD color;
+void rendermap1()
 {
 	ifstream file;
 	if (g_MapNo == 1)
@@ -22,10 +23,6 @@ void rendermaps()
 		file.open("map8.txt");
 	if (g_MapNo == 9)
 		file.open("map9.txt");
-}
-void rendermap1()
-{
-	ifstream file;
 	int width = 0;
 	int height = 0;
 	COORD c;
@@ -54,7 +51,7 @@ void rendermap1()
 					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
+				g_Console.writeToBuffer(c, MapSize[x][y], color);
 			}
 		}
 	}
