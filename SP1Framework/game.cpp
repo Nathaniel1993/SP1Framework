@@ -139,6 +139,9 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	case S_DICE:Dice();
+		break;
+
 	}
 }
 //--------------------------------------------------------------
@@ -165,6 +168,8 @@ void render()
 		case S_MAP2: rendermap2();
 			break;
 		case S_MAP3:rendermap3();
+			break;
+		case S_DICE:Dice();
 			break;
     }
     renderFramerate();  // renders debug information, frame rate, elapsed time, etc
@@ -242,6 +247,7 @@ void moveCharacter()
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
         bSomethingHappened = true;
+		diceRoll = true;
 
     }
 

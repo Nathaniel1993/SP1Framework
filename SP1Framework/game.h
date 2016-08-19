@@ -29,7 +29,8 @@ enum EGAMESTATES
     S_GAME,
 	S_MAP1, S_MAP2, S_MAP3, S_MAP4, S_MAP5, S_MAP6, S_MAP7, S_MAP8, S_MAP9,
     S_COUNT,
-	S_GUIDE
+	S_GUIDE,
+	S_DICE, S_DICE1, S_DICE2, S_DICE3, S_DICE4, S_DICE5, S_DICE6,
 };
 
 // struct for the game character
@@ -40,6 +41,10 @@ struct SGameChar
 };
 
 struct SGameEnemy
+{
+	COORD m_cLocation;
+};
+struct SGDICE
 {
 	COORD m_cLocation;
 };
