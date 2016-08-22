@@ -2,31 +2,34 @@
 #include "Completed.h"
 int g_MapNo;
 extern WORD color;
+/*if (g_MapNo == 1)
+file.open("map1.txt");
+if (g_MapNo == 2)
+file.open("map2.txt");
+if (g_MapNo == 3)
+file.open("map3.txt");
+if (g_MapNo == 4)
+file.open("map4.txt");
+if (g_MapNo == 5)
+file.open("map5.txt");
+if (g_MapNo == 6)
+file.open("map6.txt");
+if (g_MapNo == 7)
+file.open("map7.txt");
+if (g_MapNo == 8)
+file.open("map8.txt");
+if (g_MapNo == 9)
+file.open("map9.txt");*/
 void rendermap1()
 {
-	ifstream file;
-	if (g_MapNo == 1)
-		file.open("map1.txt");
-	if (g_MapNo == 2)
-		file.open("map2.txt");
-	if (g_MapNo == 3)
-		file.open("map3.txt");
-	if (g_MapNo == 4)
-		file.open("map4.txt");
-	if (g_MapNo == 5)
-		file.open("map5.txt");
-	if (g_MapNo == 6)
-		file.open("map6.txt");
-	if (g_MapNo == 7)
-		file.open("map7.txt");
-	if (g_MapNo == 8)
-		file.open("map8.txt");
-	if (g_MapNo == 9)
-		file.open("map9.txt");
+	g_MapNo = 1;
+	g_eGameState = S_MAP1;
+	ifstream file("map1.txt");
 	int width = 0;
 	int height = 0;
-	COORD c;
+	processUserInput();
 	moveCharacter();
+	COORD c;
 	if (file.is_open())
 	{
 		while (height < 31)
@@ -51,15 +54,16 @@ void rendermap1()
 					MapSize[x][y] = ' ';
 				}
 				c.X = x;
-				g_Console.writeToBuffer(c, MapSize[x][y], color);
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
 			}
 		}
 	}
 	renderCharacter();
-	checkcomplete();
 }
 void rendermap2()
 {
+	g_MapNo = 2;
+	g_eGameState = S_MAP2;
 	ifstream file("map2.txt");
 	int width = 0;
 	int height = 0;
@@ -95,10 +99,11 @@ void rendermap2()
 		}
 	}
 	renderCharacter();
-	checkcomplete();
 }
 void rendermap3()
 {
+	g_MapNo = 3;
+	g_eGameState = S_MAP3;
 	ifstream file("map3.txt");
 	int width = 0;
 	int height = 0;
@@ -134,10 +139,11 @@ void rendermap3()
 		}
 	}
 	renderCharacter();
-	checkcomplete();
 }
 void rendermap4()
 {
+	g_MapNo = 4;
+	g_eGameState = S_MAP4;
 	ifstream file("map4.txt");
 	int width = 0;
 	int height = 0;
@@ -173,5 +179,4 @@ void rendermap4()
 		}
 	}
 	renderCharacter();
-	checkcomplete();
 }

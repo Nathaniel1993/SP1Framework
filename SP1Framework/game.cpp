@@ -10,6 +10,7 @@
 #include "map.h"
 #include "Dice.h"
 #include <fstream>
+#include "Completed.h"
 #include <mmsystem.h>
 
 using namespace std;
@@ -46,7 +47,7 @@ void init(void)
 	// Set precision for floating point output
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
-	color = 0x09;
+
 	aiTimeElapsed = 0.0;
 	aiBounceTime = 0.0;
 	g_MapNo = 1;
@@ -56,7 +57,11 @@ void init(void)
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 	g_sEnemy.m_cLocation.X = 18; // enemy spawn location
 	g_sEnemy.m_cLocation.Y = 24;
-
+	ifstream file;
+	file.open("map1.txt");
+	file.open("map2.txt");
+	file.open("map3.txt");
+	file.open("map4.txt");
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -132,6 +137,14 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	case S_MAP1: map1();
+		break;
+	case S_MAP2: map2();
+		break;
+	case S_MAP3: map3();
+		break;
+	case S_MAP4: map4();
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -152,6 +165,14 @@ void render()
 	case S_GUIDE:renderguide();
 		break;
 	case S_GAME: renderGame();
+		break;
+	case S_MAP1: rendermap1();
+		break;
+	case S_MAP2: rendermap2();
+		break;
+	case S_MAP3: rendermap3();
+		break;
+	case S_MAP4: rendermap4();
 		break;
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
@@ -175,15 +196,14 @@ void gameplay()            // gameplay logic
 {
 	processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
 	moveCharacter();   // moves the character, collision detection, physics, etc
-	g_eGameState = S_MAP1;
-	if (g_MapNo = 1)
+	/*if (g_MapNo == 1)//Sound for Map 1 (Not Working Yet)
 	{
-		PlaySound(L"Map1.wav", NULL, SND_FILENAME | SND_LOOP);
+		PlaySound(L"Map1.wav", NULL, SND_FILENAME | SND_ASYNC);
 	}
-	else if (g_MapNo = 2)
+	else if (g_MapNo == 2)//Sound for Map 2 (Not Working Yet)
 	{
-		PlaySound(L"Lights Out.wav", NULL, SND_FILENAME | SND_LOOP);
-	}
+		PlaySound(L"Lights Out.wav", NULL, SND_FILENAME | SND_ASYNC);
+	}*/
 }
 
 void moveCharacter()
@@ -309,11 +329,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-	if (g_eGameState = S_MAP1)
-	{
-		rendermap1();
-	}
-	//renderMap();
+	renderMap();
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
 }
@@ -329,6 +345,22 @@ void renderMap()
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
 	rendermap1();
+	/*if (g_MapNo = 1)
+	{
+		rendermap1();
+	}
+	if (g_MapNo = 2)
+	{
+		rendermap2();
+	}
+	if (g_MapNo = 3)
+	{
+		rendermap3();
+	}
+	if (g_MapNo = 4)
+	{
+		rendermap4();
+	}*/
 }
 
 void renderCharacter()
