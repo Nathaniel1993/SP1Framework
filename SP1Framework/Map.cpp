@@ -7,43 +7,41 @@ extern Console g_Console;
 extern SGameChar g_sChar;
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
+bool LoadMap = true;
 
 void rendermap1()
 {
-	COORD c;
-	for (int y = 0;y < 31;y++)
+	if (LoadMap = true)
 	{
-		c.Y = y;
-		for (int x = 0;x < 80;x++)
+		COORD c;
+		for (int y = 0;y < 31;y++)
 		{
-			if (MapSize[x][y] == 'i')
+			c.Y = y;
+			for (int x = 0;x < 80;x++)
 			{
-				MapSize[x][y] = ' ';
-			}
-			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
-			if (MapSize[x][y] == '.')
-			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
-			}
-			if (MapSize[x][y] == 'X')
-			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
-			}
-			if (MapSize[x][y] == 'l')
-			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
+				if (MapSize[x][y] == 'i')
+				{
+					MapSize[x][y] = ' ';
+				}
+				c.X = x;
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
+				if (MapSize[x][y] == '.')
+				{
+					g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
+				}
+				if (MapSize[x][y] == 'X')
+				{
+					g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+				}
+				if (MapSize[x][y] == 'l')
+				{
+					g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
+				}
 			}
 		}
-	}	
-	renderCharacter();
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
-	{
-		clearScreen();
-		loadmap2();
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 29;
+		renderCharacter();
 	}
+	LoadMap = false;
 }
 
 void loadmap1()

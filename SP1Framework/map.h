@@ -1,8 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include "Framework\timer.h"
 #include "game.h"
 #include "Framework\console.h"
-#include <fstream>
+#include "ScoreTrack.h"
 
 using namespace std;
 
@@ -26,3 +27,4 @@ void loadmap7();
 void loadmap8();
 void loadmap9();
 
+void ScoreTrack();
