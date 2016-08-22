@@ -34,6 +34,7 @@ SGameChar   g_sChar;
 SGameEnemy  g_sEnemy;// Enemy
 SGameEnemy  g_sEnemy2;
 SGameBoss g_sBoss;
+SGameKeys	g_sKeys[4];
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
@@ -196,78 +197,126 @@ void gameplay()            // gameplay logic
 		ScoreTracker = false;
 	}
 }
-
 void moveCharacter()
 {
 	bool bSomethingHappened = false;
 	if (g_dBounceTime > g_dElapsedTime)
 		return;
-
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Updating the location of the character based on the key press
 	// providing a beep sound whenver we shift the character
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
-		//Beep(1440, 30);
-		g_sChar.m_cLocation.Y--;
-		bSomethingHappened = true;
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#')
 		{
-			g_sChar.m_cLocation.Y++;
-		}
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
-		{
-			ScoreTracker = true;
+			if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == 'F')
+			{
+				if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#'&&MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A')
+				{
+					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] = 'F';
+					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] = ' ';
+					g_sChar.m_cLocation.Y--;
+					bSomethingHappened = true;
+				}
+			}
+			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			{
+				ScoreTracker = true;
+			}
+			else
+			{
+				g_sChar.m_cLocation.Y--;
+				bSomethingHappened = true;
+			}
 		}
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		//Beep(1440, 30);
-		g_sChar.m_cLocation.X--;
-		bSomethingHappened = true;
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#')
 		{
-			g_sChar.m_cLocation.X++;
-		}
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
-		{
-			ScoreTracker = true;
+			if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
+			{
+				if (MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#'&&MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A')
+				{
+					MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] = 'F';
+					MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] = ' ';
+					g_sChar.m_cLocation.X--;
+					bSomethingHappened = true;
+				}
+			}
+
+			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			{
+				ScoreTracker = true;
+			}
+			else
+			{
+				g_sChar.m_cLocation.X--;
+				bSomethingHappened = true;
+			}
 		}
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
-		//Beep(1440, 30);
-		g_sChar.m_cLocation.Y++;
-		bSomethingHappened = true;
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#')
 		{
-			g_sChar.m_cLocation.Y--;
-		}
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
-		{
-			ScoreTracker = true;
+			if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] == 'F')
+			{
+				if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#'&&MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A')
+				{
+					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] = 'F';
+					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] = ' ';
+					g_sChar.m_cLocation.Y++;
+					bSomethingHappened = true;
+				}
+			}
+			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			{
+				ScoreTracker = true; 
+			}
+			else
+			{
+				g_sChar.m_cLocation.Y++;
+				bSomethingHappened = true;
+			}
 		}
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		//Beep(1440, 30);
-		g_sChar.m_cLocation.X++;
-		bSomethingHappened = true;
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+		if (MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#')
 		{
-			g_sChar.m_cLocation.X--;
-		}
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
-		{
-			ScoreTracker = true;
+			if (MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == 'F')
+			{
+				if (MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#'&&MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A')
+				{
+					MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] = 'F';
+					MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] = ' ';
+					g_sChar.m_cLocation.X++;
+					bSomethingHappened = true;
+				}
+			}
+			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			{
+				ScoreTracker = true;
+			}
+			else
+			{
+				g_sChar.m_cLocation.X++;
+				bSomethingHappened = true;
+			}
 		}
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_SPACE])
 	{
 		g_sChar.m_bActive = !g_sChar.m_bActive;
 		bSomethingHappened = true;
 
 	}
-
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
@@ -372,22 +421,6 @@ void renderMap()
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 1;
  	}
-	/*if (g_MapNo = 1)
-	{
-		rendermap1();
-	}
-	if (g_MapNo = 2)
-	{
-		rendermap2();
-	}
-	if (g_MapNo = 3)
-	{
-		rendermap3();
-	}
-	if (g_MapNo = 4)
-	{
-		rendermap4();
-	}*/
 }
 
 void renderCharacter()

@@ -5,9 +5,12 @@ extern WORD color;
 extern char MapSize[80][31];
 extern Console g_Console;
 extern SGameChar g_sChar;
+extern SGameKeys g_sKeys[4];
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
 bool LoadMap = true;
+int i = 0;
+extern int numkey = 0;
 
 void rendermap1()
 {
@@ -29,14 +32,20 @@ void rendermap1()
 				{
 					g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
 				}
-				if (MapSize[x][y] == 'X')
+				if (MapSize[x][y] == 'K')
+				{
+					g_sKeys[numkey].m_cLocation.X = x;
+					g_sKeys[numkey].m_cLocation.Y= y;
+					numkey++;
+				}
+			/*	if (MapSize[x][y] == 'X')
 				{
 					g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
 				}
 				if (MapSize[x][y] == 'l')
 				{
 					g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
-				}
+				}*/
 			}
 		}
 		renderCharacter();
