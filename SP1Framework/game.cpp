@@ -22,15 +22,18 @@ char MapSize[80][31];
 bool ScoreTracker = false;
 int Score = 0;
 
-double aiTimeElapsed;
-double aiBounceTime;
-double aiDeltaTime;
+
+double aiBounceTime1;
+double aiBounceTime2;
+double bossBounceTime;
 
 // Game specific variables here
 extern int g_MapNo;
 WORD color;
 SGameChar   g_sChar;
-SGameEnemy  g_sEnemy; // Enemy
+SGameEnemy  g_sEnemy;// Enemy
+SGameEnemy  g_sEnemy2;
+SGameBoss g_sBoss;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
@@ -50,16 +53,25 @@ void init(void)
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
 
-	aiTimeElapsed = 0.0;
-	aiBounceTime = 0.0;
+
+	aiBounceTime1 = 0.0;
+	aiBounceTime2 = 0.0;
+	bossBounceTime = 0.0;
 
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
+	
 	g_sEnemy.m_cLocation.X = 18; // enemy spawn location
 	g_sEnemy.m_cLocation.Y = 24;
+
+	g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
+	g_sEnemy2.m_cLocation.Y = 10;
 	
+	g_sBoss.m_cLocation.X = 20;
+	g_sBoss.m_cLocation.Y = 25;
+
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -124,9 +136,6 @@ void update(double dt)
 	g_dElapsedTime += dt;
 	g_dDeltaTime = dt;
 
-	aiTimeElapsed += dt;
-	aiDeltaTime = dt;
-
 	switch (g_eGameState)
 	{
 	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen
@@ -135,14 +144,6 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	/*case S_MAP1: loadmap1();
-		break;
-	case S_MAP2: loadmap2();
-		break;
-	case S_MAP3: loadmap3();
-		break;
-	/*case S_MAP4: loadmap4();
-		break;*/
 	}
 }
 //--------------------------------------------------------------
@@ -164,14 +165,6 @@ void render()
 		break;
 	case S_GAME: renderGame();
 		break;
-	case S_MAP1: rendermap1();
-		break;
-	case S_MAP2: rendermap2();
-		break;
-	case S_MAP3: rendermap3();
-		break;
-	/*case S_MAP4: rendermap4();
-		break;*/
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 	renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -347,6 +340,8 @@ void renderGame()
 	renderMap();
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
+	BossAi();
+	renderBoss();
 }
 
 void renderMap()

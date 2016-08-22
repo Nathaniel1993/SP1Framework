@@ -48,6 +48,10 @@ struct SGDICE
 {
 	COORD m_cLocation;
 };
+struct SGameBoss
+{
+	COORD m_cLocation;
+};
 
 void init        ( void );      // initialize your variables, allocate memory, etc
 void getInput    ( void );      // get input from player

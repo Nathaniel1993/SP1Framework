@@ -2,7 +2,7 @@
 
 void AiEnemy()
 {
-	if (aiBounceTime > aiTimeElapsed)
+	if (aiBounceTime1 > g_dElapsedTime)
 	{
 		return;
 	}
@@ -56,7 +56,7 @@ void AiEnemy()
 	}
 
 
-	aiBounceTime = aiTimeElapsed + 0.2;
+	aiBounceTime1 = g_dElapsedTime + 0.2;
 }
 
 void renderEnemy()
@@ -65,8 +65,8 @@ void renderEnemy()
 	//Draw location of Enemy
 	WORD charColor = 0x0C;
 	COORD c = g_Console.getConsoleSize();
-	g_sEnemy.m_cLocation.X = 18; // enemy spawn location
-	g_sEnemy.m_cLocation.Y = 25;
+	//g_sEnemy.m_cLocation.X = 18; // enemy spawn location
+	//g_sEnemy.m_cLocation.Y = 25;
 
 	c.X = 5;
 	c.Y = 5;

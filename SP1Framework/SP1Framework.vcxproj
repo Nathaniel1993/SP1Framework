@@ -77,7 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ai.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
@@ -86,6 +86,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Map1Enemy1.cpp" />
+    <ClCompile Include="Map1Enemy2.cpp" />
     <ClCompile Include="quiz.cpp" />
   </ItemGroup>
   <ItemGroup>
