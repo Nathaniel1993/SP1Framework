@@ -78,7 +78,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ai.cpp" />
-    <ClCompile Include="Completed.cpp" />
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />

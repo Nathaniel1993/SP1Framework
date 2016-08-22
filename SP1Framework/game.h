@@ -79,6 +79,8 @@ void rendermap7();
 void rendermap8();
 void rendermap9();
 
+void loadsplashscreen();
+
 void map1();
 void map2();
 void map3();

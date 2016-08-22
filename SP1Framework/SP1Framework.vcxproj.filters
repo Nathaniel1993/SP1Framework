@@ -51,9 +51,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Completed.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Map1Enemy1.cpp">
       <Filter>Source Files\Enemies</Filter>
     </ClCompile>

@@ -5,8 +5,24 @@
 #include <fstream>
 
 using namespace std;
-extern char MapSize[80][31];
-extern Console g_Console;
-extern SGameChar g_sChar;
-extern bool g_abKeyPressed[K_COUNT];
-extern EGAMESTATES g_eGameState;
+
+void rendermap1();
+void rendermap2();
+void rendermap3();
+void rendermap4();
+void rendermap5();
+void rendermap6();
+void rendermap7();
+void rendermap8();
+void rendermap9();
+
+void loadmap1();
+void loadmap2();
+void loadmap3();
+void loadmap4();
+void loadmap5();
+void loadmap6();
+void loadmap7();
+void loadmap8();
+void loadmap9();
+

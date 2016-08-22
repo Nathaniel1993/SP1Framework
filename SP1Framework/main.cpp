@@ -19,6 +19,7 @@ void mainLoop( void );
 int main( void )
 {
     init();      // initialize your variables
+	loadsplashscreen();
     mainLoop();  // main loop
     shutdown();  // do clean up, if any. free memory.
     

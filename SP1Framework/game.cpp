@@ -10,7 +10,6 @@
 #include "map.h"
 #include "Dice.h"
 #include <fstream>
-#include "Completed.h"
 #include <mmsystem.h>
 
 using namespace std;
@@ -19,6 +18,8 @@ double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool	diceRoll = false;
 char MapSize[80][31];
+bool ScoreTracker = false;
+int Score = 0;
 
 double aiTimeElapsed;
 double aiBounceTime;
@@ -50,18 +51,14 @@ void init(void)
 
 	aiTimeElapsed = 0.0;
 	aiBounceTime = 0.0;
-	g_MapNo = 1;
+
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 	g_sEnemy.m_cLocation.X = 18; // enemy spawn location
 	g_sEnemy.m_cLocation.Y = 24;
-	ifstream file;
-	file.open("map1.txt");
-	file.open("map2.txt");
-	file.open("map3.txt");
-	file.open("map4.txt");
+	
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -137,13 +134,13 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	case S_MAP1: map1();
+	case S_MAP1: loadmap1();
 		break;
-	case S_MAP2: map2();
+	case S_MAP2: loadmap2();
 		break;
-	case S_MAP3: map3();
+	case S_MAP3: loadmap3();
 		break;
-	case S_MAP4: map4();
+	case S_MAP4: loadmap4();
 		break;
 	}
 }
@@ -181,29 +178,27 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-	/*if (g_abKeyPressed[K_ENTER])
+	if (g_abKeyPressed[K_ENTER])
 	{
 	g_eGameState = S_GAME;
+	loadmap1();
 	}
 	if (g_abKeyPressed[K_LEFTCONTROL])
 	{
 	g_eGameState = S_GUIDE;
-	}*/
-	g_eGameState = S_GAME;
+	}
 }
 
 void gameplay()            // gameplay logic
 {
 	processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
 	moveCharacter();   // moves the character, collision detection, physics, etc
-	/*if (g_MapNo == 1)//Sound for Map 1 (Not Working Yet)
+	if (ScoreTracker == true)
 	{
-		PlaySound(L"Map1.wav", NULL, SND_FILENAME | SND_ASYNC);
+		Score++;
+		MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
+		ScoreTracker = false;
 	}
-	else if (g_MapNo == 2)//Sound for Map 2 (Not Working Yet)
-	{
-		PlaySound(L"Lights Out.wav", NULL, SND_FILENAME | SND_ASYNC);
-	}*/
 }
 
 void moveCharacter()
@@ -223,6 +218,10 @@ void moveCharacter()
 		{
 			g_sChar.m_cLocation.Y++;
 		}
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+		{
+			ScoreTracker = true;
+		}
 	}
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
@@ -232,6 +231,10 @@ void moveCharacter()
 		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.X++;
+		}
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+		{
+			ScoreTracker = true;
 		}
 	}
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
@@ -243,6 +246,10 @@ void moveCharacter()
 		{
 			g_sChar.m_cLocation.Y--;
 		}
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+		{
+			ScoreTracker = true;
+		}
 	}
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
@@ -252,6 +259,10 @@ void moveCharacter()
 		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 		{
 			g_sChar.m_cLocation.X--;
+		}
+		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+		{
+			ScoreTracker = true;
 		}
 	}
 	if (g_abKeyPressed[K_SPACE])
@@ -283,10 +294,37 @@ void clearScreen()
 
 void renderSplashScreen()  // renders the splash screen
 {
+	COORD c;
+	for (int y = 0; y < 31; y++)
+	{
+		c.Y = y;
+		for (int x = 0; x < 80; x++)
+		{
+			if (MapSize[x][y] == 'i')
+			{
+				MapSize[x][y] = ' ';
+			}
+			c.X = x;
+			g_Console.writeToBuffer(c, MapSize[x][y]);
+		}
+	}
+	COORD l;
+	l.Y = 26;
+	l.X = 20;
+	g_Console.writeToBuffer(l, "Press <Enter> key to start game", 0x0B);
+	l.Y = 27;
+	l.X = 20;
+	g_Console.writeToBuffer(l, "Press <Left Control> key to open guide", 0x0B);
+	l.Y = 28;
+	l.X = 20;
+	g_Console.writeToBuffer(l, "Press <Esc> key in game to quit", 0x0B);
+}
+
+void loadsplashscreen()
+{
 	ifstream file("mainmenu.txt");
 	int width = 0;
 	int height = 0;
-	COORD c;
 	if (file.is_open())
 	{
 		while (height < 31)
@@ -299,32 +337,8 @@ void renderSplashScreen()  // renders the splash screen
 			height++;
 			width = 0;
 		}
-
 		file.close();
-		for (int y = 0; y < 31; y++)
-		{
-			c.Y = y;
-			for (int x = 0; x < 80; x++)
-			{
-				if (MapSize[x][y] == 'i')
-				{
-					MapSize[x][y] = ' ';
-				}
-				c.X = x;
-				g_Console.writeToBuffer(c, MapSize[x][y]);
-			}
-		}
 	}
-	COORD l = g_Console.getConsoleSize();
-	l.Y = 26;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Enter> key to start game", 0x0B);
-	l.Y = 27;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Left Control> key to open guide", 0x0B);
-	l.Y = 28;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Esc> key in game to quit", 0x0B);
 }
 
 void renderGame()
@@ -390,7 +404,13 @@ void renderFramerate()
 	ss << g_dElapsedTime << "secs";
 	c.X = 0;
 	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str(), 0x59);
+	g_Console.writeToBuffer(c, ss.str());
+
+	ss.str("");
+	ss << Score << "points";
+	c.X = 40;
+	c.Y = 0;
+	g_Console.writeToBuffer(c, ss.str());
 }
 void renderToScreen()
 {
