@@ -142,7 +142,6 @@ void update(double dt)
 	case S_MAP3: loadmap3();
 		break;
 	/*case S_MAP4: loadmap4();
-		gameplay();
 		break;*/
 	}
 }
@@ -361,15 +360,11 @@ void renderMap()
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
 	rendermap1();
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
-	{
-		rendermap2();
-	}
-	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
+	if (g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
 	{
 		loadmap3();
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 40;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
  	}
 	/*if (g_MapNo = 1)
 	{

@@ -22,6 +22,18 @@ void rendermap1()
 			}
 			c.X = x;
 			g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
+			if (MapSize[x][y] == '.')
+			{
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
+			}
+			if (MapSize[x][y] == 'X')
+			{
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+			}
+			if (MapSize[x][y] == 'l')
+			{
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
+			}
 		}
 	}	
 	renderCharacter();
@@ -57,33 +69,6 @@ void loadmap1()
 
 		file.close();
 	}
-}
-
-void rendermap2()
-{
-	gameplay();
-	COORD c;
-	for (int y = 0;y < 31;y++)
-	{
-		c.Y = y;
-		for (int x = 0;x < 80;x++)
-		{
-			if (MapSize[x][y] == 'i')
-			{
-				MapSize[x][y] = ' ';
-			}
-			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y], 0x0B);
-		}
-	}
-	renderCharacter();
-	/*if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
-	{
-		clearScreen();
-		loadmap3();
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
-	}*/
 }
 
 void loadmap2()
