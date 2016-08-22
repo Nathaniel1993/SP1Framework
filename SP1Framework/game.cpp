@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include "Ai.h"
+#include "guide.h"
 #include "map.h"
 #include "Dice.h"
 #include <fstream>
@@ -134,14 +135,15 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	case S_MAP1: loadmap1();
+	/*case S_MAP1: loadmap1();
 		break;
 	case S_MAP2: loadmap2();
 		break;
 	case S_MAP3: loadmap3();
 		break;
-	case S_MAP4: loadmap4();
-		break;
+	/*case S_MAP4: loadmap4();
+		gameplay();
+		break;*/
 	}
 }
 //--------------------------------------------------------------
@@ -159,7 +161,7 @@ void render()
 	{
 	case S_SPLASHSCREEN: renderSplashScreen();
 		break;
-	case S_GUIDE:renderguide();
+	case S_GUIDE: loadguide();
 		break;
 	case S_GAME: renderGame();
 		break;
@@ -169,8 +171,8 @@ void render()
 		break;
 	case S_MAP3: rendermap3();
 		break;
-	case S_MAP4: rendermap4();
-		break;
+	/*case S_MAP4: rendermap4();
+		break;*/
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 	renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
@@ -359,6 +361,16 @@ void renderMap()
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
 	rendermap1();
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
+	{
+		rendermap2();
+	}
+	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 28)
+	{
+		loadmap3();
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+ 	}
 	/*if (g_MapNo = 1)
 	{
 		rendermap1();

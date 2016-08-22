@@ -12,7 +12,7 @@ void guide()
 	}
 }
 
-void renderguide()
+void loadguide()
 {
 	COORD l = g_Console.getConsoleSize();
 	l.Y = 2;

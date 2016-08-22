@@ -4,4 +4,4 @@
 using namespace std;
 
 void guide();
-void renderguide();
+void loadguide();
