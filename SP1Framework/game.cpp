@@ -447,7 +447,7 @@ void renderMap()
 		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
 		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
 	};
-	rendermap1();
+	DrawMap();
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
 	{
 		clearScreen();

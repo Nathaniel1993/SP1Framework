@@ -7,15 +7,7 @@
 
 using namespace std;
 
-void rendermap1();
-void rendermap2();
-void rendermap3();
-void rendermap4();
-void rendermap5();
-void rendermap6();
-void rendermap7();
-void rendermap8();
-void rendermap9();
+void DrawMap();
 
 void loadmap1();
 void loadmap2();

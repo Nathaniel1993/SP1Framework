@@ -13,7 +13,7 @@ bool LoadMap = true;
 int i = 0;
 extern int numkey;
 
-void rendermap1()
+void DrawMap()
 {
 	if (LoadMap == true)
 	{
