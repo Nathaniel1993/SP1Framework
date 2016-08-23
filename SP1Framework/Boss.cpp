@@ -27,7 +27,7 @@ void coordSaveLocation()
 
 void BossAi()
 {
-	if (bossBounceTime > g_dElapsedTime)
+	if (Bounce.bossBounceTime > g_dElapsedTime)
 	{
 		return;
 	}
@@ -67,7 +67,7 @@ void BossAi()
 		g_sBoss.m_cLocation.X++;
 		coordSave[0] = c;
 	}
-	bossBounceTime = g_dElapsedTime + 0.2;
+	Bounce.bossBounceTime = g_dElapsedTime + 0.2;
 }
 
 void renderBoss()

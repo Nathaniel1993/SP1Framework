@@ -23,17 +23,17 @@ bool ScoreTracker = false;
 int Score = 0;
 
 
-double aiBounceTime1;
-double aiBounceTime2;
-double bossBounceTime;
+
 
 // Game specific variables here
 extern int g_MapNo;
 WORD color;
 SGameChar   g_sChar;
-SGameEnemy  g_sEnemy;// Enemy
-SGameEnemy  g_sEnemy2;
-SGameBoss g_sBoss;
+//SGameEnemy  g_sEnemy;// Enemy
+//SGameEnemy  g_sEnemy2;
+EnemyStruct Enemy;
+AiBounceTime Bounce;
+SGameBoss   g_sBoss;
 SGameKeys	g_sKeys[4];
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
@@ -55,9 +55,13 @@ void init(void)
 	g_dBounceTime = 0.0;
 
 
-	aiBounceTime1 = 0.0;
-	aiBounceTime2 = 0.0;
-	bossBounceTime = 0.0;
+	Bounce.aiBounceTime1 = 0.0;
+	Bounce.aiBounceTime2 = 0.0;
+	Bounce.aiBounceTime3 = 0.0;
+	Bounce.aiBounceTime4 = 0.0;
+	Bounce.aiBounceTime5 = 0.0;
+	Bounce.aiBounceTime6 = 0.0;
+	Bounce.bossBounceTime = 0.0;
 
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
@@ -65,14 +69,17 @@ void init(void)
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 	
-	g_sEnemy.m_cLocation.X = 18; // enemy spawn location
-	g_sEnemy.m_cLocation.Y = 24;
+	Enemy.g_sEnemy.m_cLocation.X = 18; // Map1Enemy1 spawn location
+	Enemy.g_sEnemy.m_cLocation.Y = 25;
 
-	g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
-	g_sEnemy2.m_cLocation.Y = 10;
+	Enemy.g_sEnemy2.m_cLocation.X = 18; // Map1Enemy2 spawn location
+	Enemy.g_sEnemy2.m_cLocation.Y = 10;
+
+	Enemy.g_sEnemy3.m_cLocation.X = 68; // Map1Enemy3 spawn location
+	Enemy.g_sEnemy3.m_cLocation.Y = 15;
 	
-	g_sBoss.m_cLocation.X = 20;
-	g_sBoss.m_cLocation.Y = 25;
+	g_sBoss.m_cLocation.X = 40;
+	g_sBoss.m_cLocation.Y = 20;
 
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
@@ -391,7 +398,12 @@ void renderGame()
 	renderMap();
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
-	BossAi();
+	Enemy1();
+	Enemy2();
+	Enemy3();
+
+	//BossAi();
+
 	renderBoss();
 }
 

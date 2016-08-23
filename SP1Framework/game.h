@@ -44,6 +44,25 @@ struct SGameEnemy
 {
 	COORD m_cLocation;
 };
+struct EnemyStruct
+{
+	SGameEnemy g_sEnemy;
+	SGameEnemy g_sEnemy2;
+	SGameEnemy g_sEnemy3;
+	SGameEnemy g_sEnemy4;
+	SGameEnemy g_sEnemy5;
+	SGameEnemy g_sEnemy6;
+};
+struct AiBounceTime
+{
+	double aiBounceTime1;
+	double aiBounceTime2;
+	double aiBounceTime3;
+	double aiBounceTime4;
+	double aiBounceTime5;
+	double aiBounceTime6;
+	double bossBounceTime;
+};
 struct SGDICE
 {
 	COORD m_cLocation;
