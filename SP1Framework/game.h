@@ -28,9 +28,9 @@ enum EGAMESTATES
 	S_MENU,
     S_GAME,
 	S_MAP1, S_MAP2, S_MAP3, S_MAP4, S_MAP5, S_MAP6, S_MAP7, S_MAP8, S_MAP9,
-    S_COUNT,
 	S_GUIDE,
 	S_DICE, S_DICE1, S_DICE2, S_DICE3, S_DICE4, S_DICE5, S_DICE6,
+	S_COUNT,
 };
 
 // struct for the game character
@@ -41,6 +41,14 @@ struct SGameChar
 };
 
 struct SGameEnemy
+{
+	COORD m_cLocation;
+};
+struct SGDICE
+{
+	COORD m_cLocation;
+};
+struct SGameBoss
 {
 	COORD m_cLocation;
 };
@@ -63,14 +71,7 @@ struct AiBounceTime
 	double aiBounceTime6;
 	double bossBounceTime;
 };
-struct SGDICE
-{
-	COORD m_cLocation;
-};
-struct SGameBoss
-{
-	COORD m_cLocation;
-};
+
 struct SGameKeys
 {
 	COORD m_cLocation;
@@ -96,6 +97,8 @@ void renderFramerate();     // renders debug information, frame rate, elapsed ti
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void guide();				// guide menu logic
 void loadsplashscreen();
+void renderKeys();
+void openDoor();
 
 void rendermap1();
 void rendermap2();

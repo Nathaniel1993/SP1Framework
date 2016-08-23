@@ -6,25 +6,28 @@ extern char MapSize[80][31];
 extern Console g_Console;
 extern SGameChar g_sChar;
 extern SGameKeys g_sKeys[4];
+extern SGameKeys g_sDoor;
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
 bool LoadMap = true;
 int i = 0;
-extern int numkey = 0;
+extern int numkey;
 
 void rendermap1()
 {
-	if (LoadMap = true)
+	if (LoadMap == true)
 	{
+		LoadMap = false;
 		COORD c;
-		for (int y = 0;y < 31;y++)
+		for (int y = 0; y < 31; y++)
 		{
 			c.Y = y;
-			for (int x = 0;x < 80;x++)
+			for (int x = 0; x < 80; x++)
 			{
 				if (MapSize[x][y] == 'i')
 				{
 					MapSize[x][y] = ' ';
+					i++;
 				}
 				c.X = x;
 				g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
@@ -32,25 +35,52 @@ void rendermap1()
 				{
 					g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
 				}
+				if (MapSize[x][y] == 'A')
+				{
+					g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+					g_sDoor.m_cLocation.X = x;
+					g_sDoor.m_cLocation.Y = y;
+				}
 				if (MapSize[x][y] == 'K')
 				{
 					g_sKeys[numkey].m_cLocation.X = x;
-					g_sKeys[numkey].m_cLocation.Y= y;
+					g_sKeys[numkey].m_cLocation.Y = y;
 					numkey++;
 				}
-			/*	if (MapSize[x][y] == 'X')
+				for (int i = 0; i < numkey; i++)
 				{
-					g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+					g_Console.writeToBuffer(g_sKeys[numkey].m_cLocation, 'K', 0x1F);
+
 				}
-				if (MapSize[x][y] == 'l')
-				{
-					g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
-				}*/
+				/*	if (MapSize[x][y] == 'X')
+					{
+						g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+					}
+					if (MapSize[x][y] == 'l')
+					{
+						g_Console.writeToBuffer(c, MapSize[x][y], 0x0F);
+					}*/
 			}
 		}
-		renderCharacter();
 	}
-	LoadMap = false;
+	COORD c;
+	for (int y = 0; y < 31; y++)
+	{
+		c.Y = y;
+		for (int x = 0; x < 80; x++)
+		{
+			c.X = x;
+			g_Console.writeToBuffer(c, MapSize[x][y], 0x09);
+			if (MapSize[x][y] == '.')
+			{
+				g_Console.writeToBuffer(c, MapSize[x][y], 0x0A);
+			}
+			for (int i = 0; i < numkey; i++)
+			{
+				g_Console.writeToBuffer(g_sKeys[numkey].m_cLocation, 'K', 0x1F);
+			}
+		}
+	}
 }
 
 void loadmap1()

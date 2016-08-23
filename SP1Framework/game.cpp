@@ -21,20 +21,24 @@ bool	diceRoll = false;
 char MapSize[80][31];
 bool ScoreTracker = false;
 int Score = 0;
+int keys = 4;
+int numkey=0;
 
 
-
+double aiBounceTime1;
+double aiBounceTime2;
+double bossBounceTime;
 
 // Game specific variables here
 extern int g_MapNo;
 WORD color;
 SGameChar   g_sChar;
 //SGameEnemy  g_sEnemy;// Enemy
-//SGameEnemy  g_sEnemy2;
 EnemyStruct Enemy;
 AiBounceTime Bounce;
-SGameBoss   g_sBoss;
+SGameBoss g_sBoss;
 SGameKeys	g_sKeys[4];
+SGameKeys	g_sDoor;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
@@ -69,17 +73,14 @@ void init(void)
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 	
-	Enemy.g_sEnemy.m_cLocation.X = 18; // Map1Enemy1 spawn location
-	Enemy.g_sEnemy.m_cLocation.Y = 25;
+	Enemy.g_sEnemy.m_cLocation.X = 18; // enemy spawn location
+	Enemy.g_sEnemy.m_cLocation.Y = 24;
 
-	Enemy.g_sEnemy2.m_cLocation.X = 18; // Map1Enemy2 spawn location
+	Enemy.g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
 	Enemy.g_sEnemy2.m_cLocation.Y = 10;
-
-	Enemy.g_sEnemy3.m_cLocation.X = 68; // Map1Enemy3 spawn location
-	Enemy.g_sEnemy3.m_cLocation.Y = 15;
 	
-	g_sBoss.m_cLocation.X = 40;
-	g_sBoss.m_cLocation.Y = 20;
+	g_sBoss.m_cLocation.X = 20;
+	g_sBoss.m_cLocation.Y = 25;
 
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
@@ -240,7 +241,7 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#')
+		if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#'&& MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != 'A')
 		{
 			if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
 			{
@@ -329,6 +330,16 @@ void moveCharacter()
 		// set the bounce time to some time in the future to prevent accidental triggers
 		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int i = 0; i < numkey; i++)
+	{
+		if (g_sChar.m_cLocation.X == g_sKeys[i].m_cLocation.X && g_sChar.m_cLocation.Y == g_sKeys[i].m_cLocation.Y && g_sKeys[i].m_bActive == true)
+		{
+			keys--;
+			g_sKeys[i].m_bActive = false;
+		}
+	}
 }
 
 void processUserInput()
@@ -398,13 +409,10 @@ void renderGame()
 	renderMap();
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
-	Enemy1();
-	Enemy2();
-	Enemy3();
-
-	//BossAi();
-
-	renderBoss();
+	
+	
+	renderKeys();
+	openDoor();
 }
 
 void renderMap()
@@ -474,4 +482,23 @@ void renderToScreen()
 {
 	// Writes the buffer to the console, hence you will see what you have written
 	g_Console.flushBufferToConsole();
+}
+
+void renderKeys()
+{
+	for (int i = 0; i < numkey; i++)
+	{
+		if (g_sKeys[i].m_bActive == false)
+		{
+			g_Console.writeToBuffer(g_sKeys[i].m_cLocation,' ', 0x0f);
+		}
+	}
+}
+
+void openDoor()
+{
+	if (keys == 0)
+	{
+		MapSize[g_sDoor.m_cLocation.X][g_sDoor.m_cLocation.Y] = ' ';
+	}
 }
