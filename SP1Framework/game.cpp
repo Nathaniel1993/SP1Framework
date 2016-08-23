@@ -1,6 +1,6 @@
 // This is the main file for the game logic and function
 
-
+#include "combat.h"
 #include "game.h"
 #include "Framework\console.h"
 #include <iostream>
@@ -123,6 +123,12 @@ void getInput(void)
 	g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_ENTER] = isKeyPressed(VK_RETURN);
 	g_abKeyPressed[K_LEFTCONTROL] = isKeyPressed(VK_LCONTROL);
+	g_abKeyPressed[K_ONE] = isKeyPressed(0x31);
+	g_abKeyPressed[K_TWO] = isKeyPressed(0x32);
+	g_abKeyPressed[K_THREE] = isKeyPressed(0x33);
+	g_abKeyPressed[K_FOUR] = isKeyPressed(0x34);
+	g_abKeyPressed[K_FIVE] = isKeyPressed(0x35);
+
 }
 
 
@@ -154,6 +160,14 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	/*case S_DICE: dice();
+		break;
+	case S_COMBATEASY: combatEasy();
+		break;
+	case S_COMBATMEDIUM: combatMedium();
+		break;
+	case S_COMBATHARD: combatHard();
+		break;*/
 	}
 }
 //--------------------------------------------------------------
@@ -175,6 +189,14 @@ void render()
 		break;
 	case S_GAME: renderGame();
 		break;
+	/*case S_DICE: renderdice();
+		break;
+	case S_COMBATEASY: rendercombatEasy();
+		break;
+	case S_COMBATMEDIUM: rendercombatMedium();
+		break;
+	case S_COMBATHARD: rendercombatHard();
+		break;*/
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 	renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
