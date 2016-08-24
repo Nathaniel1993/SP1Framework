@@ -79,8 +79,3 @@ void renderEnemy6()
 
 	}
 }
-void Enemy6()
-{
-	AiEnemy6();
-	renderEnemy6();
-}

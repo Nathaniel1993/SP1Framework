@@ -55,15 +55,6 @@ void AiEnemy3()
 			Enemy.g_sEnemy3.m_cLocation.X++;
 		}
 	}
-	//else
-	//{
-	//	
-	//	if (startPatrol == true)
-	//	{
-	//		Enemy.g_sEnemy3.m_cLocation.X 
-	//		
-	//	}
-	//}
 
 
 	Bounce.aiBounceTime3 = g_dElapsedTime + 0.2;
@@ -88,9 +79,4 @@ void renderEnemy3()
 		g_Console.writeToBuffer(c, "Caught Lel ", 0x03);
 
 	}
-}
-void Enemy3()
-{
-	AiEnemy3();
-	renderEnemy3();
 }

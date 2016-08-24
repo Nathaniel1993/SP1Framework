@@ -80,8 +80,3 @@ void renderEnemy2()
 	}
 }
 
-void Enemy2()
-{
-	AiEnemy2();
-	renderEnemy2();
-}

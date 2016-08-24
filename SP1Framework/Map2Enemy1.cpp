@@ -79,8 +79,3 @@ void renderEnemy4()
 
 	}
 }
-void Enemy4()
-{
-	AiEnemy4();
-	renderEnemy4();
-}

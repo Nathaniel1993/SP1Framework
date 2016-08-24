@@ -2,6 +2,8 @@
 
 void AiEnemy()
 {
+	int patrol;
+
 	if (Bounce.aiBounceTime1 > g_dElapsedTime)
 	{
 		return;
@@ -54,8 +56,27 @@ void AiEnemy()
 			Enemy.g_sEnemy.m_cLocation.X++;
 		}
 	}
+	else
+	{
+		patrol = rand() % 4 + 1;
+		if (patrol == 1 && (MapSize[Enemy.g_sEnemy.m_cLocation.X][Enemy.g_sEnemy.m_cLocation.Y - 1] != '#'))
+		{
+			Enemy.g_sEnemy.m_cLocation.Y--;
+		}
+		else if (patrol == 2 && (MapSize[Enemy.g_sEnemy.m_cLocation.X][Enemy.g_sEnemy.m_cLocation.Y + 1] != '#'))
+		{
+			Enemy.g_sEnemy.m_cLocation.Y++;
+		}
 
-
+		if (patrol == 3 && (MapSize[Enemy.g_sEnemy.m_cLocation.X - 1][Enemy.g_sEnemy.m_cLocation.Y] != '#'))
+		{
+			Enemy.g_sEnemy.m_cLocation.X--;
+		}
+		else if (patrol == 4 && (MapSize[Enemy.g_sEnemy.m_cLocation.X + 1][Enemy.g_sEnemy.m_cLocation.Y] != '#'))
+		{
+			Enemy.g_sEnemy.m_cLocation.X++;
+		}
+	}
 	Bounce.aiBounceTime1 = g_dElapsedTime + 0.2;
 }
 
@@ -78,11 +99,4 @@ void renderEnemy()
 		g_Console.writeToBuffer(c, "Caught Lel ", 0x03);
 
 	}
-}
-
-void Enemy1()
-{
-	AiEnemy();
-	renderEnemy();
-	
 }

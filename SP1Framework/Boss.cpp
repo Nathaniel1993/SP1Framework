@@ -34,15 +34,15 @@ void BossAi()
 	
 	coordSaveLocation();
 
-	if (g_sChar.m_cLocation.Y < g_sBoss.m_cLocation.Y && (MapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y - 1] != '#'))
-	{
+	if (g_sChar.m_cLocation.Y < g_sBoss.m_cLocation.Y && (MapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y - 1] != '#')) //finding character, detect walls to prevent walking through
+	{																														// detect 
 		c.X = g_sBoss.m_cLocation.X;
 		c.Y = g_sBoss.m_cLocation.Y;
 		g_sBoss.m_cLocation.Y--;
 		coordSave[0] = c;
 		
 	}
-	else if (g_sChar.m_cLocation.Y > g_sBoss.m_cLocation.Y && (MapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y + 1] != '#'))
+	else if (g_sChar.m_cLocation.Y > g_sBoss.m_cLocation.Y && (MapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y + 1] != '#')) //detect up
 	{
 		c.X = g_sBoss.m_cLocation.X;
 		c.Y = g_sBoss.m_cLocation.Y;
@@ -51,7 +51,7 @@ void BossAi()
 		coordSave[0] = c;
 	}
 
-	if (g_sChar.m_cLocation.X < g_sBoss.m_cLocation.X && (MapSize[g_sBoss.m_cLocation.X - 1][g_sBoss.m_cLocation.Y] != '#'))
+	if (g_sChar.m_cLocation.X < g_sBoss.m_cLocation.X && (MapSize[g_sBoss.m_cLocation.X - 1][g_sBoss.m_cLocation.Y] != '#')) //detect left, move left
 	{
 		c.X = g_sBoss.m_cLocation.X;
 		c.Y = g_sBoss.m_cLocation.Y;
@@ -59,7 +59,7 @@ void BossAi()
 		g_sBoss.m_cLocation.X--;
 		coordSave[0] = c;
 	}
-	else if (g_sChar.m_cLocation.X > g_sBoss.m_cLocation.X && (MapSize[g_sBoss.m_cLocation.X + 1][g_sBoss.m_cLocation.Y] != '#'))
+	else if (g_sChar.m_cLocation.X > g_sBoss.m_cLocation.X && (MapSize[g_sBoss.m_cLocation.X + 1][g_sBoss.m_cLocation.Y] != '#')) //detect 
 	{
 		c.X = g_sBoss.m_cLocation.X;
 		c.Y = g_sBoss.m_cLocation.Y;

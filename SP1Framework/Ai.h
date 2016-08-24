@@ -15,20 +15,21 @@ extern double g_dElapsedTime;
 extern COORD c;
 extern char MapSize[80][31];
 
-
+void renderHealth();
 
 void renderBoss();
 void BossAi();
 
-void Enemy1();
-void Enemy2();
-void Enemy3();
-void Enemy4();
-void Enemy5();
-void Enemy6();
+void AiEnemy();
+void AiEnemy2();
+void AiEnemy3();
+void AiEnemy4();
+void AiEnemy5();
+void AiEnemy6();
 
-//void AiEnemy();
-//void renderEnemy();
-//void renderGame();
-//void EnemyDetect();
-//void init(void);
+void renderEnemy();
+void renderEnemy2();
+void renderEnemy3();
+void renderEnemy4();
+void renderEnemy5();
+void renderEnemy6();
