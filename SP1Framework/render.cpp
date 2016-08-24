@@ -6,7 +6,6 @@
 #include <sstream>
 #include "Ai.h"
 #include "guide.h"
-#include "map.h"
 #include "Dice.h"
 #include <fstream>
 #include <mmsystem.h>
@@ -23,7 +22,6 @@ extern char dice5[80][31];
 extern char dice6[80][31];
 /*---------------------------------------------------------*/
 extern bool mapLoader;
-bool mapDraw = true;
 int g_MapNo = 0;
 
 /*-------Variable for Interactive Objects and Score*/
@@ -69,7 +67,7 @@ void renderSplashscreen()  // renders the splash screen
 
 void renderGame()
 {
-	renderMap();
+	renderMap(); 
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
 
@@ -101,18 +99,6 @@ void renderMap()
 				g_sDoor.m_cLocation.X = x;
 				g_sDoor.m_cLocation.Y = y;
 			}
-			
-			/*if (mapSize[x][y] == 'K')
-			{
-			g_sKeys[numkey].m_cLocation.X = x;
-			g_sKeys[numkey].m_cLocation.Y = y;
-			numkey++;
-			}
-			for (int i = 0; i < numkey; i++)
-			{
-			g_Console.writeToBuffer(g_sKeys[numkey].m_cLocation, 'K', 0x1F);
-
-			}*/
 		}
 	}
 }
@@ -146,6 +132,7 @@ void renderFramerate()
 	c.Y = 0;
 	g_Console.writeToBuffer(c, ss.str());
 
+	//displays the score
 	ss.str("");
 	ss << Score << "points";
 	c.X = 40;

@@ -6,7 +6,6 @@
 #include <sstream>
 #include "Ai.h"
 #include "guide.h"
-#include "map.h"
 #include "Dice.h"
 #include <fstream>
 #include <mmsystem.h>
@@ -20,8 +19,6 @@ char dice3[80][31];
 char dice4[80][31];
 char dice5[80][31];
 char dice6[80][31];
-
-extern bool mapLoader;
 
 void loadSplashscreen()
 {

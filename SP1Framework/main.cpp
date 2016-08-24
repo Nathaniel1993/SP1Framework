@@ -2,7 +2,6 @@
 
 #include "Framework\timer.h"
 #include "game.h"
-#include "map.h"
 #include "guide.h"
 
 CStopWatch g_Timer;                            // Timer function to keep track of time and the frame rate

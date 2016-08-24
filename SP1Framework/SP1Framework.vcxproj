@@ -82,6 +82,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameplay.cpp" />
     <ClCompile Include="guide.cpp" />
     <ClCompile Include="loadfiles.cpp" />
     <ClCompile Include="main.cpp" />
@@ -101,7 +102,6 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="loadfile.h" />
-    <ClInclude Include="map.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defeat.txt" />

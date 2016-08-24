@@ -1,8 +1,6 @@
 #include "Framework\timer.h"
 #include "Framework\console.h"
 #include "game.h"
-#include "map.h"
-
 
 extern Console g_Console;
 extern SGameChar g_sChar;
