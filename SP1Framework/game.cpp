@@ -17,7 +17,6 @@ using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
-bool	diceRoll = false;
 bool ScoreTracker = false;
 extern bool mapDraw;
 bool mapLoader = false; 
@@ -35,6 +34,7 @@ double bossBounceTime;
 extern int g_MapNo;
 WORD color;
 SGameChar   g_sChar;
+SGameChar HealthBar;
 //SGameEnemy  g_sEnemy;// Enemy
 EnemyStruct Enemy;
 AiBounceTime Bounce;
@@ -83,7 +83,11 @@ void init(void)
 
 	Enemy.g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
 	Enemy.g_sEnemy2.m_cLocation.Y = 10;
+
+	Enemy.g_sEnemy3.m_cLocation.X = 59; // enemy spawn location
+	Enemy.g_sEnemy3.m_cLocation.Y = 15;
 	
+
 	g_sBoss.m_cLocation.X = 20;
 	g_sBoss.m_cLocation.Y = 25;
 
@@ -165,9 +169,9 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
-	/*case S_DICE: dice();
+	case S_DICE: dice();
 		break;
-	case S_COMBATEASY: combatEasy();
+	/*case S_COMBATEASY: combatEasy();
 		break;
 	case S_COMBATMEDIUM: combatMedium();
 		break;
@@ -194,9 +198,9 @@ void render()
 		break;
 	case S_GAME: renderGame();
 		break;
-	/*case S_DICE: renderdice();
+	case S_DICE: renderdice();
 		break;
-	case S_COMBATEASY: rendercombatEasy();
+	/*case S_COMBATEASY: rendercombatEasy();
 		break;
 	case S_COMBATMEDIUM: rendercombatMedium();
 		break;

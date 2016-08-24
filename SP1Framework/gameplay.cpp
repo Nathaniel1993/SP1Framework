@@ -11,10 +11,13 @@
 #include <mmsystem.h>
 #include "loadfile.h"
 
+bool encounter = false;
+
 extern bool    ScoreTracker;
 extern bool    g_abKeyPressed[K_COUNT];
 extern bool	   diceRoll;
 extern bool    mapLoader;
+extern bool launchDice;
 
 extern int g_MapNo;
 extern int Score;
@@ -26,8 +29,6 @@ extern char mapSize[80][31];
 extern double  g_dElapsedTime;
 extern double  g_dDeltaTime;
 extern double  g_dBounceTime;
-extern double  aiBounceTime1;
-extern double  aiBounceTime2;
 extern double  bossBounceTime;
 
 extern WORD color;
@@ -70,6 +71,23 @@ void gameplay()            // gameplay logic
 		mapLoader = false;
 	}
 	moveCharacter();   // moves the character, collision detection, physics, etc
+	if (g_MapNo == 1)
+	{
+		AiEnemy();
+		AiEnemy2();
+		AiEnemy3();
+	}
+	if (g_MapNo == 2)
+	{
+		AiEnemy4();
+		AiEnemy5();
+		AiEnemy6();
+	}
+	if (g_MapNo == 3)
+	{
+		BossAi();
+		healthAi();
+	}
 	if (ScoreTracker == true)
 	{
 		Score++;
@@ -79,20 +97,29 @@ void gameplay()            // gameplay logic
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
 	{
 		g_MapNo = 2;
+		keys = 4;
 		mapLoader = true;
 		PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+		
 	}
 	else if (g_sChar.m_cLocation.X == 39 && g_sChar.m_cLocation.Y == 0)
 	{
 		g_MapNo = 3;
+		keys = 4;
 		mapLoader = true;
 		PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
 	}
+	if (encounter == true)
+	{
+		g_eGameState = S_DICE;
+		launchDice = true;
+	}
 }
+
 void moveCharacter()
 {
 	bool bSomethingHappened = false;

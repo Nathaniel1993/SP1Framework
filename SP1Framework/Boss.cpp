@@ -9,18 +9,20 @@ void coordSaveLocation()
 {
 	if (coordSave.size() <= 0)
 	{
-		c.X = 15;
-		c.Y = 20;
-		for (int i = 0; i < 5; i++)
+		c.X = 20;
+		c.Y = 25;
+		for (int i = 0; i < 8; i++)
 			coordSave.push_back(c);
 	}
 	else
 	{
-			
-			coordSave[4] = coordSave[3];
-			coordSave[3] = coordSave[2];
-			coordSave[2] = coordSave[1];
-			coordSave[1] =  c;
+		coordSave[7] = coordSave[6];
+		coordSave[6] = coordSave[5];
+		coordSave[5] = coordSave[4];
+		coordSave[4] = coordSave[3];
+		coordSave[3] = coordSave[2];
+		coordSave[2] = coordSave[1];
+		coordSave[1] =  c;
 	}
 
 }
@@ -86,9 +88,9 @@ void renderBoss()
 		g_Console.writeToBuffer(coordSave[i], (char)65, charColor);
 	}
 
-	if ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))
-	{
-		g_Console.writeToBuffer(c, "Ayy Lmao ", 0x03);
+	//if ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))
+	//{
+	//	g_Console.writeToBuffer(c, "Ayy Lmao ", 0x03);
 
-	}
+	//}
 }

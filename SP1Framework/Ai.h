@@ -2,6 +2,8 @@
 #include "Framework\console.h"
 #include "game.h"
 
+
+
 extern Console g_Console;
 extern SGameChar g_sChar;
 //extern SGameEnemy g_sEnemy;
@@ -14,6 +16,7 @@ extern COORD c;
 extern char mapSize[80][31];
 
 void renderHealth();
+void healthAi();
 
 void renderBoss();
 void BossAi();

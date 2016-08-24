@@ -9,8 +9,6 @@ using namespace std;
 
 void dice();
 
-
-
 void renderdice();
 
 void renderDice1();

@@ -71,6 +71,23 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
 
+	if (g_MapNo == 1)
+	{
+		renderEnemy();
+		renderEnemy2();
+		renderEnemy3();
+	}
+	else if (g_MapNo == 2)
+	{
+		renderEnemy4();
+		renderEnemy5();
+		renderEnemy6();
+	}
+	else if (g_MapNo == 3)
+	{
+		renderBoss();
+		renderHealth();
+	}
 	renderKeys();
 	openDoor();
 }

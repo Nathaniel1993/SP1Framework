@@ -2,14 +2,16 @@
 
 void AiEnemy()
 {
-	int patrol;
+	
 
 	if (Bounce.aiBounceTime1 > g_dElapsedTime)
 	{
 		return;
 	}
-
+	
+	int patrol = rand() % 4 + 1;
 	bool Detect = false;
+	extern bool encounter;
 
 	if ((Enemy.g_sEnemy.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemy.g_sEnemy.m_cLocation.X > 0)	//Detect Right  //Lesser than 0 
 		&& (g_sChar.m_cLocation.Y == Enemy.g_sEnemy.m_cLocation.Y)												//Greater than -5
@@ -58,7 +60,7 @@ void AiEnemy()
 	}
 	else
 	{
-		patrol = rand() % 4 + 1;
+
 		if (patrol == 1 && (mapSize[Enemy.g_sEnemy.m_cLocation.X][Enemy.g_sEnemy.m_cLocation.Y - 1] != '#'))
 		{
 			Enemy.g_sEnemy.m_cLocation.Y--;
@@ -77,6 +79,10 @@ void AiEnemy()
 			Enemy.g_sEnemy.m_cLocation.X++;
 		}
 	}
+	if ((Enemy.g_sEnemy.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy.m_cLocation.Y == g_sChar.m_cLocation.Y))
+	{
+		encounter = true;
+	}
 	Bounce.aiBounceTime1 = g_dElapsedTime + 0.2;
 }
 
@@ -94,9 +100,5 @@ void renderEnemy()
 	
 	g_Console.writeToBuffer(Enemy.g_sEnemy.m_cLocation, (char)97, charColor);
 
-	if ((Enemy.g_sEnemy.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy.m_cLocation.Y == g_sChar.m_cLocation.Y))
-	{
-		g_Console.writeToBuffer(c, "Caught Lel ", 0x03);
-
-	}
+	
 }

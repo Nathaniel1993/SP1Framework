@@ -7,7 +7,9 @@ void AiEnemy2()
 		return;
 	}
 
+	int patrol = rand() % 4 + 1;
 	bool Detect = false;
+	extern bool encounter;
 
 	if ((Enemy.g_sEnemy2.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemy.g_sEnemy2.m_cLocation.X > 0)	//Detect Right  //Lesser than 0 
 		&& (g_sChar.m_cLocation.Y == Enemy.g_sEnemy2.m_cLocation.Y)												//Greater than -5
@@ -55,7 +57,30 @@ void AiEnemy2()
 		}
 	}
 
+	else
+	{
+		if (patrol == 1 && (mapSize[Enemy.g_sEnemy2.m_cLocation.X][Enemy.g_sEnemy2.m_cLocation.Y - 1] != '#'))
+		{
+			Enemy.g_sEnemy2.m_cLocation.Y--;
+		}
+		else if (patrol == 2 && (mapSize[Enemy.g_sEnemy2.m_cLocation.X][Enemy.g_sEnemy2.m_cLocation.Y + 1] != '#'))
+		{
+			Enemy.g_sEnemy2.m_cLocation.Y++;
+		}
 
+		if (patrol == 3 && (mapSize[Enemy.g_sEnemy2.m_cLocation.X - 1][Enemy.g_sEnemy2.m_cLocation.Y] != '#'))
+		{
+			Enemy.g_sEnemy2.m_cLocation.X--;
+		}
+		else if (patrol == 4 && (mapSize[Enemy.g_sEnemy2.m_cLocation.X + 1][Enemy.g_sEnemy2.m_cLocation.Y] != '#'))
+		{
+			Enemy.g_sEnemy2.m_cLocation.X++;
+		}
+	}
+	if ((Enemy.g_sEnemy2.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy2.m_cLocation.Y == g_sChar.m_cLocation.Y))
+	{
+		encounter = true;
+	}
 	Bounce.aiBounceTime2 = g_dElapsedTime + 0.2;
 }
 
@@ -73,10 +98,5 @@ void renderEnemy2()
 
 	g_Console.writeToBuffer(Enemy.g_sEnemy2.m_cLocation, (char)97, charColor);
 
-	if ((Enemy.g_sEnemy2.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy2.m_cLocation.Y == g_sChar.m_cLocation.Y))
-	{
-		g_Console.writeToBuffer(c, "Caught Lel ", 0x03);
-
-	}
 }
 

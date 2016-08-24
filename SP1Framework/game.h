@@ -72,6 +72,7 @@ struct AiBounceTime
 	double aiBounceTime5;
 	double aiBounceTime6;
 	double bossBounceTime;
+	double healthBounceTime;
 };
 
 struct SGameKeys
