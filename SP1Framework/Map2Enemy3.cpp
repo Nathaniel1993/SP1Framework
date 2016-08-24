@@ -36,20 +36,20 @@ void AiEnemy6()
 
 	if (Detect == true)
 	{
-		if (g_sChar.m_cLocation.Y < Enemy.g_sEnemy6.m_cLocation.Y && (MapSize[Enemy.g_sEnemy6.m_cLocation.X][Enemy.g_sEnemy6.m_cLocation.Y - 1] != '#'))
+		if (g_sChar.m_cLocation.Y < Enemy.g_sEnemy6.m_cLocation.Y && (mapSize[Enemy.g_sEnemy6.m_cLocation.X][Enemy.g_sEnemy6.m_cLocation.Y - 1] != '#'))
 		{
 			Enemy.g_sEnemy6.m_cLocation.Y--;
 		}
-		else if (g_sChar.m_cLocation.Y > Enemy.g_sEnemy6.m_cLocation.Y && (MapSize[Enemy.g_sEnemy6.m_cLocation.X][Enemy.g_sEnemy6.m_cLocation.Y + 1] != '#'))
+		else if (g_sChar.m_cLocation.Y > Enemy.g_sEnemy6.m_cLocation.Y && (mapSize[Enemy.g_sEnemy6.m_cLocation.X][Enemy.g_sEnemy6.m_cLocation.Y + 1] != '#'))
 		{
 			Enemy.g_sEnemy6.m_cLocation.Y++;
 		}
 
-		if (g_sChar.m_cLocation.X < Enemy.g_sEnemy6.m_cLocation.X && (MapSize[Enemy.g_sEnemy6.m_cLocation.X - 1][Enemy.g_sEnemy6.m_cLocation.Y] != '#'))
+		if (g_sChar.m_cLocation.X < Enemy.g_sEnemy6.m_cLocation.X && (mapSize[Enemy.g_sEnemy6.m_cLocation.X - 1][Enemy.g_sEnemy6.m_cLocation.Y] != '#'))
 		{
 			Enemy.g_sEnemy6.m_cLocation.X--;
 		}
-		else if (g_sChar.m_cLocation.X > Enemy.g_sEnemy6.m_cLocation.X && (MapSize[Enemy.g_sEnemy6.m_cLocation.X + 1][Enemy.g_sEnemy6.m_cLocation.Y] != '#'))
+		else if (g_sChar.m_cLocation.X > Enemy.g_sEnemy6.m_cLocation.X && (mapSize[Enemy.g_sEnemy6.m_cLocation.X + 1][Enemy.g_sEnemy6.m_cLocation.Y] != '#'))
 		{
 			Enemy.g_sEnemy6.m_cLocation.X++;
 		}

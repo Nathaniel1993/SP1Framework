@@ -13,7 +13,7 @@ extern AiBounceTime Bounce;
 extern SGameBoss g_sBoss;
 extern double g_dElapsedTime;
 extern COORD c;
-extern char MapSize[80][31];
+extern char mapSize[80][31];
 
 void renderHealth();
 

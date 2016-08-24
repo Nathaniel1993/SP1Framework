@@ -91,37 +91,14 @@ void gameplay();            // gameplay logic
 void moveCharacter();       // moves the character, collision detection, physics, etc
 void processUserInput();    // checks if you should change states or do something else with the game, e.g. pause, exit
 void clearScreen();         // clears the current screen and draw from scratch 
-void renderSplashScreen();  // renders the splash screen
+void renderSplashscreen();  // renders the splash screen
 void renderGame();          // renders the game stuff
 void renderMap();           // renders the map to the buffer first
 void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void guide();				// guide menu logic
-void loadsplashscreen();
 void renderKeys();
 void openDoor();
-
-void rendermap1();
-void rendermap2();
-void rendermap3();
-void rendermap4();
-void rendermap5();
-void rendermap6();
-void rendermap7();
-void rendermap8();
-void rendermap9();
-
-void loadsplashscreen();
-
-void map1();
-void map2();
-void map3();
-void map4();
-void map5();
-void map6();
-void map7();
-void map8();
-void map9();
 
 #endif // _GAME_H

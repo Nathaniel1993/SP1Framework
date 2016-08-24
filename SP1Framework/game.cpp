@@ -12,17 +12,20 @@
 #include "Dice.h"
 #include <fstream>
 #include <mmsystem.h>
+#include "loadfile.h"
 
 using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool	diceRoll = false;
-char MapSize[80][31];
 bool ScoreTracker = false;
+extern bool mapDraw;
+bool mapLoader = false; 
 int Score = 0;
 int keys = 4;
 int numkey=0;
+extern char mapSize[80][31];
 
 
 double aiBounceTime1;
@@ -58,7 +61,10 @@ void init(void)
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
 
+	/*---------------------file load------------------------------*/
+	loadSplashscreen();
 
+	/*-----------------------------------------------------------*/
 	Bounce.aiBounceTime1 = 0.0;
 	Bounce.aiBounceTime2 = 0.0;
 	Bounce.aiBounceTime3 = 0.0;
@@ -183,7 +189,7 @@ void render()
 	clearScreen();      // clears the current screen and draw from scratch 
 	switch (g_eGameState)
 	{
-	case S_SPLASHSCREEN: renderSplashScreen();
+	case S_SPLASHSCREEN: renderSplashscreen();
 		break;
 	case S_GUIDE: loadguide();
 		break;
@@ -206,25 +212,54 @@ void splashScreenWait()    // waits for time to pass in splash screen
 {
 	if (g_abKeyPressed[K_ENTER])
 	{
-	g_eGameState = S_GAME;
-	loadmap1();
-	PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
+		g_eGameState = S_GAME;
+		g_MapNo = 1;
+		mapLoader = true;
 	}
 	if (g_abKeyPressed[K_LEFTCONTROL])
 	{
-	g_eGameState = S_GUIDE;
+		g_eGameState = S_GUIDE;
 	}
 }
 
 void gameplay()            // gameplay logic
 {
 	processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
+	if (mapLoader == true)
+	{
+		switch (g_MapNo)
+		{
+		case 1: loadMap1();
+			break;
+		case 2: loadMap2();
+			break;
+		case 3: loadMap3();
+			break;
+		}
+		mapLoader = false;
+	}
 	moveCharacter();   // moves the character, collision detection, physics, etc
 	if (ScoreTracker == true)
 	{
 		Score++;
-		MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
+		mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 		ScoreTracker = false;
+	}
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
+	{
+		g_MapNo = 2;
+		mapLoader = true;
+		PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+	}
+	else if (g_sChar.m_cLocation.X == 39 && g_sChar.m_cLocation.Y == 0)
+	{
+		g_MapNo = 3;
+		mapLoader = true;
+		PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
 	}
 }
 void moveCharacter()
@@ -237,21 +272,26 @@ void moveCharacter()
 	// providing a beep sound whenver we shift the character
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#')
 		{
-			if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == 'F')
+			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == 'F')
 			{
-				if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#'&&MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A')
 				{
-					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] = 'F';
-					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] = ' ';
+					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] = 'F';
+					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] = ' ';
 					g_sChar.m_cLocation.Y--;
 					bSomethingHappened = true;
 				}
 			}
-			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true;
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
+			{
+				keys--;
+				mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 			}
 			else
 			{
@@ -263,22 +303,26 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#'&& MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != 'A')
+		if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != 'A')
 		{
-			if (MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
+			if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
 			{
-				if (MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#'&&MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A')
 				{
-					MapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] = 'F';
-					MapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] = ' ';
+					mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] = 'F';
+					mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] = ' ';
 					g_sChar.m_cLocation.X--;
 					bSomethingHappened = true;
 				}
 			}
-
-			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true;
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
+			{
+				keys--;
+				mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 			}
 			else
 			{
@@ -290,21 +334,26 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
-		if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#')
 		{
-			if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] == 'F')
+			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] == 'F')
 			{
-				if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#'&&MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A')
 				{
-					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] = 'F';
-					MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] = ' ';
+					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] = 'F';
+					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] = ' ';
 					g_sChar.m_cLocation.Y++;
 					bSomethingHappened = true;
 				}
 			}
-			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true; 
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
+			{
+				keys--;
+				mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 			}
 			else
 			{
@@ -316,21 +365,26 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		if (MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#')
+		if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#')
 		{
-			if (MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == 'F')
-			{
-				if (MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#'&&MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A')
+			if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == 'F')
+			{ 
+				if (mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A')
 				{
-					MapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] = 'F';
-					MapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] = ' ';
+					mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] = 'F';
+					mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] = ' ';
 					g_sChar.m_cLocation.X++;
 					bSomethingHappened = true;
 				}
 			}
-			else if (MapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true;
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
+			{
+				keys--;
+				mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 			}
 			else
 			{
@@ -377,150 +431,8 @@ void clearScreen()
 	g_Console.clearBuffer(0x00);
 }
 
-void renderSplashScreen()  // renders the splash screen
-{
-	COORD c;
-	for (int y = 0; y < 31; y++)
-	{
-		c.Y = y;
-		for (int x = 0; x < 80; x++)
-		{
-			if (MapSize[x][y] == 'i')
-			{
-				MapSize[x][y] = ' ';
-			}
-			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y]);
-		}
-	}
-	COORD l;
-	l.Y = 26;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Enter> key to start game", 0x0B);
-	l.Y = 27;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Left Control> key to open guide", 0x0B);
-	l.Y = 28;
-	l.X = 20;
-	g_Console.writeToBuffer(l, "Press <Esc> key in game to quit", 0x0B);
-}
 
-void loadsplashscreen()
-{
-	ifstream file("mainmenu.txt");
-	int width = 0;
-	int height = 0;
-	if (file.is_open())
-	{
-		while (height < 31)
-		{
-			while (width < 80)
-			{
-				file >> MapSize[width][height];
-				width++;
-			}
-			height++;
-			width = 0;
-		}
-		file.close();
-	}
-}
 
-void renderGame()
-{
-	renderMap();
-	renderCharacter();  // renders the character into the buffer
-	moveCharacter();
-	
-	
-	renderKeys();
-	openDoor();
-}
 
-void renderMap()
-{
-	bool start = true;
-	bool check = false;
-	bool cleared = false;
-	// Set up sample colours, and output shadings
-	const WORD colors[] = {
-		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-	};
-	DrawMap();
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
-	{
-		clearScreen();
-		loadmap2();
-		PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
-	}
-	else if (g_sChar.m_cLocation.X == 39 && g_sChar.m_cLocation.Y == 0)
-	{
-		PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
-		loadmap3();
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 1;
- 	}
-}
 
-void renderCharacter()
-{
-	// Draw the location of the character
-	WORD charColor = 0x0C;
-	if (g_sChar.m_bActive)
-	{
-		charColor = 0x0A;
-	}
-	g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
-}
 
-void renderFramerate()
-{
-	COORD c;
-	// displays the framerate
-	std::ostringstream ss;
-	ss << std::fixed << std::setprecision(3);
-	ss << 1.0 / g_dDeltaTime << "fps";
-	c.X = g_Console.getConsoleSize().X - 9;
-	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str());
-
-	// displays the elapsed time
-	ss.str("");
-	ss << g_dElapsedTime << "secs";
-	c.X = 0;
-	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str());
-
-	ss.str("");
-	ss << Score << "points";
-	c.X = 40;
-	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str());
-}
-void renderToScreen()
-{
-	// Writes the buffer to the console, hence you will see what you have written
-	g_Console.flushBufferToConsole();
-}
-
-void renderKeys()
-{
-	for (int i = 0; i < numkey; i++)
-	{
-		if (g_sKeys[i].m_bActive == false)
-		{
-			g_Console.writeToBuffer(g_sKeys[i].m_cLocation,' ', 0x0f);
-		}
-	}
-}
-
-void openDoor()
-{
-	if (keys == 0)
-	{
-		MapSize[g_sDoor.m_cLocation.X][g_sDoor.m_cLocation.Y] = ' ';
-	}
-}

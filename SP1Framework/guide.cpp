@@ -63,7 +63,7 @@ void loadguide()
 	g_Console.writeToBuffer(l, "Upon contact or caught, roll the dice to determine difficulty of question", 0x0C);
 	l.Y = 22;
 	l.X = 1; 
-	g_Console.writeToBuffer(l, "For hard questions, 5 choices is given, press the 1-5 keys to answer", 0x0C);
+	g_Console.writeToBuffer(l, "For questions, 5 choices is given, press the 1-5 keys to answer", 0x0C);
 	l.Y = 23;
 	l.X = 1;
 	g_Console.writeToBuffer(l, "You have only 3 chances per question and 1 LIFE", 0x0C);

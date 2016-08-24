@@ -9,18 +9,13 @@ using namespace std;
 
 void dice();
 
-void loaddice1();
-void loaddice2();
-void loaddice3();
-void loaddice4();
-void loaddice5();
-void loaddice6();
+
 
 void renderdice();
 
-void renderdice1();
-void renderdice2();
-void renderdice3();
-void renderdice4();
-void renderdice5();
-void renderdice6();
+void renderDice1();
+void renderDice2();
+void renderDice3();
+void renderDice4();
+void renderDice5();
+void renderDice6();
