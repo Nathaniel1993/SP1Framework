@@ -10,6 +10,7 @@ void AiEnemy2()
 	int patrol = rand() % 4 + 1;
 	bool Detect = false;
 	extern bool encounter;
+	extern int encounterCheck2;
 
 	if ((Enemy.g_sEnemy2.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemy.g_sEnemy2.m_cLocation.X > 0)	//Detect Right  //Lesser than 0 
 		&& (g_sChar.m_cLocation.Y == Enemy.g_sEnemy2.m_cLocation.Y)												//Greater than -5
@@ -77,9 +78,11 @@ void AiEnemy2()
 			Enemy.g_sEnemy2.m_cLocation.X++;
 		}
 	}
-	if ((Enemy.g_sEnemy2.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy2.m_cLocation.Y == g_sChar.m_cLocation.Y))
+	if ((Enemy.g_sEnemy2.m_cLocation.X == g_sChar.m_cLocation.X) && (Enemy.g_sEnemy2.m_cLocation.Y == g_sChar.m_cLocation.Y)
+		&& encounterCheck2 == 0)
 	{
 		encounter = true;
+		encounterCheck2 = 1;
 	}
 	Bounce.aiBounceTime2 = g_dElapsedTime + 0.2;
 }

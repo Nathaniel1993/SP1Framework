@@ -37,6 +37,13 @@ extern double  g_dDeltaTime;
 
 extern bool g_abKeyPressed[K_COUNT];
 
+extern int encounterCheck1;
+extern int encounterCheck2;
+extern int encounterCheck3;
+extern int encounterCheck4;
+extern int encounterCheck5;
+extern int encounterCheck6;
+
 void renderSplashscreen()  // renders the splash screen
 {
 	COORD c;
@@ -73,15 +80,33 @@ void renderGame()
 
 	if (g_MapNo == 1)
 	{
-		renderEnemy();
-		renderEnemy2();
-		renderEnemy3();
+		if (encounterCheck1 == 0)
+		{
+			renderEnemy();
+		}
+		if (encounterCheck2 == 0)
+		{
+			renderEnemy2();
+		}
+		if (encounterCheck3 == 0)
+		{
+			renderEnemy3();
+		}
 	}
 	else if (g_MapNo == 2)
 	{
-		renderEnemy4();
-		renderEnemy5();
-		renderEnemy6();
+		if (encounterCheck4 == 0)
+		{
+			renderEnemy4();
+		}
+		if (encounterCheck5 == 0)
+		{
+			renderEnemy5();
+		}
+		if (encounterCheck6 == 0)
+		{
+			renderEnemy6();
+		}
 	}
 	else if (g_MapNo == 3)
 	{

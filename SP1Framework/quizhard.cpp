@@ -13,7 +13,6 @@ void HardQuestion1()
 	if (g_abKeyPressed[K_ONE])
 	{
 		g_eGameState = S_GAME;
-		mapLoader = true;
 	}
 	else if (g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
@@ -26,7 +25,6 @@ void HardQuestion2()
 	if (g_abKeyPressed[K_TWO])
 	{
 		g_eGameState = S_GAME;
-		mapLoader = true;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
@@ -39,7 +37,6 @@ void HardQuestion3()
 	if (g_abKeyPressed[K_THREE])
 	{
 		g_eGameState = S_GAME;
-		mapLoader = true;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_TWO])
 	{
@@ -52,7 +49,6 @@ void HardQuestion4()
 	if (g_abKeyPressed[K_FOUR])
 	{
 		g_eGameState = S_GAME;
-		mapLoader = true;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
@@ -65,7 +61,6 @@ void HardQuestion5()
 	if (g_abKeyPressed[K_FIVE])
 	{
 		g_eGameState = S_GAME;
-		mapLoader = true;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_THREE])
 	{

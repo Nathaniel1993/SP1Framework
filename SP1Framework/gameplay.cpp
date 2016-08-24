@@ -40,6 +40,13 @@ extern SGameKeys	g_sKeys[4];
 extern SGameKeys	g_sDoor;
 extern EGAMESTATES g_eGameState;
 
+int encounterCheck1 = 0;
+int encounterCheck2 = 0;
+int encounterCheck3 = 0;
+int encounterCheck4 = 0;
+int encounterCheck5 = 0;
+int encounterCheck6 = 0;
+
 void splashScreenWait()    // waits for time to pass in splash screen
 {
 	if (g_abKeyPressed[K_ENTER])

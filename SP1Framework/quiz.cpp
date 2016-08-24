@@ -3,6 +3,7 @@
 #include <sstream>
 #include "loadfile.h"
 
+extern bool encounter;
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
 extern Console g_Console;
@@ -70,6 +71,7 @@ void combatEasy()
 	case 5: EasyQuestion5();
 		break;
 	}
+	encounter = false;
 }
 
 void combatMedium()
@@ -117,6 +119,7 @@ void combatMedium()
 	case 5: MediumQuestion5();
 		break;
 	}
+	encounter = false;
 }
 
 void combatHard()
@@ -164,6 +167,7 @@ void combatHard()
 	case 5: HardQuestion5();
 		break;
 	}
+	encounter = false;
 }
 
 void rendercombatEasy()
