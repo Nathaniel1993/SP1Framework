@@ -20,6 +20,10 @@ char dice4[80][31];
 char dice5[80][31];
 char dice6[80][31];
 
+char easyQuiz[80][31];
+char mediumQuiz[80][31];
+char hardQuiz[80][31];
+
 void loadSplashscreen()
 {
 	ifstream file("mainmenu.txt");
@@ -224,6 +228,69 @@ void loadDice6()
 			while (width < 80)
 			{
 				file >> dice6[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+		file.close();
+	}
+}
+
+void loadquizEasy()
+{
+	ifstream file("combateasy.txt");
+	int width = 0;
+	int height = 0;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> easyQuiz[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+		file.close();
+	}
+}
+
+void loadquizMedium()
+{
+	ifstream file("combatmedium.txt");
+	int width = 0;
+	int height = 0;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> mediumQuiz[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+		file.close();
+	}
+}
+
+void loadquizHard()
+{
+	ifstream file("combathard.txt");
+	int width = 0;
+	int height = 0;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> hardQuiz[width][height];
 				width++;
 			}
 			height++;

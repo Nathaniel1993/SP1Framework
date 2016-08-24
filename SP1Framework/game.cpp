@@ -171,12 +171,12 @@ void update(double dt)
 		break;
 	case S_DICE: dice();
 		break;
-	/*case S_COMBATEASY: combatEasy();
+	case S_COMBATEASY: combatEasy();
 		break;
 	case S_COMBATMEDIUM: combatMedium();
 		break;
 	case S_COMBATHARD: combatHard();
-		break;*/
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -200,12 +200,12 @@ void render()
 		break;
 	case S_DICE: renderdice();
 		break;
-	/*case S_COMBATEASY: rendercombatEasy();
+	case S_COMBATEASY: rendercombatEasy();
 		break;
 	case S_COMBATMEDIUM: rendercombatMedium();
 		break;
 	case S_COMBATHARD: rendercombatHard();
-		break;*/
+		break;
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 	renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game

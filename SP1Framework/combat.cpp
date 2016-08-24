@@ -1,12 +1,17 @@
 #include"combat.h"
 #include <fstream>
 #include <sstream>
+#include "loadfile.h"
 
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
 extern Console g_Console;
-extern char MapSize[80][31];
-extern Score;
+
+extern char easyQuiz[80][31];
+extern char mediumQuiz[80][31];
+extern char hardQuiz[80][31];
+
+extern int Score;
 
 int secondEasyRoll;
 int secondMediumRoll;
@@ -14,174 +19,153 @@ int secondHardRoll;
 
 int Lifecounter = 0;
 
+bool questionConfirm = false;
+bool quizTime = false;
+
 void combatEasy()
 {
-	int EasyRoll;
-	EasyRoll = rand() % 5 + 1;
-	secondEasyRoll = EasyRoll;
-
-	ifstream file("combateasy.txt");
-	int width = 0;
-	int height = 0;
-	if (file.is_open())
+	if (questionConfirm == true)
 	{
-		while (height < 31)
+		int EasyRoll;
+		EasyRoll = rand() % 5 + 1;
+		secondEasyRoll = EasyRoll;
+		quizTime = true;
+		questionConfirm = false;
+	}
+
+	if (quizTime == true)
+	{
+		loadquizEasy();
+
+		switch (secondEasyRoll)
 		{
-			while (width < 80)
-			{
-				file >> MapSize[width][height];
-				width++;
-			}
-			height++;
-			width = 0;
+		case 1: EasyQuestion1();
+			break;
+		case 2: EasyQuestion2();
+			break;
+		case 3: EasyQuestion3();
+			break;
+		case 4: EasyQuestion4();
+			break;
+		case 5: EasyQuestion5();
+			break;
 		}
-		file.close();
-	}
 
-	switch (EasyRoll)
-	{
-	case 1: EasyQuestion1();
-		break;
-	case 2: EasyQuestion2();
-		break;
-	case 3: EasyQuestion3();
-		break;
-	case 4: EasyQuestion4();
-		break;
-	case 5: EasyQuestion5();
-		break;
-	}
+		if (Lifecounter == 0)
+		{
+			Score += 5;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 3;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 1;
+		}
+		else if (Lifecounter == 3)
+		{
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
 
-	if (Lifecounter == 0)
-	{
-		Score += 5;
-	}
-	else if (Lifecounter == 1)
-	{
-		Score += 3;
-	}
-	else if (Lifecounter == 2)
-	{
-		Score += 1;
-	}
-	else if (Lifecounter == 3)
-	{
-		g_eGameState = S_DEFEAT;
-		Lifecounter = 0;
+		quizTime = false;
 	}
 }
 
 void combatMedium()
 {
-	int MediumRoll;
-	MediumRoll = rand() % 5 + 1;
-	secondMediumRoll = MediumRoll;
-
-	ifstream file("combatmedium.txt");
-	int width = 0;
-	int height = 0;
-	if (file.is_open())
+	if (questionConfirm == true)
 	{
-		while (height < 31)
+		int MediumRoll;
+		MediumRoll = rand() % 5 + 1;
+		secondMediumRoll = MediumRoll;
+		quizTime = true;
+		questionConfirm = false;
+	}
+	if (quizTime == true)
+	{
+		loadquizMedium();
+
+		switch (secondMediumRoll)
 		{
-			while (width < 80)
-			{
-				file >> MapSize[width][height];
-				width++;
-			}
-			height++;
-			width = 0;
+		case 1: MediumQuestion1();
+			break;
+		case 2: MediumQuestion2();
+			break;
+		case 3: MediumQuestion3();
+			break;
+		case 4: MediumQuestion4();
+			break;
+		case 5: MediumQuestion5();
+			break;
 		}
-		file.close();
-	}
-
-	switch (MediumRoll)
-	{
-	case 1: MediumQuestion1();
-		break;
-	case 2: MediumQuestion2();
-		break;
-	case 3: MediumQuestion3();
-		break;
-	case 4: MediumQuestion4();
-		break;
-	case 5: MediumQuestion5();
-		break;
-	}
-
-	if (Lifecounter == 0)
-	{
-		Score += 10;
-	}
-	else if (Lifecounter == 1)
-	{
-		Score += 7;
-	}
-	else if (Lifecounter == 2)
-	{
-		Score += 5;
-	}
-	else if (Lifecounter == 3)
-	{
-		g_eGameState = S_DEFEAT;
-		Lifecounter = 0;
+		if (Lifecounter == 0)
+		{
+			Score += 10;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 7;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 5;
+		}
+		else if (Lifecounter == 3)
+		{
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
+		quizTime = false;
 	}
 }
 
 void combatHard()
 {
-	int HardRoll;
-	HardRoll = rand() % 5 + 1;
-	secondHardRoll = HardRoll;
-
-	ifstream file("combathard.txt");
-	int width = 0;
-	int height = 0;
-	if (file.is_open())
+	if (questionConfirm == true)
 	{
-		while (height < 31)
+		int HardRoll;
+		HardRoll = rand() % 5 + 1;
+		secondHardRoll = HardRoll;
+		quizTime = true;
+		questionConfirm = false;
+	}
+	if (quizTime == true)
+	{
+		loadquizHard();
+
+		switch (secondHardRoll)
 		{
-			while (width < 80)
-			{
-				file >> MapSize[width][height];
-				width++;
-			}
-			height++;
-			width = 0;
+		case 1: HardQuestion1();
+			break;
+		case 2: HardQuestion2();
+			break;
+		case 3: HardQuestion3();
+			break;
+		case 4: HardQuestion4();
+			break;
+		case 5: HardQuestion5();
+			break;
 		}
-		file.close();
-	}
-
-	switch (HardRoll)
-	{
-	case 1: HardQuestion1();
-		break;
-	case 2: HardQuestion2();
-		break;
-	case 3: HardQuestion3();
-		break;
-	case 4: HardQuestion4();
-		break;
-	case 5: HardQuestion5();
-		break;
-	}
-
-	if (Lifecounter == 0)
-	{
-		Score += 15;
-	}
-	else if (Lifecounter == 1)
-	{
-		Score += 12;
-	}
-	else if (Lifecounter == 2)
-	{
-		Score += 10;
-	}
-	else if (Lifecounter == 3)
-	{
-		g_eGameState = S_DEFEAT;
-		Lifecounter = 0;
+		if (Lifecounter == 0)
+		{
+			Score += 15;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 12;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 10;
+		}
+		else if (Lifecounter == 3)
+		{
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
+		quizTime = false;
 	}
 }
 
@@ -193,15 +177,15 @@ void rendercombatEasy()
 		c.Y = y;
 		for (int x = 0; x < 80; x++)
 		{
-			if (MapSize[x][y] == 'i')
+			if (easyQuiz[x][y] == 'i')
 			{
-				MapSize[x][y] = ' ';
+				easyQuiz[x][y] = ' ';
 			}
 			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y]);
-			if (MapSize[x][y] == '-')
+			g_Console.writeToBuffer(c, easyQuiz[x][y], 0x01);
+			if (easyQuiz[x][y] == '-')
 			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+				g_Console.writeToBuffer(c, easyQuiz[x][y], 0x0C);
 			}
 		}
 	}
@@ -235,15 +219,15 @@ void rendercombatMedium()
 		c.Y = y;
 		for (int x = 0; x < 80; x++)
 		{
-			if (MapSize[x][y] == 'i')
+			if (mediumQuiz[x][y] == 'i')
 			{
-				MapSize[x][y] = ' ';
+				mediumQuiz[x][y] = ' ';
 			}
 			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y]);
-			if (MapSize[x][y] == '-')
+			g_Console.writeToBuffer(c, mediumQuiz[x][y], 0x01);
+			if (mediumQuiz[x][y] == '-')
 			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+				g_Console.writeToBuffer(c, mediumQuiz[x][y], 0x0C);
 			}
 		}
 	}
@@ -278,15 +262,15 @@ void rendercombatHard()
 		c.Y = y;
 		for (int x = 0; x < 80; x++)
 		{
-			if (MapSize[x][y] == 'i')
+			if (hardQuiz[x][y] == 'i')
 			{
-				MapSize[x][y] = ' ';
+				hardQuiz[x][y] = ' ';
 			}
 			c.X = x;
-			g_Console.writeToBuffer(c, MapSize[x][y]);
-			if ((MapSize[x][y] == '-') || (MapSize[x][y] == '|'))
+			g_Console.writeToBuffer(c, hardQuiz[x][y], 0x01);
+			if ((hardQuiz[x][y] == '-') || (hardQuiz[x][y] == '|'))
 			{
-				g_Console.writeToBuffer(c, MapSize[x][y], 0x0C);
+				g_Console.writeToBuffer(c, hardQuiz[x][y], 0x0C);
 			}
 		}
 	}

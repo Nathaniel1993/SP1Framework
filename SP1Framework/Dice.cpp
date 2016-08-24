@@ -13,7 +13,8 @@ extern char dice6[80][31];
 
 extern bool g_abKeyPressed[K_COUNT];
 bool launchDice = false;
-
+extern bool quizTime;
+extern bool questionConfirm;
 
 extern EGAMESTATES g_eGameState;
 extern Console g_Console;
@@ -53,14 +54,18 @@ void dice()
 	{
 		if ((rollednumber == 1) || (rollednumber == 2))
 		{
+			questionConfirm = true;
 			g_eGameState = S_COMBATEASY;
+			
 		}
 		else if ((rollednumber == 3) || (rollednumber == 4))
 		{
+			questionConfirm = true;
 			g_eGameState = S_COMBATMEDIUM;
 		}
 		else if ((rollednumber == 5) || (rollednumber == 6))
 		{
+			questionConfirm = true;
 			g_eGameState = S_COMBATHARD;
 		}
 	}

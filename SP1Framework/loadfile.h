@@ -20,3 +20,7 @@ void loadDice4();
 void loadDice5();
 void loadDice6();
 
+void loadquizEasy();
+void loadquizMedium();
+void loadquizHard();
+
