@@ -78,10 +78,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="combat.cpp" />
-    <ClCompile Include="combateasy.cpp" />
-    <ClCompile Include="combathard.cpp" />
-    <ClCompile Include="combatmedium.cpp" />
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
@@ -97,17 +93,21 @@
     <ClCompile Include="Map2Enemy2.cpp" />
     <ClCompile Include="Map2Enemy3.cpp" />
     <ClCompile Include="PlayerHealth.cpp" />
+    <ClCompile Include="quiz.cpp" />
+    <ClCompile Include="quizeasy.cpp" />
+    <ClCompile Include="quizhard.cpp" />
+    <ClCompile Include="quizmedium.cpp" />
     <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h" />
-    <ClInclude Include="combat.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="loadfile.h" />
+    <ClInclude Include="quiz.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defeat.txt" />

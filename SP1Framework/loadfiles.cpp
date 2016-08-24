@@ -1,4 +1,4 @@
-#include "combat.h"
+#include "quiz.h"
 #include "game.h"
 #include "Framework\console.h"
 #include <iostream>

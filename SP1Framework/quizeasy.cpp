@@ -1,7 +1,8 @@
-#include"combat.h"
+#include"quiz.h"
 #include <fstream>
 
 extern int Score;
+extern bool mapLoader;
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
 extern Console g_Console;
@@ -13,8 +14,9 @@ void EasyQuestion1()
 	if (g_abKeyPressed[K_THREE])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE])
 	{
 		Lifecounter++;
 	}
@@ -25,8 +27,9 @@ void EasyQuestion2()
 	if (g_abKeyPressed[K_ONE])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -37,8 +40,9 @@ void EasyQuestion3()
 	if (g_abKeyPressed[K_TWO])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -49,8 +53,9 @@ void EasyQuestion4()
 	if (g_abKeyPressed[K_FIVE])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -61,8 +66,9 @@ void EasyQuestion5()
 	if (g_abKeyPressed[K_FOUR])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -73,7 +79,10 @@ void renderEasyQuestion1()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Who is the richest man in the world?", 0x0A);
+	g_Console.writeToBuffer(l, "Who is the richest man in the", 0x0A);
+	l.X = 46;
+	l.Y = 4;
+	g_Console.writeToBuffer(l, "world?", 0x0A);
 	l.Y = 6;
 	g_Console.writeToBuffer(l, "1: Tim Cook", 0x0B);
 	l.Y = 8;
@@ -91,7 +100,10 @@ void renderEasyQuestion2()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "What is the position of Earth from the sun?", 0x0A);
+	g_Console.writeToBuffer(l, "What is the position of Earth from", 0x0A);
+	l.X = 46;
+	l.Y = 4;
+	g_Console.writeToBuffer(l, "the sun?", 0x0A);
 	l.Y = 6;
 	g_Console.writeToBuffer(l, "1: Third", 0x0B);
 	l.Y = 8;
@@ -109,7 +121,10 @@ void renderEasyQuestion3()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Which is the most subscribed channel in YouTube?", 0x0A);
+	g_Console.writeToBuffer(l, "Which is the most subscribed", 0x0A);
+	l.X = 46;
+	l.Y = 4;
+	g_Console.writeToBuffer(l, "channel in YouTube?", 0x0A);
 	l.Y = 6;
 	g_Console.writeToBuffer(l, "1: Smosh", 0x0B);
 	l.Y = 8;
@@ -145,7 +160,10 @@ void renderEasyQuestion5()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Where is the first youth olympics held?", 0x0A);
+	g_Console.writeToBuffer(l, "Where is the first youth olympics", 0x0A);
+	l.X = 46;
+	l.Y = 4;
+	g_Console.writeToBuffer(l, "held?", 0x0A);
 	l.Y = 6;
 	g_Console.writeToBuffer(l, "1: Brazil", 0x0B);
 	l.Y = 8;

@@ -1,4 +1,4 @@
-#include"combat.h"
+#include"quiz.h"
 #include <fstream>
 
 extern bool g_abKeyPressed[K_COUNT];
@@ -6,14 +6,16 @@ extern EGAMESTATES g_eGameState;
 extern Console g_Console;
 extern char MapSize[80][31];
 extern int Lifecounter;
+extern bool mapLoader;
 
 void MediumQuestion1()
 {
 	if (g_abKeyPressed[K_THREE])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_TWO])
 	{
 		Lifecounter++;
 	}
@@ -24,8 +26,9 @@ void MediumQuestion2()
 	if (g_abKeyPressed[K_FOUR])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -36,8 +39,9 @@ void MediumQuestion3()
 	if (g_abKeyPressed[K_FOUR])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -48,8 +52,9 @@ void MediumQuestion4()
 	if (g_abKeyPressed[K_FOUR])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -60,8 +65,9 @@ void MediumQuestion5()
 	if (g_abKeyPressed[K_ONE])
 	{
 		g_eGameState = S_GAME;
+		mapLoader = true;
 	}
-	else
+	else if (g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
 		Lifecounter++;
 	}
@@ -72,10 +78,10 @@ void renderMediumQuestion1()
 	COORD l;
 	l.X = 2;
 	l.Y = 24;
-	g_Console.writeToBuffer(l, "Johnny’s mother had three children. The first child was named April.", 0x0A);
-  l.X = 2;
+	g_Console.writeToBuffer(l, "Johnny's mother had three children. The first child was named April.", 0x0A);
+	l.X = 2;
 	l.Y = 25;
-  g_Console.writeToBuffer(l, "The second child was named May. What was the third child’s name?",0x0A);
+	g_Console.writeToBuffer(l, "The second child was named May. What was the third child's name?", 0x0A);
 	l.X = 2;
 	l.Y = 26;
 	g_Console.writeToBuffer(l, "1: June", 0x0B);
@@ -84,7 +90,7 @@ void renderMediumQuestion1()
 	g_Console.writeToBuffer(l, "2: Jan", 0x0B);
 	l.X = 2;
 	l.Y = 27;
-	g_Console.writeToBuffer(l, "3: Johnny", 0x0B); 
+	g_Console.writeToBuffer(l, "3: Johnny", 0x0B);
 	l.X = 50;
 	l.Y = 27;
 	g_Console.writeToBuffer(l, "4: Jake", 0x0B);

@@ -1,6 +1,6 @@
 // This is the main file for the game logic and function
 
-#include "combat.h"
+#include "quiz.h"
 #include "game.h"
 #include "Framework\console.h"
 #include <iostream>
@@ -171,11 +171,11 @@ void update(double dt)
 		break;
 	case S_DICE: dice();
 		break;
-	case S_COMBATEASY: combatEasy();
+	case S_QUIZEASY: combatEasy();
 		break;
-	case S_COMBATMEDIUM: combatMedium();
+	case S_QUIZMEDIUM: combatMedium();
 		break;
-	case S_COMBATHARD: combatHard();
+	case S_QUIZHARD: combatHard();
 		break;
 	}
 }
@@ -200,11 +200,11 @@ void render()
 		break;
 	case S_DICE: renderdice();
 		break;
-	case S_COMBATEASY: rendercombatEasy();
+	case S_QUIZEASY: rendercombatEasy();
 		break;
-	case S_COMBATMEDIUM: rendercombatMedium();
+	case S_QUIZMEDIUM: rendercombatMedium();
 		break;
-	case S_COMBATHARD: rendercombatHard();
+	case S_QUIZHARD: rendercombatHard();
 		break;
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc

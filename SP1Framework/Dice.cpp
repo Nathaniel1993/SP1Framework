@@ -55,18 +55,18 @@ void dice()
 		if ((rollednumber == 1) || (rollednumber == 2))
 		{
 			questionConfirm = true;
-			g_eGameState = S_COMBATEASY;
+			g_eGameState = S_QUIZEASY;
 			
 		}
 		else if ((rollednumber == 3) || (rollednumber == 4))
 		{
 			questionConfirm = true;
-			g_eGameState = S_COMBATMEDIUM;
+			g_eGameState = S_QUIZMEDIUM;
 		}
 		else if ((rollednumber == 5) || (rollednumber == 6))
 		{
 			questionConfirm = true;
-			g_eGameState = S_COMBATHARD;
+			g_eGameState = S_QUIZHARD;
 		}
 	}
 	

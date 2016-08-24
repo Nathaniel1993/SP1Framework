@@ -1,4 +1,4 @@
-#include"combat.h"
+#include"quiz.h"
 #include <fstream>
 #include <sstream>
 #include "loadfile.h"
@@ -37,20 +37,6 @@ void combatEasy()
 	{
 		loadquizEasy();
 
-		switch (secondEasyRoll)
-		{
-		case 1: EasyQuestion1();
-			break;
-		case 2: EasyQuestion2();
-			break;
-		case 3: EasyQuestion3();
-			break;
-		case 4: EasyQuestion4();
-			break;
-		case 5: EasyQuestion5();
-			break;
-		}
-
 		if (Lifecounter == 0)
 		{
 			Score += 5;
@@ -63,13 +49,26 @@ void combatEasy()
 		{
 			Score += 1;
 		}
-		else if (Lifecounter == 3)
+		else if (Lifecounter <= 3)
 		{
 			g_eGameState = S_DEFEAT;
 			Lifecounter = 0;
 		}
 
 		quizTime = false;
+	}
+	switch (secondEasyRoll)
+	{
+	case 1: EasyQuestion1();
+		break;
+	case 2: EasyQuestion2();
+		break;
+	case 3: EasyQuestion3();
+		break;
+	case 4: EasyQuestion4();
+		break;
+	case 5: EasyQuestion5();
+		break;
 	}
 }
 
@@ -86,20 +85,6 @@ void combatMedium()
 	if (quizTime == true)
 	{
 		loadquizMedium();
-
-		switch (secondMediumRoll)
-		{
-		case 1: MediumQuestion1();
-			break;
-		case 2: MediumQuestion2();
-			break;
-		case 3: MediumQuestion3();
-			break;
-		case 4: MediumQuestion4();
-			break;
-		case 5: MediumQuestion5();
-			break;
-		}
 		if (Lifecounter == 0)
 		{
 			Score += 10;
@@ -112,12 +97,25 @@ void combatMedium()
 		{
 			Score += 5;
 		}
-		else if (Lifecounter == 3)
+		else if (Lifecounter <= 3)
 		{
 			g_eGameState = S_DEFEAT;
 			Lifecounter = 0;
 		}
 		quizTime = false;
+	}
+	switch (secondMediumRoll)
+	{
+	case 1: MediumQuestion1();
+		break;
+	case 2: MediumQuestion2();
+		break;
+	case 3: MediumQuestion3();
+		break;
+	case 4: MediumQuestion4();
+		break;
+	case 5: MediumQuestion5();
+		break;
 	}
 }
 
@@ -134,20 +132,6 @@ void combatHard()
 	if (quizTime == true)
 	{
 		loadquizHard();
-
-		switch (secondHardRoll)
-		{
-		case 1: HardQuestion1();
-			break;
-		case 2: HardQuestion2();
-			break;
-		case 3: HardQuestion3();
-			break;
-		case 4: HardQuestion4();
-			break;
-		case 5: HardQuestion5();
-			break;
-		}
 		if (Lifecounter == 0)
 		{
 			Score += 15;
@@ -160,12 +144,25 @@ void combatHard()
 		{
 			Score += 10;
 		}
-		else if (Lifecounter == 3)
+		else if (Lifecounter <= 3)
 		{
 			g_eGameState = S_DEFEAT;
 			Lifecounter = 0;
 		}
 		quizTime = false;
+	}
+	switch (secondHardRoll)
+	{
+	case 1: HardQuestion1();
+		break;
+	case 2: HardQuestion2();
+		break;
+	case 3: HardQuestion3();
+		break;
+	case 4: HardQuestion4();
+		break;
+	case 5: HardQuestion5();
+		break;
 	}
 }
 
