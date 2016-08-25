@@ -111,7 +111,8 @@ void renderGame()
 	else if (g_MapNo == 3)
 	{
 		renderBoss();
-		renderHealth();
+		//renderHealth();
+		//renderTrap;
 	}
 	renderKeys();
 	openDoor();

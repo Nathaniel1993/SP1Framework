@@ -54,6 +54,16 @@ struct SGameBoss
 {
 	COORD m_cLocation;
 };
+struct SGameTrap
+{
+	COORD m_cLocation;
+	//SGameBoss BossTrap1;
+	//SGameBoss BossTrap2;
+	//SGameBoss BossTrap3;
+	//SGameBoss BossTrap4;
+	//SGameBoss BossTrap5;
+	//SGameBoss BossTrap6;
+};
 struct EnemyStruct
 {
 	SGameEnemy g_sEnemy;
@@ -73,6 +83,9 @@ struct AiBounceTime
 	double aiBounceTime6;
 	double bossBounceTime;
 	double healthBounceTime;
+	double easyQuizBounceTime;
+	double medQuizBounceTime;
+	double hardQuizBounceTime;
 };
 
 struct SGameKeys

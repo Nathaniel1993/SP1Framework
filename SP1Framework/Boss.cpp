@@ -29,11 +29,12 @@ void coordSaveLocation()
 
 void BossAi()
 {
+	
 	if (Bounce.bossBounceTime > g_dElapsedTime)
 	{
 		return;
 	}
-	
+	Bounce.bossBounceTime = 0.0;
 	coordSaveLocation();
 
 	if (g_sChar.m_cLocation.Y < g_sBoss.m_cLocation.Y && (mapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y - 1] != '#')) //finding character, detect walls to prevent walking through
@@ -77,20 +78,11 @@ void renderBoss()
 
 	//Draw location of Boss
 	WORD charColor = 0x0C;
-	//COORD c = g_Console.getConsoleSize();
-	//g_sBoss.m_cLocation.X = 18; // Boss spawn location
-	//g_sBoss.m_cLocation.Y = 25;
-
-	//c.X = 5;
-	//c.Y = 5;
+	
 	for (int i = 0; i < coordSave.size(); i++)
 	{
 		g_Console.writeToBuffer(coordSave[i], (char)65, charColor);
 	}
 
-	//if ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))
-	//{
-	//	g_Console.writeToBuffer(c, "Ayy Lmao ", 0x03);
-
-	//}
+	
 }

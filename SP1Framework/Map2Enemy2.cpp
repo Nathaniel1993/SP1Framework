@@ -6,7 +6,7 @@ void AiEnemy5()
 	{
 		return;
 	}
-
+	Bounce.aiBounceTime5 = 0.0;
 	int patrol = rand() % 4 + 1;
 	bool Detect = false;
 	extern int encounterCheck5;

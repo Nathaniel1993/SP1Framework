@@ -100,7 +100,8 @@ void gameplay()            // gameplay logic
 	if (g_MapNo == 3)
 	{
 		BossAi();
-		healthAi();
+		//damageBoss();
+		//healthAi();
 	}
 	if (ScoreTracker == true)
 	{

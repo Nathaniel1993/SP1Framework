@@ -11,6 +11,11 @@ extern bool giveScore;
 
 void HardQuestion1()
 {
+	if (Bounce.hardQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.hardQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_ONE])
 	{
 		giveScore = true;
@@ -27,10 +32,16 @@ void HardQuestion1()
 			Lifecounter++;
 		}
 	}
+	Bounce.hardQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void HardQuestion2()
 {
+	if (Bounce.hardQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.hardQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_TWO])
 	{
 		giveScore = true;
@@ -47,10 +58,16 @@ void HardQuestion2()
 			Lifecounter++;
 		}
 	}
+	Bounce.hardQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void HardQuestion3()
 {
+	if (Bounce.hardQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.hardQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_THREE])
 	{
 		giveScore = true;
@@ -67,10 +84,16 @@ void HardQuestion3()
 			Lifecounter++;
 		}
 	}
+	Bounce.hardQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void HardQuestion4()
 {
+	if (Bounce.hardQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.hardQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_FOUR])
 	{
 		giveScore = true;
@@ -87,10 +110,16 @@ void HardQuestion4()
 			Lifecounter++;
 		}
 	}
+	Bounce.hardQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void HardQuestion5()
 {
+	if (Bounce.hardQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.hardQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_FIVE])
 	{
 		giveScore = true;
@@ -107,6 +136,7 @@ void HardQuestion5()
 			Lifecounter++;
 		}
 	}
+	Bounce.hardQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void renderHardQuestion1()

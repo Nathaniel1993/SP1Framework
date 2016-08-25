@@ -11,6 +11,11 @@ extern bool giveScore;
 
 void MediumQuestion1()
 {
+	if (Bounce.medQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.medQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_THREE])
 	{
 		giveScore = true;
@@ -27,10 +32,16 @@ void MediumQuestion1()
 			Lifecounter++;
 		}
 	}
+	Bounce.medQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void MediumQuestion2()
 {
+	if (Bounce.medQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.medQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_FOUR])
 	{
 		giveScore = true;
@@ -47,10 +58,16 @@ void MediumQuestion2()
 			Lifecounter++;
 		}
 	}
+	Bounce.medQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void MediumQuestion3()
 {
+	if (Bounce.medQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.medQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_FOUR])
 	{
 		giveScore = true;
@@ -67,10 +84,16 @@ void MediumQuestion3()
 			Lifecounter++;
 		}
 	}
+	Bounce.medQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void MediumQuestion4()
 {
+	if (Bounce.medQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.medQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_FOUR])
 	{
 		giveScore = true;
@@ -87,10 +110,16 @@ void MediumQuestion4()
 			Lifecounter++;
 		};
 	}
+	Bounce.medQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void MediumQuestion5()
 {
+	if (Bounce.medQuizBounceTime > g_dElapsedTime)
+	{
+		return;
+	}
+	Bounce.medQuizBounceTime = 0.0;
 	if (g_abKeyPressed[K_ONE])
 	{
 		giveScore = true;
@@ -107,6 +136,7 @@ void MediumQuestion5()
 			Lifecounter++;
 		}
 	}
+	Bounce.medQuizBounceTime = g_dElapsedTime + 0.125;
 }
 
 void renderMediumQuestion1()

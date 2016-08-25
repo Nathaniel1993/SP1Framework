@@ -6,7 +6,7 @@ void AiEnemy3()
 	{
 		return;
 	}
-
+	Bounce.aiBounceTime3 = 0.0;
 	int patrol = rand() % 4 + 1;
 	bool Detect = false;
 	bool startPatrol = true;

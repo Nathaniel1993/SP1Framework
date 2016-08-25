@@ -90,6 +90,9 @@
     <ClCompile Include="quiz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BossTrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="postgame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

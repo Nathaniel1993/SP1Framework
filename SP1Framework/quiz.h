@@ -3,6 +3,9 @@
 
 using namespace std;
 
+extern AiBounceTime Bounce;
+extern double g_dElapsedTime;
+
 void quizEasy();
 void quizMedium();
 void quizHard();

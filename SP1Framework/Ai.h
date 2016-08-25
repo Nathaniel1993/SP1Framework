@@ -11,9 +11,14 @@ extern SGameChar g_sChar;
 extern EnemyStruct Enemy;
 extern AiBounceTime Bounce;
 extern SGameBoss g_sBoss;
+extern SGameTrap BossTrap[6];
 extern double g_dElapsedTime;
 extern COORD c;
 extern char mapSize[80][31];
+
+void renderTrap(COORD trapLocation);
+void trapSpawn();
+void damageBoss();
 
 void renderHealth();
 void healthAi();
