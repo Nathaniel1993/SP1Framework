@@ -30,6 +30,7 @@ extern int keys;
 extern int numkey;
 extern SGameKeys g_sKeys[4];
 extern SGameKeys g_sDoor;
+extern Teleporters g_A, g_B, g_C, g, g_D;
 /*------------------------------------------------*/
 
 extern double  g_dElapsedTime;
@@ -131,6 +132,21 @@ void renderMap()
 			{
 				mapSize[x][y] = ' ';
 			}
+			if (mapSize[x][y] == 'B')
+			{
+				g_B.m_cLocation.X = x;
+				g_B.m_cLocation.Y = y;
+			}
+			if (mapSize[x][y] == 'C')
+			{
+				g_C.m_cLocation.X = x;
+				g_C.m_cLocation.Y = y;
+			}
+			if (mapSize[x][y] == 'D')
+			{
+				g_D.m_cLocation.X = x;
+				g_D.m_cLocation.Y = y;
+			}
 			c.X = x;
 			g_Console.writeToBuffer(c, mapSize[x][y], 0x00);
 		}
@@ -199,6 +215,11 @@ void openDoor()
 	}
 }
 
+void BoulderIn()
+{
+	;
+}
+
 void renderSight()
 {
 	COORD c;
@@ -222,7 +243,7 @@ void renderSight()
 				{
 					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x09);
 				}
-				if (mapSize[VisionX][VisionY] == 'A')
+				if (mapSize[VisionX][VisionY] == 'E')
 				{
 					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
 					g_sDoor.m_cLocation.X = VisionX;
@@ -237,6 +258,37 @@ void renderSight()
 					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0B);
 				}
 				if (mapSize[VisionX][VisionY] == 'F')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+				}
+				if (mapSize[VisionX][VisionY] == 'O')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+				}
+				if (mapSize[VisionX][VisionY] == 'A')
+				{
+					g_A.m_cLocation.X = VisionX;
+					g_A.m_cLocation.Y = VisionY;
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+				}
+				if (mapSize[VisionX][VisionY] == 'B')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);;
+				}
+				if (mapSize[VisionX][VisionY] == 'C')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+				}
+				if (mapSize[VisionX][VisionY] == 'D')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+				}
+				if (mapSize[VisionX][VisionY] == 'H')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+
+				}
+				if (mapSize[VisionX][VisionY] == '|')
 				{
 					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
 				}

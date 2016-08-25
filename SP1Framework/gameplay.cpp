@@ -24,6 +24,7 @@ extern int g_MapNo;
 extern int Score;
 int keys = 4;
 extern int numkey;
+bool TeleportActive = false;
 
 extern char mapSize[80][31];
 
@@ -40,6 +41,7 @@ extern SGameBoss g_sBoss;
 extern SGameKeys	g_sKeys[4];
 extern SGameKeys	g_sDoor;
 extern EGAMESTATES g_eGameState;
+extern Teleporters g_A, g_B, g_C, g, g_D;
 
 int encounterCheck1 = 0;
 int encounterCheck2 = 0;
@@ -148,11 +150,13 @@ void moveCharacter()
 	// providing a beep sound whenver we shift the character
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
-		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '|')
 		{
 			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == 'F')
 			{
-				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#' 
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A'
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '|')
 				{
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] = 'F';
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] = ' ';
@@ -179,11 +183,13 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != 'A')
+		if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '|')
 		{
 			if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
 			{
-				if (mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#' 
+					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A'
+					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '|')
 				{
 					mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] = 'F';
 					mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] = ' ';
@@ -210,11 +216,13 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
-		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#'&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '|')
 		{
 			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] == 'F')
 			{
-				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#' 
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A'
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '|')
 				{
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] = 'F';
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] = ' ';
@@ -241,11 +249,13 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#')
+		if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '|')
 		{
 			if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == 'F')
 			{
-				if (mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A')
+				if (mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#' 
+					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A'
+					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '|')
 				{
 					mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] = 'F';
 					mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] = ' ';
@@ -284,6 +294,50 @@ void moveCharacter()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	if (mapSize[g_A.m_cLocation.X - 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X + 4][g_A.m_cLocation.Y + 1] == 'F'
+		||mapSize[g_A.m_cLocation.X + 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X][g_A.m_cLocation.Y + 3] == 'F'
+		|| mapSize[g_A.m_cLocation.X - 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X][g_A.m_cLocation.Y + 3] == 'F')
+	{
+		TeleportActive = true;
+		g_Console.writeToBuffer(g_A.m_cLocation, 'A', 0x0A);
+	}
+	else
+	{
+		TeleportActive = false;
+	}
+
+	if (TeleportActive == true 
+		&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y]=='A'
+		&& mapSize[g_A.m_cLocation.X - 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X + 4][g_A.m_cLocation.Y + 1] == 'F')
+	{
+		g_sChar.m_cLocation.X = g_B.m_cLocation.X+1;
+		g_sChar.m_cLocation.Y = g_B.m_cLocation.Y;
+	}
+
+	if (TeleportActive == true
+		&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'A'
+		&mapSize[g_A.m_cLocation.X + 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X][g_A.m_cLocation.Y + 3] == 'F')
+	{
+		g_sChar.m_cLocation.X = g_C.m_cLocation.X+1;
+		g_sChar.m_cLocation.Y = g_C.m_cLocation.Y-1;
+	}
+	 if (TeleportActive == true
+		&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'A'
+		&& mapSize[g_A.m_cLocation.X - 4][g_A.m_cLocation.Y + 1] == 'F' && mapSize[g_A.m_cLocation.X][g_A.m_cLocation.Y + 3] == 'F')
+	{
+		g_sChar.m_cLocation.X = g_D.m_cLocation.X;
+		g_sChar.m_cLocation.Y = g_D.m_cLocation.Y-1;
+	}
+	 
+	 
+	 if (TeleportActive == true && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'B'
+		 || TeleportActive == true && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'C'
+		 || TeleportActive == true && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'D')
+	 {
+		 g_sChar.m_cLocation.X = g_A.m_cLocation.X;
+		 g_sChar.m_cLocation.Y = g_A.m_cLocation.Y+1;
+	 }
+
 }
 
 void processUserInput()

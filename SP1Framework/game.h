@@ -93,6 +93,10 @@ struct SGameKeys
 	COORD m_cLocation;
 	bool  m_bActive = true;
 };
+struct Teleporters
+{
+	COORD m_cLocation;
+};
 
 void init        ( void );      // initialize your variables, allocate memory, etc
 void getInput    ( void );      // get input from player
@@ -115,6 +119,7 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 
 void renderKeys();
 void openDoor();
+void BoulderIn();
 
 void renderSight();
 
