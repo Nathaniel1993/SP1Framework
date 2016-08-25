@@ -206,4 +206,3 @@ void openDoor()
 		mapSize[g_sDoor.m_cLocation.X][g_sDoor.m_cLocation.Y] = ' ';
 	}
 }
-
