@@ -26,7 +26,6 @@ void dice()
 {
 	if (launchDice == true)
 	{
-		srand(time(NULL));
 		int roll;
 
 		roll = rand() % 6 + 1;

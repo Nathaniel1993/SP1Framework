@@ -60,6 +60,7 @@ Console g_Console(80, 31, "SP1 Framework");
 //--------------------------------------------------------------
 void init(void)
 {
+	srand(time(NULL));
 	// Set precision for floating point output
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
