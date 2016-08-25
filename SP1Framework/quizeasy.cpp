@@ -24,7 +24,7 @@ void EasyQuestion1()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -50,7 +50,7 @@ void EasyQuestion2()
 	}
 	else if (g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -76,7 +76,7 @@ void EasyQuestion3()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -102,7 +102,7 @@ void EasyQuestion4()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -128,7 +128,7 @@ void EasyQuestion5()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}

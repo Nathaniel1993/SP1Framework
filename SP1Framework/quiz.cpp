@@ -60,16 +60,19 @@ void quizEasy()
 		if (Lifecounter == 0)
 		{
 			Score += 5;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 1)
 		{
 			Score += 3;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 2)
 		{
 			Score += 1;
+			Lifecounter = 0;
 		}
-		else if (Lifecounter >= 3)
+		else if (Lifecounter == 3)
 		{
 			launchDefScreen = true;
 			g_eGameState = S_DEFEAT;
@@ -113,16 +116,19 @@ void quizMedium()
 		if (Lifecounter == 0)
 		{
 			Score += 10;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 1)
 		{
 			Score += 7;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 2)
 		{
 			Score += 5;
+			Lifecounter = 0;
 		}
-		else if (Lifecounter >= 3)
+		else if (Lifecounter == 3)
 		{
 			launchDefScreen = true;
 			g_eGameState = S_DEFEAT;
@@ -167,16 +173,19 @@ void quizHard()
 		if (Lifecounter == 0)
 		{
 			Score += 15;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 1)
 		{
 			Score += 12;
+			Lifecounter = 0;
 		}
 		else if (Lifecounter == 2)
 		{
 			Score += 10;
+			Lifecounter = 0;
 		}
-		else if (Lifecounter >= 3)
+		else if (Lifecounter == 3)
 		{
 			launchDefScreen = true;
 			g_eGameState = S_DEFEAT;

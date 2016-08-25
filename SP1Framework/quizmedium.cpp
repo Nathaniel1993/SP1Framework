@@ -23,7 +23,7 @@ void MediumQuestion1()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_TWO])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -49,7 +49,7 @@ void MediumQuestion2()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -75,7 +75,7 @@ void MediumQuestion3()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -101,7 +101,7 @@ void MediumQuestion4()
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
@@ -127,7 +127,7 @@ void MediumQuestion5()
 	}
 	else if (g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		if (Lifecounter >= 3)
+		if (Lifecounter == 3)
 		{
 			giveScore = true;
 		}
