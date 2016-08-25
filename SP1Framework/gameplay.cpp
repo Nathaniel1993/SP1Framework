@@ -60,6 +60,14 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 	if (g_abKeyPressed[K_ENTER])
 	{
+		encounterCheck1 = 0;
+		encounterCheck2 = 0;
+		encounterCheck3 = 0;
+		encounterCheck4 = 0;
+		encounterCheck5 = 0;
+		encounterCheck6 = 0;
+		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
+		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 		g_eGameState = S_GAME;
 		g_MapNo = 1;
 		mapLoader = true;

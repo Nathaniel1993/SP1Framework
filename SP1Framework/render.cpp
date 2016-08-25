@@ -88,7 +88,7 @@ void renderGame()
 		renderSight();
 		if (encounterCheck1 == 0)
 		{
-			renderSight();
+			renderEnemy();
 		}
 		if (encounterCheck2 == 0)
 		{
