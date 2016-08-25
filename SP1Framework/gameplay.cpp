@@ -22,7 +22,7 @@ extern bool splashScreenload;
 
 extern int g_MapNo;
 extern int Score;
-extern int keys;
+int keys = 4;
 extern int numkey;
 
 extern char mapSize[80][31];
@@ -284,14 +284,6 @@ void moveCharacter()
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	for (int i = 0; i < numkey; i++)
-	{
-		if (g_sChar.m_cLocation.X == g_sKeys[i].m_cLocation.X && g_sChar.m_cLocation.Y == g_sKeys[i].m_cLocation.Y && g_sKeys[i].m_bActive == true)
-		{
-			keys--;
-			g_sKeys[i].m_bActive = false;
-		}
-	}
 }
 
 void processUserInput()

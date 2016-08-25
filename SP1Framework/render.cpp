@@ -76,6 +76,7 @@ void renderGame()
 {
 	renderMap(); 
 	renderCharacter();  // renders the character into the buffer
+	//openDoor();
 	moveCharacter();
 	if (g_MapNo == 1)
 	{
@@ -113,9 +114,9 @@ void renderGame()
 		//renderHealth();
 		//renderTrap;
 	}
-	renderKeys();
+	//renderKeys();
 	renderSight();
-	//openDoor();
+	openDoor();
 }
 
 void renderMap()
@@ -224,6 +225,8 @@ void renderSight()
 				if (mapSize[VisionX][VisionY] == 'A')
 				{
 					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
+					g_sDoor.m_cLocation.X = VisionX;
+					g_sDoor.m_cLocation.Y = VisionY;
 				}
 				if (mapSize[VisionX][VisionY] == 'K')
 				{

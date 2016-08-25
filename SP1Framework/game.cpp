@@ -23,7 +23,6 @@ bool splashScreenload = true;
 extern bool mapDraw;
 bool mapLoader = false; 
 int Score = 0;
-int keys = 4;
 int numkey=0;
 extern char mapSize[80][31];
 bool launchVicScreen = false;
