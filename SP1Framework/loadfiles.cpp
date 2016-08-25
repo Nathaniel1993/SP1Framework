@@ -24,6 +24,9 @@ char easyQuiz[80][31];
 char mediumQuiz[80][31];
 char hardQuiz[80][31];
 
+char victory[80][31];
+char defeat[80][31];
+
 void loadSplashscreen()
 {
 	ifstream file("mainmenu.txt");
@@ -239,7 +242,7 @@ void loadDice6()
 
 void loadquizEasy()
 {
-	ifstream file("combateasy.txt");
+	ifstream file("quizeasy.txt");
 	int width = 0;
 	int height = 0;
 	if (file.is_open())
@@ -260,7 +263,7 @@ void loadquizEasy()
 
 void loadquizMedium()
 {
-	ifstream file("combatmedium.txt");
+	ifstream file("quizmedium.txt");
 	int width = 0;
 	int height = 0;
 	if (file.is_open())
@@ -281,7 +284,7 @@ void loadquizMedium()
 
 void loadquizHard()
 {
-	ifstream file("combathard.txt");
+	ifstream file("quizhard.txt");
 	int width = 0;
 	int height = 0;
 	if (file.is_open())
@@ -291,6 +294,48 @@ void loadquizHard()
 			while (width < 80)
 			{
 				file >> hardQuiz[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+		file.close();
+	}
+}
+
+void loadDefeatScreen()
+{
+	ifstream file("defeat.txt");
+	int width = 0;
+	int height = 0;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> defeat[width][height];
+				width++;
+			}
+			height++;
+			width = 0;
+		}
+		file.close();
+	}
+}
+
+void loadVictoryScreen()
+{
+	ifstream file("victory.txt");
+	int width = 0;
+	int height = 0;
+	if (file.is_open())
+	{
+		while (height < 31)
+		{
+			while (width < 80)
+			{
+				file >> victory[width][height];
 				width++;
 			}
 			height++;

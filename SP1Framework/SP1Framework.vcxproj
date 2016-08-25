@@ -93,6 +93,7 @@
     <ClCompile Include="Map2Enemy2.cpp" />
     <ClCompile Include="Map2Enemy3.cpp" />
     <ClCompile Include="PlayerHealth.cpp" />
+    <ClCompile Include="postgame.cpp" />
     <ClCompile Include="quiz.cpp" />
     <ClCompile Include="quizeasy.cpp" />
     <ClCompile Include="quizhard.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="loadfile.h" />
+    <ClInclude Include="postgame.h" />
     <ClInclude Include="quiz.h" />
   </ItemGroup>
   <ItemGroup>

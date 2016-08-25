@@ -17,7 +17,8 @@ extern bool    ScoreTracker;
 extern bool    g_abKeyPressed[K_COUNT];
 extern bool	   diceRoll;
 extern bool    mapLoader;
-extern bool launchDice;
+extern bool	   launchDice;
+extern bool splashScreenload;
 
 extern int g_MapNo;
 extern int Score;
@@ -49,6 +50,12 @@ int encounterCheck6 = 0;
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
+	if (splashScreenload == true)
+	{
+		loadSplashscreen();
+		splashScreenload = false;
+	}
+
 	if (g_abKeyPressed[K_ENTER])
 	{
 		g_eGameState = S_GAME;

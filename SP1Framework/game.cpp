@@ -12,12 +12,14 @@
 #include <fstream>
 #include <mmsystem.h>
 #include "loadfile.h"
+#include "postgame.h"
 
 using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool ScoreTracker = false;
+bool splashScreenload = true;
 extern bool mapDraw;
 bool mapLoader = false; 
 int Score = 0;
@@ -64,14 +66,6 @@ void init(void)
 	loadSplashscreen();
 
 	/*-----------------------------------------------------------*/
-	Bounce.aiBounceTime1 = 0.0;
-	Bounce.aiBounceTime2 = 0.0;
-	Bounce.aiBounceTime3 = 0.0;
-	Bounce.aiBounceTime4 = 0.0;
-	Bounce.aiBounceTime5 = 0.0;
-	Bounce.aiBounceTime6 = 0.0;
-	Bounce.bossBounceTime = 0.0;
-
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
 	PlaySound(TEXT("splash.wav"), NULL, SND_ASYNC | SND_LOOP);
@@ -79,7 +73,7 @@ void init(void)
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 	
 	Enemy.g_sEnemy.m_cLocation.X = 18; // enemy spawn location
-	Enemy.g_sEnemy.m_cLocation.Y = 24;
+	Enemy.g_sEnemy.m_cLocation.Y = 25;
 
 	Enemy.g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
 	Enemy.g_sEnemy2.m_cLocation.Y = 10;
@@ -87,6 +81,14 @@ void init(void)
 	Enemy.g_sEnemy3.m_cLocation.X = 59; // enemy spawn location
 	Enemy.g_sEnemy3.m_cLocation.Y = 15;
 	
+	Enemy.g_sEnemy4.m_cLocation.X = 15; // enemy spawn location
+	Enemy.g_sEnemy4.m_cLocation.Y = 27;
+
+	Enemy.g_sEnemy5.m_cLocation.X = 46; // enemy spawn location
+	Enemy.g_sEnemy5.m_cLocation.Y = 18;
+
+	Enemy.g_sEnemy6.m_cLocation.X = 33; // enemy spawn location
+	Enemy.g_sEnemy6.m_cLocation.Y = 18;
 
 	g_sBoss.m_cLocation.X = 20;
 	g_sBoss.m_cLocation.Y = 25;
@@ -177,6 +179,10 @@ void update(double dt)
 		break;
 	case S_QUIZHARD: combatHard();
 		break;
+	case S_DEFEAT: defeatScreen();
+		break;
+	case S_VICTORY: victoryScreen();
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -205,6 +211,10 @@ void render()
 	case S_QUIZMEDIUM: rendercombatMedium();
 		break;
 	case S_QUIZHARD: rendercombatHard();
+		break;
+	case S_DEFEAT: renderDefeatScreen();
+		break;
+	case S_VICTORY: renderVictoryScreen();
 		break;
 	}
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc

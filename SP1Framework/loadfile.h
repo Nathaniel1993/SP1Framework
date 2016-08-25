@@ -24,3 +24,6 @@ void loadquizEasy();
 void loadquizMedium();
 void loadquizHard();
 
+void loadDefeatScreen();
+void loadVictoryScreen();
+
