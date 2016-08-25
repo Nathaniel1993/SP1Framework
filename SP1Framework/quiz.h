@@ -3,13 +3,13 @@
 
 using namespace std;
 
-void combatEasy();
-void combatMedium();
-void combatHard();
+void quizEasy();
+void quizMedium();
+void quizHard();
 
-void rendercombatEasy();
-void rendercombatMedium();
-void rendercombatHard();
+void renderquizEasy();
+void renderquizMedium();
+void renderquizHard();
 
 void EasyQuestion1();
 void EasyQuestion2();

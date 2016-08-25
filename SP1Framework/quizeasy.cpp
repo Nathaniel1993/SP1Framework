@@ -8,16 +8,25 @@ extern EGAMESTATES g_eGameState;
 extern Console g_Console;
 extern char MapSize[80][31];
 extern int Lifecounter;
+extern bool giveScore;
 
 void EasyQuestion1()
 {
 	if (g_abKeyPressed[K_THREE])
 	{
+		giveScore = true;
 		g_eGameState = S_GAME;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE])
 	{
-		Lifecounter++;
+		if (Lifecounter >= 3)
+		{
+			giveScore = true;
+		}
+		else
+		{
+			Lifecounter++;
+		}
 	}
 }
 
@@ -25,11 +34,19 @@ void EasyQuestion2()
 {
 	if (g_abKeyPressed[K_ONE])
 	{
+		giveScore = true;
 		g_eGameState = S_GAME;
 	}
 	else if (g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		Lifecounter++;
+		if (Lifecounter >= 3)
+		{
+			giveScore = true;
+		}
+		else
+		{
+			Lifecounter++;
+		}
 	}
 }
 
@@ -37,11 +54,19 @@ void EasyQuestion3()
 {
 	if (g_abKeyPressed[K_TWO])
 	{
+		giveScore = true;
 		g_eGameState = S_GAME;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		Lifecounter++;
+		if (Lifecounter >= 3)
+		{
+			giveScore = true;
+		}
+		else
+		{
+			Lifecounter++;
+		}
 	}
 }
 
@@ -49,11 +74,19 @@ void EasyQuestion4()
 {
 	if (g_abKeyPressed[K_FIVE])
 	{
+		giveScore = true;
 		g_eGameState = S_GAME;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_FOUR] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_THREE])
 	{
-		Lifecounter++;
+		if (Lifecounter >= 3)
+		{
+			giveScore = true;
+		}
+		else
+		{
+			Lifecounter++;
+		}
 	}
 }
 
@@ -61,11 +94,19 @@ void EasyQuestion5()
 {
 	if (g_abKeyPressed[K_FOUR])
 	{
+		giveScore = true;
 		g_eGameState = S_GAME;
 	}
 	else if (g_abKeyPressed[K_ONE] || g_abKeyPressed[K_TWO] || g_abKeyPressed[K_FIVE] || g_abKeyPressed[K_THREE])
 	{
-		Lifecounter++;
+		if (Lifecounter >= 3)
+		{
+			giveScore = true;
+		}
+		else
+		{
+			Lifecounter++;
+		}
 	}
 }
 

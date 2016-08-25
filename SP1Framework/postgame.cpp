@@ -12,8 +12,8 @@ extern char victory[80][31];
 extern Console g_Console;
 extern EGAMESTATES g_eGameState;
 
-bool launchVicScreen = false;
-bool launchDefScreen = false;
+extern bool launchVicScreen;
+extern bool launchDefScreen;
 
 void defeatScreen()
 {
@@ -56,16 +56,16 @@ void renderDefeatScreen()
 	}
 	COORD l;
 	l.Y = 26;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "", 0x0B); //highscore
 	l.Y = 27;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "", 0x0B); // time
 	l.Y = 28;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B); 
 	l.Y = 29;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Esc> key to quit", 0x0B);
 }
 
@@ -110,15 +110,15 @@ void renderVictoryScreen()
 	}
 	COORD l;
 	l.Y = 26;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "", 0x0B); //highscore
 	l.Y = 27;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "", 0x0B); // time
 	l.Y = 28;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B);
 	l.Y = 29;
-	l.X = 40;
+	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Esc> key to quit", 0x0B);
 }

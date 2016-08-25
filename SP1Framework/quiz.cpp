@@ -3,6 +3,8 @@
 #include <sstream>
 #include "loadfile.h"
 
+extern bool launchVicScreen;
+extern bool launchDefScreen;
 extern bool encounter;
 extern bool g_abKeyPressed[K_COUNT];
 extern EGAMESTATES g_eGameState;
@@ -22,8 +24,9 @@ int Lifecounter = 0;
 
 bool questionConfirm = false;
 bool quizTime = false;
+bool giveScore = false;
 
-void combatEasy()
+void quizEasy()
 {
 	if (questionConfirm == true)
 	{
@@ -37,25 +40,6 @@ void combatEasy()
 	if (quizTime == true)
 	{
 		loadquizEasy();
-
-		if (Lifecounter == 0)
-		{
-			Score += 5;
-		}
-		else if (Lifecounter == 1)
-		{
-			Score += 3;
-		}
-		else if (Lifecounter == 2)
-		{
-			Score += 1;
-		}
-		else if (Lifecounter <= 3)
-		{
-			g_eGameState = S_DEFEAT;
-			Lifecounter = 0;
-		}
-
 		quizTime = false;
 	}
 	switch (secondEasyRoll)
@@ -71,10 +55,32 @@ void combatEasy()
 	case 5: EasyQuestion5();
 		break;
 	}
+	if (giveScore == true)
+	{
+		if (Lifecounter == 0)
+		{
+			Score += 5;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 3;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 1;
+		}
+		else if (Lifecounter >= 3)
+		{
+			launchDefScreen = true;
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
+		giveScore = false;
+	}
 	encounter = false;
 }
 
-void combatMedium()
+void quizMedium()
 {
 	if (questionConfirm == true)
 	{
@@ -87,23 +93,6 @@ void combatMedium()
 	if (quizTime == true)
 	{
 		loadquizMedium();
-		if (Lifecounter == 0)
-		{
-			Score += 10;
-		}
-		else if (Lifecounter == 1)
-		{
-			Score += 7;
-		}
-		else if (Lifecounter == 2)
-		{
-			Score += 5;
-		}
-		else if (Lifecounter <= 3)
-		{
-			g_eGameState = S_DEFEAT;
-			Lifecounter = 0;
-		}
 		quizTime = false;
 	}
 	switch (secondMediumRoll)
@@ -119,10 +108,33 @@ void combatMedium()
 	case 5: MediumQuestion5();
 		break;
 	}
+	if (giveScore == true)
+	{
+		if (Lifecounter == 0)
+		{
+			Score += 10;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 7;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 5;
+		}
+		else if (Lifecounter >= 3)
+		{
+			launchDefScreen = true;
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
+		giveScore = false;
+	}
 	encounter = false;
+	
 }
 
-void combatHard()
+void quizHard()
 {
 	if (questionConfirm == true)
 	{
@@ -135,23 +147,6 @@ void combatHard()
 	if (quizTime == true)
 	{
 		loadquizHard();
-		if (Lifecounter == 0)
-		{
-			Score += 15;
-		}
-		else if (Lifecounter == 1)
-		{
-			Score += 12;
-		}
-		else if (Lifecounter == 2)
-		{
-			Score += 10;
-		}
-		else if (Lifecounter <= 3)
-		{
-			g_eGameState = S_DEFEAT;
-			Lifecounter = 0;
-		}
 		quizTime = false;
 	}
 	switch (secondHardRoll)
@@ -167,10 +162,32 @@ void combatHard()
 	case 5: HardQuestion5();
 		break;
 	}
+	if (giveScore == true)
+	{
+		if (Lifecounter == 0)
+		{
+			Score += 15;
+		}
+		else if (Lifecounter == 1)
+		{
+			Score += 12;
+		}
+		else if (Lifecounter == 2)
+		{
+			Score += 10;
+		}
+		else if (Lifecounter >= 3)
+		{
+			launchDefScreen = true;
+			g_eGameState = S_DEFEAT;
+			Lifecounter = 0;
+		}
+		giveScore = false;
+	}
 	encounter = false;
 }
 
-void rendercombatEasy()
+void renderquizEasy()
 {
 	COORD c;
 	for (int y = 0; y < 31; y++)
@@ -212,7 +229,7 @@ void rendercombatEasy()
 	}
 }
 
-void rendercombatMedium()
+void renderquizMedium()
 {
 	COORD c;
 	for (int y = 0; y < 31; y++)
@@ -255,7 +272,7 @@ void rendercombatMedium()
 	}
 }
 
-void rendercombatHard()
+void renderquizHard()
 {
 	COORD c;
 	for (int y = 0; y < 31; y++)

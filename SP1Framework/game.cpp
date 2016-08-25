@@ -26,6 +26,8 @@ int Score = 0;
 int keys = 4;
 int numkey=0;
 extern char mapSize[80][31];
+bool launchVicScreen = false;
+bool launchDefScreen = false;;
 
 
 double aiBounceTime1;
@@ -173,11 +175,11 @@ void update(double dt)
 		break;
 	case S_DICE: dice();
 		break;
-	case S_QUIZEASY: combatEasy();
+	case S_QUIZEASY: quizEasy();
 		break;
-	case S_QUIZMEDIUM: combatMedium();
+	case S_QUIZMEDIUM: quizMedium();
 		break;
-	case S_QUIZHARD: combatHard();
+	case S_QUIZHARD: quizHard();
 		break;
 	case S_DEFEAT: defeatScreen();
 		break;
@@ -206,11 +208,11 @@ void render()
 		break;
 	case S_DICE: renderdice();
 		break;
-	case S_QUIZEASY: rendercombatEasy();
+	case S_QUIZEASY: renderquizEasy();
 		break;
-	case S_QUIZMEDIUM: rendercombatMedium();
+	case S_QUIZMEDIUM: renderquizMedium();
 		break;
-	case S_QUIZHARD: rendercombatHard();
+	case S_QUIZHARD: renderquizHard();
 		break;
 	case S_DEFEAT: renderDefeatScreen();
 		break;

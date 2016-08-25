@@ -83,7 +83,7 @@ void AiEnemy6()
 		&& encounterCheck6 == 0)
 	{
 		encounter = true;
-		encounterCheck6 = 0;
+		encounterCheck6 = 1;
 	}
 
 	Bounce.aiBounceTime6 = g_dElapsedTime + 0.2;
