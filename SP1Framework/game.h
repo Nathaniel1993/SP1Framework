@@ -116,4 +116,6 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 void renderKeys();
 void openDoor();
 
+void renderSight();
+
 #endif // _GAME_H

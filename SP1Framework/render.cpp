@@ -77,7 +77,6 @@ void renderGame()
 	renderMap(); 
 	renderCharacter();  // renders the character into the buffer
 	moveCharacter();
-
 	if (g_MapNo == 1)
 	{
 		if (encounterCheck1 == 0)
@@ -115,7 +114,8 @@ void renderGame()
 		//renderTrap;
 	}
 	renderKeys();
-	openDoor();
+	renderSight();
+	//openDoor();
 }
 
 void renderMap()
@@ -131,17 +131,7 @@ void renderMap()
 				mapSize[x][y] = ' ';
 			}
 			c.X = x;
-			g_Console.writeToBuffer(c, mapSize[x][y], 0x09);
-			if (mapSize[x][y] == '.')
-			{
-				g_Console.writeToBuffer(c, mapSize[x][y], 0x0A);
-			}
-			if (mapSize[x][y] == 'A')
-			{
-				g_Console.writeToBuffer(c, mapSize[x][y], 0x0C);
-				g_sDoor.m_cLocation.X = x;
-				g_sDoor.m_cLocation.Y = y;
-			}
+			g_Console.writeToBuffer(c, mapSize[x][y], 0x00);
 		}
 	}
 }
@@ -205,5 +195,49 @@ void openDoor()
 	if (keys == 0)
 	{
 		mapSize[g_sDoor.m_cLocation.X][g_sDoor.m_cLocation.Y] = ' ';
+	}
+}
+
+void renderSight()
+{
+	COORD c;
+	for (int VisionX = g_sChar.m_cLocation.X - 6; VisionX < g_sChar.m_cLocation.X + 6; VisionX++)
+	{
+		c.X = VisionX;
+		for (int VisionY = g_sChar.m_cLocation.Y - 3; VisionY < g_sChar.m_cLocation.Y + 3; VisionY++)
+		{
+			c.Y = VisionY;
+			if (VisionX == g_sChar.m_cLocation.X && VisionY == g_sChar.m_cLocation.Y)
+			{
+
+			}
+			else
+			{
+				if (mapSize[VisionX][VisionY] == '.')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
+				}
+				if (mapSize[VisionX][VisionY] == '#')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x09);
+				}
+				if (mapSize[VisionX][VisionY] == 'A')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
+				}
+				if (mapSize[VisionX][VisionY] == 'K')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+				}
+				if (mapSize[VisionX][VisionY] == '*')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0B);
+				}
+				if (mapSize[VisionX][VisionY] == 'F')
+				{
+					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+				}
+			}
+		}
 	}
 }
