@@ -13,10 +13,13 @@
 #include <mmsystem.h>
 #include "loadfile.h"
 #include "postgame.h"
+#include "RenderHighScore.h"
+#include "HighScore.h"
 
 using namespace std;
 double  g_dElapsedTime;
 double  g_dDeltaTime;
+double GameTime;
 bool    g_abKeyPressed[K_COUNT];
 bool ScoreTracker = false;
 bool splashScreenload = true;
@@ -141,7 +144,7 @@ void getInput(void)
 	g_abKeyPressed[K_THREE] = isKeyPressed(0x33);
 	g_abKeyPressed[K_FOUR] = isKeyPressed(0x34);
 	g_abKeyPressed[K_FIVE] = isKeyPressed(0x35);
-
+	g_abKeyPressed[K_H] = isKeyPressed(0x48);
 }
 
 
@@ -203,6 +206,8 @@ void render()
 	case S_SPLASHSCREEN: renderSplashscreen();
 		break;
 	case S_GUIDE: loadguide();
+		break;
+	case S_HIGHSCORE: RenderHighScore();
 		break;
 	case S_GAME: renderGame();
 		break;

@@ -66,6 +66,10 @@ void splashScreenWait()    // waits for time to pass in splash screen
 	{
 		g_eGameState = S_GUIDE;
 	}
+	if (g_abKeyPressed[K_H])
+	{
+		g_eGameState = S_HIGHSCORE;
+	}
 }
 
 void gameplay()            // gameplay logic

@@ -70,6 +70,9 @@ void renderSplashscreen()  // renders the splash screen
 	l.Y = 28;
 	l.X = 20;
 	g_Console.writeToBuffer(l, "Press <Esc> key in game to quit", 0x0B);
+	l.Y = 29;
+	l.X = 20;
+	g_Console.writeToBuffer(l, "Press <H> key in game to view High Scores", 0x0B);
 }
 
 void renderGame()
