@@ -109,24 +109,27 @@ void gameplay()            // gameplay logic
 		mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 		ScoreTracker = false;
 	}
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X == 0 && g_sChar.m_cLocation.Y == 2)
+	if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'X')
 	{
-		g_MapNo = 2;
-		keys = 4;
-		mapLoader = true;
-		PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
-		
-	}
-	else if (g_sChar.m_cLocation.X == 39 && g_sChar.m_cLocation.Y == 0)
-	{
-		g_MapNo = 3;
-		keys = 4;
-		mapLoader = true;
-		PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
-		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
-		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+		if (g_MapNo == 1)
+		{
+			g_MapNo = 2;
+			keys = 4;
+			mapLoader = true;
+			PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
+			g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
+			g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+
+		}
+		else if (g_MapNo == 2)
+		{
+			g_MapNo = 3;
+			keys = 4;
+			mapLoader = true;
+			PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
+			g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
+			g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
+		}
 	}
 	if (encounter == true)
 	{

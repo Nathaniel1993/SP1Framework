@@ -3,6 +3,7 @@
 #include "game.h"
 #include "Framework\console.h"
 #include "loadfile.h"
+#include <sstream>
 
 extern bool    g_abKeyPressed[K_COUNT];
 extern bool splashScreenload;
@@ -15,10 +16,18 @@ extern EGAMESTATES g_eGameState;
 extern bool launchVicScreen;
 extern bool launchDefScreen;
 
+extern int Score;
+extern double  g_dElapsedTime;
+
+int tempScore = 0;
+double tempTime = 0.0;
+
 void defeatScreen()
 {
 	if (launchDefScreen == true)
 	{
+		tempScore = Score;
+		tempTime = g_dElapsedTime;
 		loadDefeatScreen();
 		launchDefScreen = false;
 	}
@@ -55,12 +64,19 @@ void renderDefeatScreen()
 		}
 	}
 	COORD l;
+	std::ostringstream ss;			//displays the game score post game
+	ss.str("");
+	ss << "Score: " << tempScore << "points";
+	l.X = 30;
 	l.Y = 26;
+	g_Console.writeToBuffer(l, ss.str(), 0x0B);
+	
+	ss.str("");						//displays the time spend post game
+	ss << "Time Spend: " << tempTime << "secs";
 	l.X = 30;
-	g_Console.writeToBuffer(l, "", 0x0B); //highscore
 	l.Y = 27;
-	l.X = 30;
-	g_Console.writeToBuffer(l, "", 0x0B); // time
+	g_Console.writeToBuffer(l, ss.str(), 0x0B);
+
 	l.Y = 28;
 	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B); 
@@ -73,6 +89,8 @@ void victoryScreen()
 {
 	if (launchVicScreen == true)
 	{
+		tempTime = g_dElapsedTime;
+		tempScore = Score;
 		loadVictoryScreen();
 		launchVicScreen = false;
 	}
@@ -109,12 +127,18 @@ void renderVictoryScreen()
 		}
 	}
 	COORD l;
+	std::ostringstream ss;			//displays the game score post game
+	ss.str("");
+	ss << "Score: " << tempScore << "points";
+	l.X = 30;
 	l.Y = 26;
+	g_Console.writeToBuffer(l, ss.str(), 0x0B);
+
+	ss.str("");						//displays the time spend post game
+	ss << "Time Spend: " << tempTime << "secs";
 	l.X = 30;
-	g_Console.writeToBuffer(l, "", 0x0B); //highscore
 	l.Y = 27;
-	l.X = 30;
-	g_Console.writeToBuffer(l, "", 0x0B); // time
+	g_Console.writeToBuffer(l, ss.str(), 0x0B);
 	l.Y = 28;
 	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B);
