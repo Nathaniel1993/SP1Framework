@@ -107,7 +107,7 @@ void gameplay()            // gameplay logic
 	{
 		BossAi();
 		//damageBoss();
-		//healthAi();
+		healthAi();
 	}
 	if (ScoreTracker == true)
 	{

@@ -82,11 +82,13 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	//openDoor();
 	moveCharacter();
-	if (g_MapNo == 1)
+	//renderKeys();
+	if(g_MapNo == 1)
 	{
+		renderSight();
 		if (encounterCheck1 == 0)
 		{
-			renderEnemy();
+			renderSight();
 		}
 		if (encounterCheck2 == 0)
 		{
@@ -99,6 +101,7 @@ void renderGame()
 	}
 	else if (g_MapNo == 2)
 	{
+		renderSight();
 		if (encounterCheck4 == 0)
 		{
 			renderEnemy4();
@@ -115,11 +118,9 @@ void renderGame()
 	else if (g_MapNo == 3)
 	{
 		renderBoss();
-		//renderHealth();
+		renderHealth();
 		//renderTrap;
 	}
-	//renderKeys();
-	renderSight();
 	openDoor();
 }
 
@@ -151,7 +152,14 @@ void renderMap()
 				g_D.m_cLocation.Y = y;
 			}
 			c.X = x;
-			g_Console.writeToBuffer(c, mapSize[x][y], 0x00);
+			if ((g_MapNo == 1) || (g_MapNo == 2))
+			{
+				g_Console.writeToBuffer(c, mapSize[x][y], 0x00);
+			}
+			else if (g_MapNo == 3)
+			{
+				g_Console.writeToBuffer(c, mapSize[x][y], 0x09);
+			}
 		}
 	}
 }
