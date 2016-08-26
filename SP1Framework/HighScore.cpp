@@ -4,6 +4,7 @@ extern Console g_Console;
 
 void HighScore(string Time, string Points)
 {
+	//Write into File (HighScore.txt)
 	fstream file;
 	file.open("HighScore.txt", fstream::app);
 	file << Time << "\n" << Points << "\n";
@@ -19,13 +20,13 @@ void renderScore()
 	RenderHighScore();
 
 	double HighScore[5] = { 0.0, };
-	int HighScoreTime[5] = { 0, };
+	int HighScorePoints[5] = { 0, };
 
 	int AllPoints[150] = { 0, };
 	double AllTime[150] = { 0.0, };
 	int i = 0;
+	int x = 0;
 	int a = 0;
-	int b = 0;
 
 	ifstream file("HighScore.txt");
 	if (file.is_open())
@@ -34,16 +35,16 @@ void renderScore()
 		{
 			if (i % 2 == 1)
 			{
-				int Points;
-				Points = stoi(line);
-				AllPoints[i - a] = Points;
+				double ScoreTime;
+				ScoreTime = stod(line);
+				AllTime[a + x] = ScoreTime;
+				a++;
 			}
 			if (i % 2 == 0)
 			{
-				double ScoreTime;
-				ScoreTime = stod(line);
-				AllTime[b + a] = ScoreTime;
-				a++;
+				int Points;
+				Points = stoi(line);
+				AllPoints[i - x] = Points;
 			}
 			i++;
 		}
@@ -52,43 +53,44 @@ void renderScore()
 	
 	for (int HighScoreCount = 0; HighScoreCount < 5; HighScoreCount++)
 	{
-		double LongestTime = 0;
+		double ShortestTime = 0;
 		int mostpoints = 0;
 
-		for (int b = 0; b < i; a++)
+		for (int a = 0; a < i; a++)
 		{
-			if (LongestTime == 0)
+			if (ShortestTime == 0)
 			{
-				LongestTime = AllTime[b];
-				mostpoints = AllPoints[b];
+				ShortestTime = AllTime[a];
+				mostpoints = AllPoints[a];
 			}
-			if (LongestTime > AllTime[b])
+			if (ShortestTime > AllTime[a])
 			{
 				bool inarray = false;
-					for (int x = 0; x < 5; x++)
+					for (int c = 0; c < 5; c++)
 					{
-						if (HighScore[x] == AllTime[a])
+						if (HighScore[c] == AllTime[a]) // checking to see if there's anything in HighScore[] that has the same value as the selected value of (AllScores[])
 						{
-							inarray = true;
+							inarray = true; // if there is, set it to true
 						}
 					}
 					if (inarray == false)
 					{
-						LongestTime = AllTime[a];
+						ShortestTime = AllTime[a];
 						mostpoints = AllPoints[a];
 					}
 			}
 		}
-		HighScore[HighScoreCount] = mostpoints;
-		HighScoreTime[HighScoreCount] = LongestTime;
+		HighScore[HighScoreCount] = ShortestTime; // Shortest Time
+		HighScorePoints[HighScoreCount] = mostpoints; // Most points
 	}
-	for (int a = 0; a < 5; a++)
+	for (int b = 0; b < 5; b++) // Displays only top 5 scores
 	{
 		std::string str;
 		std::string strPoints;
 		char Digit[10];
 		char Points[10];
-		str = to_string(HighScore[b]);
+		str = to_string(HighScore[b]);//Time
+		strPoints = to_string(HighScorePoints[b]);//Points
 
 		std::strcpy(Digit, str.c_str());
 		std::strcpy(Points, strPoints.c_str());
@@ -100,7 +102,7 @@ void renderScore()
 		COORD SecondsCoord;
 		SecondsCoord.X = g_Console.getConsoleSize().X / 2 - 20;
 		SecondsCoord.Y = c.Y;
-		g_Console.writeToBuffer(SecondsCoord, " secs");
+		g_Console.writeToBuffer(SecondsCoord, " Seconds");
 
 		//Coordinates for displaying Time on HighScore
 		c.X = g_Console.getConsoleSize().X / 2;
@@ -108,7 +110,7 @@ void renderScore()
 		g_Console.writeToBuffer(c, Points);
 		SecondsCoord.X = g_Console.getConsoleSize().X / 2 + 5;
 		SecondsCoord.Y = c.Y;
-		g_Console.writeToBuffer(SecondsCoord, " Points");
+		
+		g_Console.writeToBuffer(SecondsCoord, " Mikus");
 	}
-
 }

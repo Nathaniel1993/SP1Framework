@@ -105,6 +105,7 @@ void victoryScreen()
 	if (g_abKeyPressed[K_ESCAPE])
 	{
 		g_bQuitGame = true;
+		HighScore(to_string(GameTime), to_string(Score));
 	}
 }
 
