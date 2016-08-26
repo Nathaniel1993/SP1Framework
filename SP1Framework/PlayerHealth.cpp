@@ -12,9 +12,8 @@ void healthAi()
 	{
 		return;
 	}
+	Bounce.healthBounceTime = 0.0;
 	/*	-------------------------------------------hit player collision --------------------------------------------------- */
-	for (int i = 0; i < 6; i++)
-	{
 		if /*(*/((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))
 			/*|| ((BossTrap[i].m_cLocation.X == g_sChar.m_cLocation.X) && (BossTrap[i].m_cLocation.Y == g_sChar.m_cLocation.Y)))*/
 		{
@@ -27,6 +26,19 @@ void healthAi()
 		{
 			launchDefScreen = true; //character dies or defeat screen
 			g_eGameState = S_DEFEAT;
+		}
+	for (int i = 0; i < 9; i++)
+	{
+		if ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y))
+		{
+			health -= 1;
+			//hitTarget[i] = true;
+
+		}
+		if ((health == 0) && ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y)))
+		{
+			launchDefScreen = true;
+			g_eGameState = S_DEFEAT; //character dies or defeat screen
 		}
 	}
 	Bounce.healthBounceTime = g_dElapsedTime + 0.125;

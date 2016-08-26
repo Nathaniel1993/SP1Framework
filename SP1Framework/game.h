@@ -85,6 +85,8 @@ struct AiBounceTime
 	double aiBounceTime6;
 	double bossBounceTime;
 	double healthBounceTime;
+	double bossHealthBounceTime;
+	double trapTime;
 	double easyQuizBounceTime;
 	double medQuizBounceTime;
 	double hardQuizBounceTime;
@@ -123,9 +125,7 @@ void renderKeys();
 void renderPlayerTime();
 void openDoor();
 void BoulderIn();
-
+void renderScore();
 void renderSight();
-
-void renderScore();         // Renders HighScore
 
 #endif // _GAME_H

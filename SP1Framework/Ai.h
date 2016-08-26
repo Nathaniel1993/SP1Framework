@@ -6,17 +6,16 @@
 
 extern Console g_Console;
 extern SGameChar g_sChar;
-//extern SGameEnemy g_sEnemy;
-//extern SGameEnemy g_sEnemy2;
 extern EnemyStruct Enemy;
-extern AiBounceTime Bounce;
 extern SGameBoss g_sBoss;
-extern SGameTrap BossTrap[6];
-extern double g_dElapsedTime;
 extern COORD c;
+extern COORD trap[9];
+extern COORD Enemies[9];
 extern char mapSize[80][31];
+extern AiBounceTime Bounce;
+extern double g_dElapsedTime;
 
-void renderTrap(COORD trapLocation);
+void renderTrap(COORD a);
 void trapSpawn();
 void damageBoss();
 
@@ -25,17 +24,27 @@ void healthAi();
 
 void renderBoss();
 void BossAi();
+void bossHealthAi();
+void renderBossHealth();
 
-void AiEnemy();
-void AiEnemy2();
-void AiEnemy3();
-void AiEnemy4();
-void AiEnemy5();
-void AiEnemy6();
+void EnemiesAi(COORD Enemy);
+void renderEnemies(COORD Enemy);
+void enemiesSpawn1();
+void enemiesSpawn2();
 
-void renderEnemy();
-void renderEnemy2();
-void renderEnemy3();
-void renderEnemy4();
-void renderEnemy5();
-void renderEnemy6();
+void trapTrigger();
+void renderTrapTrigger(COORD a);
+
+//void AiEnemy();
+//void AiEnemy2();
+//void AiEnemy3();
+//void AiEnemy4();
+//void AiEnemy5();
+//void AiEnemy6();
+//
+//void renderEnemy();
+//void renderEnemy2();
+//void renderEnemy3();
+//void renderEnemy4();
+//void renderEnemy5();
+//void renderEnemy6();

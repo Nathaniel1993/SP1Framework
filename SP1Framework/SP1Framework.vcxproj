@@ -80,6 +80,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossTrap.cpp" />
     <ClCompile Include="Dice.cpp" />
+    <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="quizhard.cpp" />
     <ClCompile Include="quizmedium.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="renderHighScore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ai.h" />
@@ -113,6 +115,7 @@
     <ClInclude Include="loadfile.h" />
     <ClInclude Include="postgame.h" />
     <ClInclude Include="quiz.h" />
+    <ClInclude Include="RenderHighScore.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="defeat.txt" />
@@ -122,6 +125,8 @@
     <Text Include="dice4.txt" />
     <Text Include="dice5.txt" />
     <Text Include="dice6.txt" />
+    <Text Include="HighScore.txt" />
+    <Text Include="HighScoreTitle.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

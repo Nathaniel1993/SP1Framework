@@ -99,6 +99,12 @@
     <ClCompile Include="HighScore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderHighScore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -131,6 +137,9 @@
     <ClInclude Include="HighScore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RenderHighScore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="defeat.txt">
@@ -153,6 +162,12 @@
     </Text>
     <Text Include="dice6.txt">
       <Filter>Source Files\Dice</Filter>
+    </Text>
+    <Text Include="HighScore.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="HighScoreTitle.txt">
+      <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

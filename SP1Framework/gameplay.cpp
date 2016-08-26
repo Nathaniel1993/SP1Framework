@@ -104,21 +104,22 @@ void gameplay()            // gameplay logic
 	moveCharacter();   // moves the character, collision detection, physics, etc
 	if (g_MapNo == 1)
 	{
-		AiEnemy();
-		AiEnemy2();
-		AiEnemy3();
+		EnemiesAi(Enemies[0]);
+		EnemiesAi(Enemies[1]);
+		EnemiesAi(Enemies[2]);
 	}
 	if (g_MapNo == 2)
 	{
-		AiEnemy4();
-		AiEnemy5();
-		AiEnemy6();
+		EnemiesAi(Enemies[3]);
+		EnemiesAi(Enemies[4]);
+		EnemiesAi(Enemies[5]);
 	}
 	if (g_MapNo == 3)
 	{
 		BossAi();
-		//damageBoss();
+		damageBoss();
 		healthAi();
+		bossHealthAi();
 	}
 	if (ScoreTracker == true)
 	{

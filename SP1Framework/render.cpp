@@ -90,15 +90,15 @@ void renderGame()
 		renderSight();
 		if (encounterCheck1 == 0)
 		{
-			renderEnemy();
+			renderEnemies(Enemies[0]);
 		}
 		if (encounterCheck2 == 0)
 		{
-			renderEnemy2();
+			renderEnemies(Enemies[1]);
 		}
 		if (encounterCheck3 == 0)
 		{
-			renderEnemy3();
+			renderEnemies(Enemies[2]);
 		}
 	}
 	else if (g_MapNo == 2)
@@ -106,22 +106,26 @@ void renderGame()
 		renderSight();
 		if (encounterCheck4 == 0)
 		{
-			renderEnemy4();
+			renderEnemies(Enemies[3]);
 		}
 		if (encounterCheck5 == 0)
 		{
-			renderEnemy5();
+			renderEnemies(Enemies[4]);
 		}
 		if (encounterCheck6 == 0)
 		{
-			renderEnemy6();
+			renderEnemies(Enemies[5]);
 		}
 	}
 	else if (g_MapNo == 3)
 	{
 		renderBoss();
 		renderHealth();
-		//renderTrap;
+		renderBossHealth();
+		for (int i = 0; i < 9; i++)
+		{
+			renderTrap(trap[i]);
+		}
 	}
 	openDoor();
 }
