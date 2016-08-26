@@ -3,6 +3,7 @@
 #include "game.h"
 #include "Framework\console.h"
 #include "loadfile.h"
+#include "HighScore.h"
 #include <sstream>
 
 extern bool    g_abKeyPressed[K_COUNT];
@@ -18,6 +19,7 @@ extern bool launchDefScreen;
 
 extern int Score;
 extern double  g_dElapsedTime;
+extern double GameTime;
 
 int tempScore = 0;
 double tempTime = 0.0;

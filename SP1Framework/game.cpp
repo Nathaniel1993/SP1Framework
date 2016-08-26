@@ -168,7 +168,7 @@ void update(double dt)
 	// get the delta time
 	g_dElapsedTime += dt;
 	g_dDeltaTime = dt;
-
+	GameTime += dt;
 	switch (g_eGameState)
 	{
 	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen

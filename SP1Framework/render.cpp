@@ -35,6 +35,8 @@ extern Teleporters g_A, g_B, g_C, g, g_D;
 
 extern double  g_dElapsedTime;
 extern double  g_dDeltaTime;
+extern double GameTime;
+extern EGAMESTATES g_eGameState;
 
 extern bool g_abKeyPressed[K_COUNT];
 
@@ -187,12 +189,15 @@ void renderFramerate()
 	g_Console.writeToBuffer(c, ss.str());
 
 	// displays the elapsed time
-	ss.str("");
-	ss << g_dElapsedTime << "secs";
-	c.X = 0;
-	c.Y = 0;
-	g_Console.writeToBuffer(c, ss.str());
-
+		ss.str("");
+		ss << GameTime << "secs";
+		c.X = 0;
+		c.Y = 0;
+		g_Console.writeToBuffer(c, ss.str(),0x00);
+		if (g_eGameState == S_GAME)
+		{
+			g_Console.writeToBuffer(c, ss.str(), 0x0A);
+		}
 	//displays the score
 	ss.str("");
 	ss << Score << "points";
@@ -229,6 +234,20 @@ void openDoor()
 void BoulderIn()
 {
 	;
+}
+
+void renderPlayerTime()
+{
+	COORD c;
+
+	ostringstream ss;
+	ss << fixed << setprecision(3);
+	
+	ss.str("");
+	ss << "Game Time: " << GameTime;
+	c.X = 1;
+	c.Y = 1;
+	g_Console.writeToBuffer(c, ss.str());
 }
 
 void renderSight()

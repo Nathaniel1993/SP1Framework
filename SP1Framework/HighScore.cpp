@@ -4,14 +4,14 @@ extern Console g_Console;
 
 void HighScore(string Time, string Points)
 {
-	ofstream file;
-	file.open("HighScore.txt", ofstream::app);
+	fstream file;
+	file.open("HighScore.txt", fstream::app);
 	file << Points << "\n" << Time << "\n";
 }
 void renderScore()
 {
 	COORD c = g_Console.getConsoleSize();
-	c.Y = 7;
+	c.Y = 19;
 	c.X = g_Console.getConsoleSize().X / 2 - 30;
 
 	string line;

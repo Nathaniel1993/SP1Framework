@@ -10,9 +10,11 @@
 #include <fstream>
 #include <mmsystem.h>
 #include "loadfile.h"
+#include "HighScore.h"
 
 bool encounter = false;
 
+extern double GameTime;
 extern bool    ScoreTracker;
 extern bool    g_abKeyPressed[K_COUNT];
 extern bool	   diceRoll;
@@ -60,6 +62,7 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 	if (g_abKeyPressed[K_ENTER])
 	{
+		GameTime = 0;
 		encounterCheck1 = 0;
 		encounterCheck2 = 0;
 		encounterCheck3 = 0;
@@ -356,7 +359,13 @@ void processUserInput()
 {
 	// quits the game if player hits the escape key
 	if (g_abKeyPressed[K_ESCAPE])
+	{
 		g_bQuitGame = true;
+		if (GameTime != 0)
+		{
+			HighScore(to_string(GameTime), to_string(Score));
+		}
+	}
 }
 
 void clearScreen()
