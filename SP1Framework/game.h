@@ -126,4 +126,6 @@ void BoulderIn();
 
 void renderSight();
 
+void renderScore();         // Renders HighScore
+
 #endif // _GAME_H

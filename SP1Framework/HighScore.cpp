@@ -6,14 +6,14 @@ void HighScore(string Time, string Points)
 {
 	fstream file;
 	file.open("HighScore.txt", fstream::app);
-	file << Points << "\n" << Time << "\n";
+	file << Time << "\n" << Points << "\n";
 }
 void renderScore()
 {
 	COORD c = g_Console.getConsoleSize();
 	c.Y = 19;
 	c.X = g_Console.getConsoleSize().X / 2 - 30;
-
+	
 	string line;
 
 	RenderHighScore();
@@ -84,15 +84,16 @@ void renderScore()
 	}
 	for (int a = 0; a < 5; a++)
 	{
-		string str;
-		string strPoints;
+		std::string str;
+		std::string strPoints;
 		char Digit[10];
 		char Points[10];
 		str = to_string(HighScore[b]);
 
-		strcpy(Digit, str.c_str());
-		strcpy(Points, strPoints.c_str());
+		std::strcpy(Digit, str.c_str());
+		std::strcpy(Points, strPoints.c_str());
 
+		//Coordinates for displaying points on HighScore
 		c.X = g_Console.getConsoleSize().X / 2 - 30;
 		c.Y += 1;
 		g_Console.writeToBuffer(c, Digit);
@@ -101,6 +102,7 @@ void renderScore()
 		SecondsCoord.Y = c.Y;
 		g_Console.writeToBuffer(SecondsCoord, " secs");
 
+		//Coordinates for displaying Time on HighScore
 		c.X = g_Console.getConsoleSize().X / 2;
 
 		g_Console.writeToBuffer(c, Points);
@@ -108,4 +110,5 @@ void renderScore()
 		SecondsCoord.Y = c.Y;
 		g_Console.writeToBuffer(SecondsCoord, " Points");
 	}
+
 }

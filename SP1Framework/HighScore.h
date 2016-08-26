@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Framework\console.h"
 #include <fstream>
+#include <string>
 #include "RenderHighScore.h"
 
 using namespace std;

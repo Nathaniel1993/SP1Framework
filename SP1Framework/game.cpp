@@ -13,8 +13,8 @@
 #include <mmsystem.h>
 #include "loadfile.h"
 #include "postgame.h"
-#include "RenderHighScore.h"
 #include "HighScore.h"
+#include "RenderHighScore.h"
 
 using namespace std;
 double  g_dElapsedTime;
@@ -208,7 +208,7 @@ void render()
 		break;
 	case S_GUIDE: loadguide();
 		break;
-	case S_HIGHSCORE: RenderHighScore();
+	case S_HIGHSCORE: renderScore();
 		break;
 	case S_GAME: renderGame();
 		break;
