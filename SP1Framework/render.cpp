@@ -39,13 +39,7 @@ extern double GameTime;
 extern EGAMESTATES g_eGameState;
 
 extern bool g_abKeyPressed[K_COUNT];
-
-extern int encounterCheck1;
-extern int encounterCheck2;
-extern int encounterCheck3;
-extern int encounterCheck4;
-extern int encounterCheck5;
-extern int encounterCheck6;
+extern int encounterCheck[6];
 
 void renderSplashscreen()  // renders the splash screen
 {
@@ -88,33 +82,23 @@ void renderGame()
 	if(g_MapNo == 1)
 	{
 		renderSight();
-		if (encounterCheck1 == 0)
+		for (int a = 0; a < 3; a++)
 		{
-			renderEnemies(Enemies[0]);
-		}
-		if (encounterCheck2 == 0)
-		{
-			renderEnemies(Enemies[1]);
-		}
-		if (encounterCheck3 == 0)
-		{
-			renderEnemies(Enemies[2]);
+			if (encounterCheck[a] == 0)
+			{
+				renderEnemies(Enemies[a]);
+			}
 		}
 	}
 	else if (g_MapNo == 2)
 	{
 		renderSight();
-		if (encounterCheck4 == 0)
+		for (int a = 3; a < 6; a++)
 		{
-			renderEnemies(Enemies[3]);
-		}
-		if (encounterCheck5 == 0)
-		{
-			renderEnemies(Enemies[4]);
-		}
-		if (encounterCheck6 == 0)
-		{
-			renderEnemies(Enemies[5]);
+			if (encounterCheck[a] == 0)
+			{
+				renderEnemies(Enemies[a]);
+			}
 		}
 	}
 	else if (g_MapNo == 3)

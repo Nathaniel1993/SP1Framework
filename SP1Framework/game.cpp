@@ -97,9 +97,6 @@ void init(void)
 	//Enemy.g_sEnemy6.m_cLocation.X = 33; // enemy spawn location
 	//Enemy.g_sEnemy6.m_cLocation.Y = 18;
 
-	enemiesSpawn1();
-
-	enemiesSpawn2();
 
 	g_sBoss.m_cLocation.X = 20;
 	g_sBoss.m_cLocation.Y = 25;

@@ -12,9 +12,9 @@ void EnemiesAi(COORD Enemy)
 	int patrol = rand() % 4 + 1;
 	bool Detect = false;
 	extern bool encounter;
-	extern int encounterCheck1;
+	extern int encounterCheck[6];
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		if ((Enemies[i].X > 0 && g_sChar.m_cLocation.X - Enemies[i].X > 0)	//Detect Right  //Lesser than 0 
 			&& (g_sChar.m_cLocation.Y == Enemies[i].Y)												//Greater than -5
@@ -82,42 +82,37 @@ void EnemiesAi(COORD Enemy)
 				Enemies[i].X++;
 			}
 		}
-		/*	if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y)
-				&& encounterCheck1 == 0)
-				{
+		if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y)
+			&& encounterCheck[i] == 0)
+			{
 				encounter = true;
-				encounterCheck1 = 1;
-
-				}
-				}*/
+				encounterCheck[i] = 1;
+			}		
 	}
 	Bounce.aiBounceTime1 = g_dElapsedTime + 0.2;
 }
 
 void renderEnemies(COORD Enemy)
 {
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		g_Console.writeToBuffer(Enemy, (char)65, 0x0C);
-		if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y))
-			//&& encounterCheck1 == 0)
-		{
-			/*encounter = true;
-			encounterCheck1 = 1;*/
-			COORD c;
-			c.X = 5;
-			c.Y = 5;
-			g_Console.writeToBuffer(c, "Ayy Lmao", 0x0C);
-		}
+		//if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y))
+		//	//&& encounterCheck[i] == 0)
+		//{
+		//	/*encounter = true;
+		//	encounterCheck[i] = 1;*/
+		//	COORD c;
+		//	c.X = 4;
+		//	c.Y = 5;
+		//	g_Console.writeToBuffer(c, "Ayy Lmao", 0x0C);
+		//}
 
 	}
 }
 
 void enemiesSpawn1()
 {
-	//Enemies[0].X = 0;
-	//Enemies[0].Y = 0;
-
 	Enemies[0].X = 18; // enemy 1 spawn location
 	Enemies[0].Y = 25;
 

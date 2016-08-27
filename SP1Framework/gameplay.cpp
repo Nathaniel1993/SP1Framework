@@ -45,12 +45,7 @@ extern SGameKeys	g_sDoor;
 extern EGAMESTATES g_eGameState;
 extern Teleporters g_A, g_B, g_C, g, g_D;
 
-int encounterCheck1 = 0;
-int encounterCheck2 = 0;
-int encounterCheck3 = 0;
-int encounterCheck4 = 0;
-int encounterCheck5 = 0;
-int encounterCheck6 = 0;
+int encounterCheck[6] = { 0, };
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
@@ -62,13 +57,13 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 	if (g_abKeyPressed[K_ENTER])
 	{
+		Score = 0;
+		enemiesSpawn1();
 		GameTime = 0;
-		encounterCheck1 = 0;
-		encounterCheck2 = 0;
-		encounterCheck3 = 0;
-		encounterCheck4 = 0;
-		encounterCheck5 = 0;
-		encounterCheck6 = 0;
+		for (int a = 0; a < 6; a++)
+		{
+			encounterCheck[a] = 0;
+		}
 		g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 		g_eGameState = S_GAME;
@@ -104,15 +99,17 @@ void gameplay()            // gameplay logic
 	moveCharacter();   // moves the character, collision detection, physics, etc
 	if (g_MapNo == 1)
 	{
-		EnemiesAi(Enemies[0]);
-		EnemiesAi(Enemies[1]);
-		EnemiesAi(Enemies[2]);
+		for (int a = 0; a < 3; a++)
+		{
+			EnemiesAi(Enemies[a]);
+		}
 	}
 	if (g_MapNo == 2)
 	{
-		EnemiesAi(Enemies[3]);
-		EnemiesAi(Enemies[4]);
-		EnemiesAi(Enemies[5]);
+		for (int a = 3; a < 6; a++)
+		{
+			EnemiesAi(Enemies[a]);
+		}
 	}
 	if (g_MapNo == 3)
 	{
@@ -131,6 +128,7 @@ void gameplay()            // gameplay logic
 	{
 		if (g_MapNo == 1)
 		{
+			enemiesSpawn2();
 			g_MapNo = 2;
 			keys = 4;
 			mapLoader = true;
