@@ -18,7 +18,7 @@ enum EKEYS
 	K_LEFTCONTROL,
 	K_ENTER,
 	K_ONE, K_TWO, K_THREE, K_FOUR, K_FIVE,
-	K_H,
+	K_H, 
     K_COUNT,
 
 };

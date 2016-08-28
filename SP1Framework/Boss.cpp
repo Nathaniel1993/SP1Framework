@@ -5,6 +5,7 @@ using std::vector;
 COORD c;
 vector<COORD> coordSave;
 
+extern bool launchVicScreen;
 extern bool launchDefScreen;
 extern EGAMESTATES g_eGameState;
 
@@ -118,8 +119,8 @@ void bossHealthAi()
 		if ((bossLife == 0) && ((trap[i].X == g_sBoss.m_cLocation.X) && (trap[i].Y == g_sBoss.m_cLocation.Y)))
 		{
 			bossAlive = false;
-			//launchDefScreen = true;
-			//g_eGameState = S_DEFEAT; //character dies or defeat screen
+			launchVicScreen = true;
+			g_eGameState = S_VICTORY; 
 			//victory page
 		}
 	}

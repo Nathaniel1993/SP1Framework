@@ -18,7 +18,6 @@ extern bool launchVicScreen;
 extern bool launchDefScreen;
 
 extern int Score;
-extern double  g_dElapsedTime;
 extern double GameTime;
 
 int tempScore = 0;
@@ -29,11 +28,11 @@ void defeatScreen()
 	if (launchDefScreen == true)
 	{
 		tempScore = Score;
-		tempTime = g_dElapsedTime;
+		tempTime = GameTime;
 		loadDefeatScreen();
 		launchDefScreen = false;
 	}
-	if (g_abKeyPressed[K_ENTER])
+	if (g_abKeyPressed[K_SPACE])
 	{
 		splashScreenload = true;
 		g_eGameState = S_SPLASHSCREEN;
@@ -81,7 +80,7 @@ void renderDefeatScreen()
 
 	l.Y = 28;
 	l.X = 30;
-	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B); 
+	g_Console.writeToBuffer(l, "Press <SPACE> key to return to main menu", 0x0B); 
 	l.Y = 29;
 	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Esc> key to quit", 0x0B);
@@ -91,13 +90,13 @@ void victoryScreen()
 {
 	if (launchVicScreen == true)
 	{
-		tempTime = g_dElapsedTime;
+		tempTime = GameTime;
 		tempScore = Score;
 		loadVictoryScreen();
 		launchVicScreen = false;
 	}
 
-	if (g_abKeyPressed[K_ENTER])
+	if (g_abKeyPressed[K_SPACE])
 	{
 		splashScreenload = true;
 		g_eGameState = S_SPLASHSCREEN;
@@ -144,7 +143,7 @@ void renderVictoryScreen()
 	g_Console.writeToBuffer(l, ss.str(), 0x0B);
 	l.Y = 28;
 	l.X = 30;
-	g_Console.writeToBuffer(l, "Press <Enter> key to return to main menu", 0x0B);
+	g_Console.writeToBuffer(l, "Press <SPACE> key to return to main menu", 0x0B);
 	l.Y = 29;
 	l.X = 30;
 	g_Console.writeToBuffer(l, "Press <Esc> key to quit", 0x0B);
