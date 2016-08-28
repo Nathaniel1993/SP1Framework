@@ -22,6 +22,7 @@ extern char dice5[80][31];
 extern char dice6[80][31];
 /*---------------------------------------------------------*/
 extern bool mapLoader;
+extern bool torchPossession;
 int g_MapNo = 0;
 
 /*-------Variable for Interactive Objects and Score*/
@@ -241,74 +242,156 @@ void renderPlayerTime()
 void renderSight()
 {
 	COORD c;
-	for (int VisionX = g_sChar.m_cLocation.X - 6; VisionX < g_sChar.m_cLocation.X + 6; VisionX++)
+	if (torchPossession == false)
 	{
-		c.X = VisionX;
-		for (int VisionY = g_sChar.m_cLocation.Y - 3; VisionY < g_sChar.m_cLocation.Y + 3; VisionY++)
+		for (int VisionX = g_sChar.m_cLocation.X - 6; VisionX < g_sChar.m_cLocation.X + 6; VisionX++)
 		{
-			c.Y = VisionY;
-			if (VisionX == g_sChar.m_cLocation.X && VisionY == g_sChar.m_cLocation.Y)
+			c.X = VisionX;
+			for (int VisionY = g_sChar.m_cLocation.Y - 3; VisionY < g_sChar.m_cLocation.Y + 3; VisionY++)
 			{
+				c.Y = VisionY;
+				if (VisionX == g_sChar.m_cLocation.X && VisionY == g_sChar.m_cLocation.Y)
+				{
 
+				}
+				else
+				{
+					if (mapSize[VisionX][VisionY] == 'T')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == '.')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
+					}
+					if (mapSize[VisionX][VisionY] == '#')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x09);
+					}
+					if (mapSize[VisionX][VisionY] == 'E')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
+						g_sDoor.m_cLocation.X = VisionX;
+						g_sDoor.m_cLocation.Y = VisionY;
+					}
+					if (mapSize[VisionX][VisionY] == 'K')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+					}
+					if (mapSize[VisionX][VisionY] == '*')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0B);
+					}
+					if (mapSize[VisionX][VisionY] == 'F')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'O')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+					}
+					if (mapSize[VisionX][VisionY] == 'A')
+					{
+						g_A.m_cLocation.X = VisionX;
+						g_A.m_cLocation.Y = VisionY;
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'B')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);;
+					}
+					if (mapSize[VisionX][VisionY] == 'C')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'D')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'H')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+
+					}
+					if (mapSize[VisionX][VisionY] == '|')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+				}
 			}
-			else
+		}
+	}
+	else
+	{
+		for (int VisionX = g_sChar.m_cLocation.X - 10; VisionX < g_sChar.m_cLocation.X + 10; VisionX++)
+		{
+			c.X = VisionX;
+			for (int VisionY = g_sChar.m_cLocation.Y - 5; VisionY < g_sChar.m_cLocation.Y + 5; VisionY++)
 			{
-				if (mapSize[VisionX][VisionY] == '.')
+				c.Y = VisionY;
+				if (VisionX == g_sChar.m_cLocation.X && VisionY == g_sChar.m_cLocation.Y)
 				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
-				}
-				if (mapSize[VisionX][VisionY] == '#')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x09);
-				}
-				if (mapSize[VisionX][VisionY] == 'E')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
-					g_sDoor.m_cLocation.X = VisionX;
-					g_sDoor.m_cLocation.Y = VisionY;
-				}
-				if (mapSize[VisionX][VisionY] == 'K')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
-				}
-				if (mapSize[VisionX][VisionY] == '*')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0B);
-				}
-				if (mapSize[VisionX][VisionY] == 'F')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-				}
-				if (mapSize[VisionX][VisionY] == 'O')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
-				}
-				if (mapSize[VisionX][VisionY] == 'A')
-				{
-					g_A.m_cLocation.X = VisionX;
-					g_A.m_cLocation.Y = VisionY;
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-				}
-				if (mapSize[VisionX][VisionY] == 'B')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);;
-				}
-				if (mapSize[VisionX][VisionY] == 'C')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-				}
-				if (mapSize[VisionX][VisionY] == 'D')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-				}
-				if (mapSize[VisionX][VisionY] == 'H')
-				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
 
 				}
-				if (mapSize[VisionX][VisionY] == '|')
+				else
 				{
-					g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					if (mapSize[VisionX][VisionY] == '.')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
+					}
+					if (mapSize[VisionX][VisionY] == '#')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x09);
+					}
+					if (mapSize[VisionX][VisionY] == 'E')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0F);
+						g_sDoor.m_cLocation.X = VisionX;
+						g_sDoor.m_cLocation.Y = VisionY;
+					}
+					if (mapSize[VisionX][VisionY] == 'K')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+					}
+					if (mapSize[VisionX][VisionY] == '*')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0B);
+					}
+					if (mapSize[VisionX][VisionY] == 'F')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'O')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0D);
+					}
+					if (mapSize[VisionX][VisionY] == 'A')
+					{
+						g_A.m_cLocation.X = VisionX;
+						g_A.m_cLocation.Y = VisionY;
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'B')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);;
+					}
+					if (mapSize[VisionX][VisionY] == 'C')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'D')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
+					if (mapSize[VisionX][VisionY] == 'H')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+
+					}
+					if (mapSize[VisionX][VisionY] == '|')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
+					}
 				}
 			}
 		}

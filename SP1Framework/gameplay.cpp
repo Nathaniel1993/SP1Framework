@@ -21,6 +21,7 @@ extern bool	   diceRoll;
 extern bool    mapLoader;
 extern bool	   launchDice;
 extern bool splashScreenload;
+extern bool torchPossession;
 
 extern int g_MapNo;
 extern int Score;
@@ -124,10 +125,18 @@ void gameplay()            // gameplay logic
 		mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
 		ScoreTracker = false;
 	}
+	if (torchPossession == true)
+	{
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'T')
+		{
+			mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] = ' ';
+		}
+	}
 	if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'X')
 	{
 		if (g_MapNo == 1)
 		{
+			torchPossession = false;
 			enemiesSpawn2();
 			g_MapNo = 2;
 			keys = 4;
@@ -182,6 +191,10 @@ void moveCharacter()
 			{
 				ScoreTracker = true;
 			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'T')
+			{
+				torchPossession = true;
+			}
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
 			{
 				keys--;
@@ -214,6 +227,10 @@ void moveCharacter()
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true;
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'T')
+			{
+				torchPossession = true;
 			}
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
 			{
@@ -248,6 +265,10 @@ void moveCharacter()
 			{
 				ScoreTracker = true;
 			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'T')
+			{
+				torchPossession = true;
+			}
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
 			{
 				keys--;
@@ -280,6 +301,10 @@ void moveCharacter()
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '.')
 			{
 				ScoreTracker = true;
+			}
+			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'T')
+			{
+				torchPossession = true;
 			}
 			else if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == 'K')
 			{

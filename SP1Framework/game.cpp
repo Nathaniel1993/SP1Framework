@@ -23,6 +23,7 @@ double GameTime;
 bool    g_abKeyPressed[K_COUNT];
 bool ScoreTracker = false;
 bool splashScreenload = true;
+bool torchPossession = false;
 extern bool mapDraw;
 bool mapLoader = false; 
 int Score = 0;
