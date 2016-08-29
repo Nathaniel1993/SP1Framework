@@ -130,7 +130,7 @@ void getInput(void)
 	g_abKeyPressed[K_THREE] = isKeyPressed(0x33);
 	g_abKeyPressed[K_FOUR] = isKeyPressed(0x34);
 	g_abKeyPressed[K_FIVE] = isKeyPressed(0x35);
-	g_abKeyPressed[K_H] = isKeyPressed(0x68);
+	g_abKeyPressed[K_H] = isKeyPressed(0x48);
 }
 
 

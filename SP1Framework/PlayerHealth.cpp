@@ -14,34 +14,30 @@ void healthAi()
 	}
 	Bounce.healthBounceTime = 0.0;
 	/*	-------------------------------------------hit player collision --------------------------------------------------- */
-		if /*(*/((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))
-			/*|| ((BossTrap[i].m_cLocation.X == g_sChar.m_cLocation.X) && (BossTrap[i].m_cLocation.Y == g_sChar.m_cLocation.Y)))*/
+		if ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))//If Boss collides with Player, health minus
 		{
 
 			health -= 1;
 
 		}
-		if ((health == 0) && ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y)))
-			/*|| ((BossTrap[i].m_cLocation.X == g_sChar.m_cLocation.X) && (BossTrap[i].m_cLocation.Y == g_sChar.m_cLocation.Y)))*/
+		if ((health == 0) && ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y)))//If Health reaches 0, launch defeat screen
 		{
 			launchDefScreen = true; //character dies or defeat screen
 			g_eGameState = S_DEFEAT;
 		}
 	for (int i = 0; i < 9; i++)
 	{
-		if ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y))
+		if ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y))//If Character's location == Trap's location, minus health
 		{
 			health -= 1;
-			//hitTarget[i] = true;
-
 		}
-		if ((health == 0) && ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y)))
+		if ((health == 0) && ((trap[i].X == g_sChar.m_cLocation.X) && (trap[i].Y == g_sChar.m_cLocation.Y)))//If Character's health reaches 0 from touching the traps, display defeat screen
 		{
 			launchDefScreen = true;
 			g_eGameState = S_DEFEAT; //character dies or defeat screen
 		}
 	}
-	Bounce.healthBounceTime = g_dElapsedTime + 0.125;
+	Bounce.healthBounceTime = g_dElapsedTime + 0.125;//The speed of which the health decreases.
 }
 void renderHealth()
 {
@@ -54,8 +50,4 @@ void renderHealth()
 		g_Console.writeToBuffer(HealthBar, (char)(3));
 		HealthBar.X++;
 	}
-	
-	/*g_Console.writeToBuffer(c,(char)3,0x03);*/
-
-	
 }

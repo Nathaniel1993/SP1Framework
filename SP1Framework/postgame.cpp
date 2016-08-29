@@ -100,6 +100,7 @@ void victoryScreen()
 	{
 		splashScreenload = true;
 		g_eGameState = S_SPLASHSCREEN;
+		HighScore(to_string(GameTime), to_string(Score));
 	}
 	if (g_abKeyPressed[K_ESCAPE])
 	{
