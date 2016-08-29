@@ -37,7 +37,6 @@ extern double  bossBounceTime;
 
 extern WORD color;
 extern SGameChar g_sChar;
-extern EnemyStruct Enemy;
 extern AiBounceTime Bounce;
 extern SGameBoss g_sBoss;
 extern SGameKeys	g_sKeys[4];
@@ -45,7 +44,7 @@ extern SGameKeys	g_sDoor;
 extern EGAMESTATES g_eGameState;
 extern Teleporters g_A, g_B, g_C,g_D;
 extern BoulderEndLocal g_Alocal, g_Blocal, g_Clocal;
-int encounterCheck[6] = { 0, };
+int encounterCheck[9] = { 0, };
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
@@ -60,7 +59,7 @@ void splashScreenWait()    // waits for time to pass in splash screen
 		Score = 0;
 		enemiesSpawn1();
 		GameTime = 0;
-		for (int a = 0; a < 6; a++)
+		for (int a = 0; a < 9; a++)
 		{
 			encounterCheck[a] = 0;
 		}
@@ -106,7 +105,7 @@ void gameplay()            // gameplay logic
 	}
 	if (g_MapNo == 2)
 	{
-		for (int a = 3; a < 6; a++)
+		for (int a = 3; a < 9; a++)
 		{
 			EnemiesAi(Enemies[a]);
 		}

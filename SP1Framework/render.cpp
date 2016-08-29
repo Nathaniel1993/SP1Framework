@@ -41,7 +41,7 @@ extern double GameTime;
 extern EGAMESTATES g_eGameState;
 
 extern bool g_abKeyPressed[K_COUNT];
-extern int encounterCheck[6];
+extern int encounterCheck[9];
 
 void renderSplashscreen()  // renders the splash screen
 {
@@ -95,7 +95,7 @@ void renderGame()
 	else if (g_MapNo == 2)
 	{
 		renderSight();
-		for (int a = 3; a < 6; a++)
+		for (int a = 3; a < 9; a++)
 		{
 			if (encounterCheck[a] == 0)
 			{

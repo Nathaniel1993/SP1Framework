@@ -89,12 +89,6 @@
     <ClCompile Include="HighScore.cpp" />
     <ClCompile Include="loadfiles.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map1Enemy1.cpp" />
-    <ClCompile Include="Map1Enemy2.cpp" />
-    <ClCompile Include="Map1Enemy3.cpp" />
-    <ClCompile Include="Map2Enemy1.cpp" />
-    <ClCompile Include="Map2Enemy2.cpp" />
-    <ClCompile Include="Map2Enemy3.cpp" />
     <ClCompile Include="PlayerHealth.cpp" />
     <ClCompile Include="postgame.cpp" />
     <ClCompile Include="quiz.cpp" />

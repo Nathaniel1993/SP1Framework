@@ -43,8 +43,6 @@ WORD color;
 SGameChar   g_sChar;
 SGameChar HealthBar;
 bool hitTarget[9];
-//SGameEnemy  g_sEnemy;// Enemy
-EnemyStruct Enemy;
 AiBounceTime Bounce;
 SGameBoss g_sBoss;
 SGameKeys	g_sKeys[4];
@@ -80,25 +78,6 @@ void init(void)
 	PlaySound(TEXT("splash.wav"), NULL, SND_ASYNC | SND_LOOP);
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
-	//
-	//Enemy.g_sEnemy.m_cLocation.X = 18; // enemy spawn location
-	//Enemy.g_sEnemy.m_cLocation.Y = 25;
-
-	//Enemy.g_sEnemy2.m_cLocation.X = 18; // enemy spawn location
-	//Enemy.g_sEnemy2.m_cLocation.Y = 10;
-
-	//Enemy.g_sEnemy3.m_cLocation.X = 59; // enemy spawn location
-	//Enemy.g_sEnemy3.m_cLocation.Y = 15;
-	//
-	//Enemy.g_sEnemy4.m_cLocation.X = 15; // enemy spawn location
-	//Enemy.g_sEnemy4.m_cLocation.Y = 27;
-
-	//Enemy.g_sEnemy5.m_cLocation.X = 46; // enemy spawn location
-	//Enemy.g_sEnemy5.m_cLocation.Y = 18;
-
-	//Enemy.g_sEnemy6.m_cLocation.X = 33; // enemy spawn location
-	//Enemy.g_sEnemy6.m_cLocation.Y = 18;
-
 
 	g_sBoss.m_cLocation.X = 20;
 	g_sBoss.m_cLocation.Y = 25;

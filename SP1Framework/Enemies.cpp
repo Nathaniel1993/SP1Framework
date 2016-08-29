@@ -11,10 +11,11 @@ void EnemiesAi(COORD Enemy)
 	Bounce.aiBounceTime1 = 0.0;
 	int patrol = rand() % 4 + 1;
 	bool Detect = false;
+	bool returnToSpawn = false;
 	extern bool encounter;
-	extern int encounterCheck[6];
+	extern int encounterCheck[9];
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		if ((Enemies[i].X > 0 && g_sChar.m_cLocation.X - Enemies[i].X > 0)	//Detect Right  //Lesser than 0 
 			&& (g_sChar.m_cLocation.Y == Enemies[i].Y)												//Greater than -5
@@ -22,19 +23,19 @@ void EnemiesAi(COORD Enemy)
 		{
 			Detect = true;
 		}
-		if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemies[i].X < 0) //Detect Left
+		else if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemies[i].X < 0) //Detect Left
 			&& (g_sChar.m_cLocation.Y == Enemies[i].Y)
 			&& (g_sChar.m_cLocation.X - Enemies[i].X >= -5))
 		{
 			Detect = true;
 		}
-		if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y > 0) // Detect Down
+		else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y > 0) // Detect Down
 			&& (g_sChar.m_cLocation.X == Enemies[i].X)
 			&& (g_sChar.m_cLocation.Y - Enemies[i].Y <= 5))
 		{
 			Detect = true;
 		}
-		if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y < 0) //Detect Up
+		else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y < 0) //Detect Up
 			&& (g_sChar.m_cLocation.X == Enemies[i].X)
 			&& (g_sChar.m_cLocation.Y - Enemies[i].Y >= -5))
 		{
@@ -63,23 +64,80 @@ void EnemiesAi(COORD Enemy)
 		}
 		else
 		{
+			if (i != 2)
+			{
+				if (patrol == 1 && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#'))
+				{
+					Enemies[i].Y--;
+				}
+				else if (patrol == 2 && (mapSize[Enemies[i].X][Enemies[i].Y + 1] != '#'))
+				{
+					Enemies[i].Y++;
+				}
 
-			if (patrol == 1 && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#'))
-			{
-				Enemies[i].Y--;
+				if (patrol == 3 && (mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#'))
+				{
+					Enemies[i].X--;
+				}
+				else if (patrol == 4 && (mapSize[Enemies[i].X + 1][Enemies[i].Y] != '#'))
+				{
+					Enemies[i].X++;
+				}
 			}
-			else if (patrol == 2 && (mapSize[Enemies[i].X][Enemies[i].Y + 1] != '#'))
+			else
 			{
-				Enemies[i].Y++;
-			}
+				for (unsigned loop = 1; loop != 5; loop++)
+				{
+					switch (loop)
+					{
+					case 1:
+					{
+						if ((mapSize[Enemies[2].X][Enemies[2].Y + 1] != '#') &&
+							Enemies[2].Y != 24 && Enemies[2].X == 50)
+						{
+							Enemies[2].Y++;
 
-			if (patrol == 3 && (mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#'))
-			{
-				Enemies[i].X--;
-			}
-			else if (patrol == 4 && (mapSize[Enemies[i].X + 1][Enemies[i].Y] != '#'))
-			{
-				Enemies[i].X++;
+						}
+						break;
+					}
+					case 2:
+					{
+						if ((mapSize[Enemies[2].X + 1][Enemies[2].Y] != '#') &&
+							Enemies[2].X != 70 && Enemies[2].Y == 23)
+						{
+
+							Enemies[2].X++;
+						}
+						break;
+					}
+					case 3:
+					{
+						if ((mapSize[Enemies[2].X][Enemies[2].Y - 1] != '#') &&
+							Enemies[2].Y != 17 && Enemies[2].X == 69)
+						{
+							Enemies[2].Y--;
+
+						}
+						break;
+					}
+					case 4:
+					{
+						if ((mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#') &&
+							Enemies[2].X != 50 && Enemies[2].Y == 17)
+						{
+							Enemies[2].X--;
+
+						}
+						break;
+					}
+						
+					if (loop == 4)
+					{
+						loop = 1;
+					}
+
+					}
+				}
 			}
 		}
 		if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y)
@@ -87,9 +145,9 @@ void EnemiesAi(COORD Enemy)
 			{
 				encounter = true;
 				encounterCheck[i] = 1;
-			}		
+			}
 	}
-	Bounce.aiBounceTime1 = g_dElapsedTime + 0.2;
+	Bounce.aiBounceTime1 = g_dElapsedTime + 0.125;
 }
 
 void renderEnemies(COORD Enemy)
@@ -97,17 +155,7 @@ void renderEnemies(COORD Enemy)
 	for (int i = 0; i < 6; i++)
 	{
 		g_Console.writeToBuffer(Enemy, (char)65, 0x0C);
-		//if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y))
-		//	//&& encounterCheck[i] == 0)
-		//{
-		//	/*encounter = true;
-		//	encounterCheck[i] = 1;*/
-		//	COORD c;
-		//	c.X = 4;
-		//	c.Y = 5;
-		//	g_Console.writeToBuffer(c, "Ayy Lmao", 0x0C);
-		//}
-
+	
 	}
 }
 
@@ -119,8 +167,8 @@ void enemiesSpawn1()
 	Enemies[1].X = 18; // enemy 2 spawn location
 	Enemies[1].Y = 10;
 
-	Enemies[2].X = 59; // enemy 3 spawn location
-	Enemies[2].Y = 15;
+	Enemies[2].X = 50; // enemy 3 spawn location
+	Enemies[2].Y = 17;
 
 }
 void enemiesSpawn2()
@@ -133,4 +181,14 @@ void enemiesSpawn2()
 
 	Enemies[5].X = 33; // enemy 6 spawn location
 	Enemies[5].Y = 18;
+
+	Enemies[6].X = 20; // enemy 7 spawn location
+	Enemies[6].Y = 20;
+
+	Enemies[7].X = 57; // enemy 8 spawn location
+	Enemies[7].Y = 15;
+
+	Enemies[8].X = 57; // enemy 9 spawn location
+	Enemies[8].Y = 27;
+
 }

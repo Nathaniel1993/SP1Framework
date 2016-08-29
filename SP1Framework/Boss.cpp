@@ -50,7 +50,7 @@ void damageBoss()
 	{
 		bossAlive = false;
 	}
-	Bounce.trapTime = g_dElapsedTime + 0.2;
+	Bounce.trapTime = g_dElapsedTime + 0.5;
 }
 
 void BossAi()

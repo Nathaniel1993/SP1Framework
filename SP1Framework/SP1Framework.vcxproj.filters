@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Framework">
       <UniqueIdentifier>{37c19c94-9502-4b2b-b3f1-70fa908b49af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Enemies">
-      <UniqueIdentifier>{78d6fd4d-5efa-4fbc-8a8d-af84674915da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Dice">
       <UniqueIdentifier>{46077277-4166-47d2-9697-304ab9aaccc0}</UniqueIdentifier>
     </Filter>
@@ -42,29 +39,11 @@
     <ClCompile Include="guide.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map1Enemy1.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="Dice.cpp">
       <Filter>Source Files\Dice</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map1Enemy2.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Map2Enemy1.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Map1Enemy3.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Map2Enemy2.cpp">
-      <Filter>Source Files\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Map2Enemy3.cpp">
-      <Filter>Source Files\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="loadfiles.cpp">
       <Filter>Source Files</Filter>
