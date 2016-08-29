@@ -31,7 +31,8 @@ extern int keys;
 extern int numkey;
 extern SGameKeys g_sKeys[4];
 extern SGameKeys g_sDoor;
-extern Teleporters g_A, g_B, g_C, g, g_D;
+extern Teleporters g_A, g_B, g_C,g_D;
+extern BoulderEndLocal g_Alocal, g_Blocal, g_Clocal;
 /*------------------------------------------------*/
 
 extern double  g_dElapsedTime;
@@ -141,6 +142,24 @@ void renderMap()
 			{
 				g_D.m_cLocation.X = x;
 				g_D.m_cLocation.Y = y;
+			}
+			if (mapSize[x][y] == 'G')
+			{
+				g_Alocal.m_cLocation.X = x;
+				g_Alocal.m_cLocation.Y = y;
+				g_Console.writeToBuffer(g_Alocal.m_cLocation, ' ', 0x00);
+			}
+			if (mapSize[x][y] == 'H')
+			{
+				g_Blocal.m_cLocation.X = x;
+				g_Blocal.m_cLocation.Y = y;
+				g_Console.writeToBuffer(g_Blocal.m_cLocation, ' ', 0x00);
+			}
+			if (mapSize[x][y] == 'J')
+			{
+				g_Clocal.m_cLocation.X = x;
+				g_Clocal.m_cLocation.Y = y;
+				g_Console.writeToBuffer(g_Clocal.m_cLocation, ' ', 0x00);
 			}
 			c.X = x;
 			if ((g_MapNo == 1) || (g_MapNo == 2))
@@ -308,11 +327,6 @@ void renderSight()
 					{
 						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
 					}
-					if (mapSize[VisionX][VisionY] == 'H')
-					{
-						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-
-					}
 					if (mapSize[VisionX][VisionY] == '|')
 					{
 						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
@@ -382,11 +396,6 @@ void renderSight()
 					if (mapSize[VisionX][VisionY] == 'D')
 					{
 						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-					}
-					if (mapSize[VisionX][VisionY] == 'H')
-					{
-						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
-
 					}
 					if (mapSize[VisionX][VisionY] == '|')
 					{

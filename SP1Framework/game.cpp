@@ -49,7 +49,8 @@ AiBounceTime Bounce;
 SGameBoss g_sBoss;
 SGameKeys	g_sKeys[4];
 SGameKeys	g_sDoor;
-Teleporters g_A, g_B, g_C, g, g_D;
+Teleporters g_A, g_B, g_C,g_D;
+BoulderEndLocal g_Alocal, g_Blocal, g_Clocal;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 

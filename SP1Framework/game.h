@@ -101,6 +101,10 @@ struct Teleporters
 {
 	COORD m_cLocation;
 };
+struct BoulderEndLocal
+{
+	COORD m_cLocation;
+};
 
 void init        ( void );      // initialize your variables, allocate memory, etc
 void getInput    ( void );      // get input from player
