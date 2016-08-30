@@ -12,12 +12,12 @@ void healthAi()
 	{
 		return;
 	}
-	Bounce.healthBounceTime = 0.0;
+	Bounce.healthBounceTime = 0.0;//Making sure bounce time is set to 0.0
 	/*	-------------------------------------------hit player collision --------------------------------------------------- */
 		if ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y))//If Boss collides with Player, health minus
 		{
 
-			health -= 1;
+			health -= 1;//Health decrease
 
 		}
 		if ((health == 0) && ((g_sBoss.m_cLocation.X == g_sChar.m_cLocation.X) && (g_sBoss.m_cLocation.Y == g_sChar.m_cLocation.Y)))//If Health reaches 0, launch defeat screen
@@ -41,13 +41,13 @@ void healthAi()
 }
 void renderHealth()
 {
-	
+	//Coordinates for rendering Health bar
 	HealthBar.X = 11;
 	HealthBar.Y = 1;
 
 	for (int i = 0; i <= health; i++)
 	{
 		g_Console.writeToBuffer(HealthBar, (char)(3), 0x0A);
-		HealthBar.X++;
+		HealthBar.X++;//Rendering health bar
 	}
 }

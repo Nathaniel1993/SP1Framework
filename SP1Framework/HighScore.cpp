@@ -41,17 +41,17 @@ void renderScore()
 	{
 		while (getline(file, line))
 		{
-			if (i % 2 == 1)//If Odd, score is points
+			if (i % 2 == 1)//Check to see whether it's even or odd line. If even, score is time
 			{
 				int Points;
 				Points = stoi(line);//Cnverts string to integers
 				AllPoints[i - x] = Points;
 			}
-			if (i % 2 == 0)//Check to see whether it's even or odd line. If even, score is time
+			if (i % 2 == 0)//If Odd, score is Points
 			{
 				double ScoreTime;
 				ScoreTime = stod(line);//Convert String to double
-				AllTime[a + x] = ScoreTime;
+				AllTime[a+x] = ScoreTime;
 				x++;
 			}
 			i++;//Go to next line
@@ -92,8 +92,8 @@ void renderScore()
 		HighScoreTime[HighScoreCount] = ShortestTime; // Shortest Time
 		HighScorePoints[HighScoreCount] = mostpoints; // Most points
 	}
-	for (int b = 0; b < (i - i/ 2) && b < 5; b++) // Displays only top 5 scores-Rows
-	{
+	for (int b = 0; b < (i / 2) && b < 5; b++) // Displays only top 5 scores-Rows. i is a variable integer,
+	{                                             // so editing i will change the amount of scores displayed in accordance to the number of scores in the txt file
 		string strTime;
 		string strPoints;
 		char Digit[20];
