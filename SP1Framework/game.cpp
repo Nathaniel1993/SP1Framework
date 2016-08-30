@@ -75,7 +75,7 @@ void init(void)
 	/*-----------------------------------------------------------*/
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
-	//PlaySound(TEXT("splash.wav"), NULL, SND_ASYNC | SND_LOOP);
+	PlaySound(TEXT("Temple.wav"), NULL, SND_ASYNC | SND_LOOP);
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 

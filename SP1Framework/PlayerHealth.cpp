@@ -42,12 +42,12 @@ void healthAi()
 void renderHealth()
 {
 	
-	HealthBar.X = 20;
-	HealthBar.Y = 0;
+	HealthBar.X = 11;
+	HealthBar.Y = 1;
 
 	for (int i = 0; i <= health; i++)
 	{
-		g_Console.writeToBuffer(HealthBar, (char)(3), 0x0C);
+		g_Console.writeToBuffer(HealthBar, (char)(3), 0x0A);
 		HealthBar.X++;
 	}
 }

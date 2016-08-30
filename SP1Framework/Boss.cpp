@@ -116,9 +116,10 @@ void bossHealthAi()
 		}
 		if ((bossLife == 0) && ((trap[i].X == g_sBoss.m_cLocation.X) && (trap[i].Y == g_sBoss.m_cLocation.Y)))
 		{
-			bossAlive = false;
+			
 			launchVicScreen = true;
 			g_eGameState = S_VICTORY; 
+			bossAlive = false;
 			//victory page
 		}
 	}
@@ -129,8 +130,8 @@ void bossHealthAi()
 void renderBossHealth()
 {
 	COORD bossHealthBar;
-	bossHealthBar.X = 30;
-	bossHealthBar.Y = 0;
+	bossHealthBar.X = 60;
+	bossHealthBar.Y = 1;
 
 	for (int i = 0; i <= bossLife; i++)
 	{

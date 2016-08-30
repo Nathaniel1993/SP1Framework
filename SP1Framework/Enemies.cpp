@@ -153,7 +153,7 @@ void renderEnemies(COORD Enemy)
 {
 	for (int i = 0; i < 6; i++)
 	{
-		g_Console.writeToBuffer(Enemy, (char)65, 0x0C);
+		g_Console.writeToBuffer(Enemy, (char)97, 0x0C);
 	
 	}
 }

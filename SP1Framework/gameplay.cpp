@@ -139,7 +139,7 @@ void gameplay()            // gameplay logic
 			g_MapNo = 2;
 			keys = 4;
 			mapLoader = true;
-			//PlaySound(TEXT("splash"), NULL, SND_ASYNC | SND_LOOP);
+			PlaySound(TEXT("Temple.wav"), NULL, SND_ASYNC | SND_LOOP);
 			g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 1;
 			g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
 
@@ -149,7 +149,7 @@ void gameplay()            // gameplay logic
 			g_MapNo = 3;
 			keys = 4;
 			mapLoader = true;
-			//PlaySound(TEXT("Map1.wav"), NULL, SND_ASYNC | SND_LOOP);
+			PlaySound(TEXT("Battle.wav"), NULL, SND_ASYNC | SND_LOOP);
 			g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 42;
 			g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 3;
 		}

@@ -76,6 +76,12 @@ void renderSplashscreen()  // renders the splash screen
 
 void renderGame()
 {
+	COORD d;
+	d.X = 19;
+	d.Y = 0;
+	COORD c;
+	c.X = 15;
+	c.Y = 0;
 	renderMap(); 
 	renderCharacter();  // renders the character into the buffer
 	//openDoor();
@@ -83,6 +89,7 @@ void renderGame()
 	//renderKeys();
 	if(g_MapNo == 1)
 	{
+		g_Console.writeToBuffer(c, "Find Keys 'K' to unlock exit", 0x0D);
 		renderSight();
 		for (int a = 0; a < 3; a++)
 		{
@@ -94,6 +101,7 @@ void renderGame()
 	}
 	else if (g_MapNo == 2)
 	{
+		g_Console.writeToBuffer(c, "Find Keys 'K' to unlock exit", 0x0D);
 		renderSight();
 		for (int a = 3; a < 9; a++)
 		{
@@ -105,6 +113,7 @@ void renderGame()
 	}
 	else if (g_MapNo == 3)
 	{
+		g_Console.writeToBuffer(d, "Lure the snake to the fire '@'", 0x0E);
 		renderBoss();
 		renderHealth();
 		renderBossHealth();
@@ -209,7 +218,7 @@ void renderFramerate()
 	//displays the score
 	ss.str("");
 	ss << Score << "points";
-	c.X = 40;
+	c.X = 50;
 	c.Y = 0;
 	g_Console.writeToBuffer(c, ss.str());
 }
