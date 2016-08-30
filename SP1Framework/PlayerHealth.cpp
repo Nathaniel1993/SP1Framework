@@ -47,7 +47,7 @@ void renderHealth()
 
 	for (int i = 0; i <= health; i++)
 	{
-		g_Console.writeToBuffer(HealthBar, (char)(3));
+		g_Console.writeToBuffer(HealthBar, (char)(3), 0x0C);
 		HealthBar.X++;
 	}
 }

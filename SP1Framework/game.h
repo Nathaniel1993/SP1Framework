@@ -63,6 +63,7 @@ struct SGameTrap
 struct AiBounceTime
 {
 	double aiBounceTime1;
+	double aiBounceTime2;
 	double bossBounceTime;
 	double healthBounceTime;
 	double bossHealthBounceTime;

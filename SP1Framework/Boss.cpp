@@ -11,8 +11,8 @@ extern EGAMESTATES g_eGameState;
 
 bool bossAlive = true;
 int bossLife = 9;
-void coordSaveLocation()
-{
+void coordSaveLocation()					// head sets last position and passes the coordinates down the array
+{											//for the body parts to follow
 	if (coordSave.size() <= 0)
 	{
 		c.X = 20;
@@ -20,7 +20,7 @@ void coordSaveLocation()
 		for (int i = 0; i < 8; i++)
 			coordSave.push_back(c);
 	}
-	else
+	else 
 	{
 		coordSave[7] = coordSave[6];
 		coordSave[6] = coordSave[5];
@@ -32,7 +32,7 @@ void coordSaveLocation()
 	}
 
 }
-void damageBoss()
+void damageBoss()					// Boss moving through trap damages it
 {
 	if (Bounce.trapTime > g_dElapsedTime)
 	{
@@ -50,7 +50,7 @@ void damageBoss()
 	{
 		bossAlive = false;
 	}
-	Bounce.trapTime = g_dElapsedTime + 0.5;
+	Bounce.trapTime = g_dElapsedTime + 0.5; // set how fast the trap kills the boss, higher the value slower it kills
 }
 
 void BossAi()
@@ -65,14 +65,14 @@ void BossAi()
 		coordSaveLocation();
 
 		if (g_sChar.m_cLocation.Y < g_sBoss.m_cLocation.Y && (mapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y - 1] != '#')) //finding character, detect walls to prevent walking through
-		{																														// detect 
+		{																														// detect up, move up
 			c.X = g_sBoss.m_cLocation.X;
 			c.Y = g_sBoss.m_cLocation.Y;
 			g_sBoss.m_cLocation.Y--;
 			coordSave[0] = c;
 
 		}
-		else if (g_sChar.m_cLocation.Y > g_sBoss.m_cLocation.Y && (mapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y + 1] != '#')) //detect up
+		else if (g_sChar.m_cLocation.Y > g_sBoss.m_cLocation.Y && (mapSize[g_sBoss.m_cLocation.X][g_sBoss.m_cLocation.Y + 1] != '#')) //detect down, move down
 		{
 			c.X = g_sBoss.m_cLocation.X;
 			c.Y = g_sBoss.m_cLocation.Y;
@@ -89,7 +89,7 @@ void BossAi()
 			g_sBoss.m_cLocation.X--;
 			coordSave[0] = c;
 		}
-		else if (g_sChar.m_cLocation.X > g_sBoss.m_cLocation.X && (mapSize[g_sBoss.m_cLocation.X + 1][g_sBoss.m_cLocation.Y] != '#')) //detect 
+		else if (g_sChar.m_cLocation.X > g_sBoss.m_cLocation.X && (mapSize[g_sBoss.m_cLocation.X + 1][g_sBoss.m_cLocation.Y] != '#')) //detect right, move right
 		{
 			c.X = g_sBoss.m_cLocation.X;
 			c.Y = g_sBoss.m_cLocation.Y;
@@ -113,8 +113,6 @@ void bossHealthAi()
 		if ((trap[i].X == g_sBoss.m_cLocation.X) && (trap[i].Y == g_sBoss.m_cLocation.Y))
 		{
 			bossLife -= 1;
-			//hitTarget[i] = true;
-
 		}
 		if ((bossLife == 0) && ((trap[i].X == g_sBoss.m_cLocation.X) && (trap[i].Y == g_sBoss.m_cLocation.Y)))
 		{
@@ -136,27 +134,14 @@ void renderBossHealth()
 
 	for (int i = 0; i <= bossLife; i++)
 	{
-		g_Console.writeToBuffer(bossHealthBar, (char)(3),0x0A);
+		g_Console.writeToBuffer(bossHealthBar, (char)(3),0x0C);
 		bossHealthBar.X++;
 	}
-
-	/*for (int i = 0; i < 9; i++)
-	{
-		if (hitTarget[i] == true)
-		{
-			renderTrapTrigger(trap[i]);
-		}
-
-	}*/
-	/*g_Console.writeToBuffer(c,(char)3,0x03);*/
 }
-
-
 
 void renderBoss()
 {
-	
-	//Draw location of Boss
+	//Draw Boss
 	WORD charColor = 0x0C;
 	if (bossAlive == true)
 	{
@@ -165,6 +150,4 @@ void renderBoss()
 			g_Console.writeToBuffer(coordSave[i], (char)65, charColor);
 		}
 	}
-
-	
 }

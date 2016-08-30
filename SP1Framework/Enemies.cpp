@@ -17,56 +17,58 @@ void EnemiesAi(COORD Enemy)
 
 	for (int i = 0; i < 9; i++)
 	{
-		if ((Enemies[i].X > 0 && g_sChar.m_cLocation.X - Enemies[i].X > 0)	//Detect Right  //Lesser than 0 
-			&& (g_sChar.m_cLocation.Y == Enemies[i].Y)												//Greater than -5
-			&& (g_sChar.m_cLocation.X - Enemies[i].X <= 5))											// -5 < x < 0
+		if (i != 2)
 		{
-			Detect = true;
-		}
-		else if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemies[i].X < 0) //Detect Left
-			&& (g_sChar.m_cLocation.Y == Enemies[i].Y)
-			&& (g_sChar.m_cLocation.X - Enemies[i].X >= -5))
-		{
-			Detect = true;
-		}
-		else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y > 0) // Detect Down
-			&& (g_sChar.m_cLocation.X == Enemies[i].X)
-			&& (g_sChar.m_cLocation.Y - Enemies[i].Y <= 5))
-		{
-			Detect = true;
-		}
-		else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y < 0) //Detect Up
-			&& (g_sChar.m_cLocation.X == Enemies[i].X)
-			&& (g_sChar.m_cLocation.Y - Enemies[i].Y >= -5))
-		{
-			Detect = true;
-		}
-
-		if (Detect == true)
-		{
-			if (g_sChar.m_cLocation.Y < Enemies[i].Y && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#'))
+			if ((Enemies[i].X > 0 && g_sChar.m_cLocation.X - Enemies[i].X > 0)	//Detect Right  //Lesser than 0 
+				&& (g_sChar.m_cLocation.Y == Enemies[i].Y)										//Greater than -7
+				&& (g_sChar.m_cLocation.X - Enemies[i].X <= 7))									// -7 < x < 0
 			{
-				Enemies[i].Y--;
+				Detect = true;
 			}
-			else if (g_sChar.m_cLocation.Y > Enemies[i].Y && (mapSize[Enemies[i].X][Enemies[i].Y + 1] != '#'))
+			else if ((g_sChar.m_cLocation.X > 0 && g_sChar.m_cLocation.X - Enemies[i].X < 0) //Detect Left
+				&& (g_sChar.m_cLocation.Y == Enemies[i].Y)
+				&& (g_sChar.m_cLocation.X - Enemies[i].X >= -7))
 			{
-				Enemies[i].Y++;
+				Detect = true;
+			}
+			else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y > 0) // Detect Down
+				&& (g_sChar.m_cLocation.X == Enemies[i].X)
+				&& (g_sChar.m_cLocation.Y - Enemies[i].Y <= 7))
+			{
+				Detect = true;
+			}
+			else if ((g_sChar.m_cLocation.Y > 0 && g_sChar.m_cLocation.Y - Enemies[i].Y < 0) //Detect Up
+				&& (g_sChar.m_cLocation.X == Enemies[i].X)
+				&& (g_sChar.m_cLocation.Y - Enemies[i].Y >= -7))
+			{
+				Detect = true;
 			}
 
-			if (g_sChar.m_cLocation.X < Enemies[i].X && (mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#'))
+			if (Detect == true)
 			{
-				Enemies[i].X--;
+
+
+				if (g_sChar.m_cLocation.Y < Enemies[i].Y && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#'))
+				{
+					Enemies[i].Y--;
+				}
+				else if (g_sChar.m_cLocation.Y > Enemies[i].Y && (mapSize[Enemies[i].X][Enemies[i].Y + 1] != '#'))
+				{
+					Enemies[i].Y++;
+				}
+
+				if (g_sChar.m_cLocation.X < Enemies[i].X && (mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#'))
+				{
+					Enemies[i].X--;
+				}
+				else if (g_sChar.m_cLocation.X > Enemies[i].X && (mapSize[Enemies[i].X + 1][Enemies[i].Y] != '#'))
+				{
+					Enemies[i].X++;
+				}
 			}
-			else if (g_sChar.m_cLocation.X > Enemies[i].X && (mapSize[Enemies[i].X + 1][Enemies[i].Y] != '#'))
+			else
 			{
-				Enemies[i].X++;
-			}
-		}
-		else
-		{
-			if (i != 2)
-			{
-				if (patrol == 1 && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#'))
+				if (patrol == 1 && (mapSize[Enemies[i].X][Enemies[i].Y - 1] != '#')) // random patrol
 				{
 					Enemies[i].Y--;
 				}
@@ -84,62 +86,59 @@ void EnemiesAi(COORD Enemy)
 					Enemies[i].X++;
 				}
 			}
-			else
+		}
+		else
+		{
+			for (unsigned loop = 1; loop != 5; loop++) // circular patrol
 			{
-				for (unsigned loop = 1; loop != 5; loop++)
+				switch (loop)
 				{
-					switch (loop)
+				case 1:
+				{
+					if ((mapSize[Enemies[2].X][Enemies[2].Y + 1] != '#') &&
+						Enemies[2].Y != 22 && Enemies[2].X == 56)
 					{
-					case 1:
+						Enemies[2].Y++;
+					}
+					break;
+				}
+				case 2:
+				{
+					if ((mapSize[Enemies[2].X + 1][Enemies[2].Y] != '#') &&
+						Enemies[2].X != 63 && Enemies[2].Y == 21)
 					{
-						if ((mapSize[Enemies[2].X][Enemies[2].Y + 1] != '#') &&
-							Enemies[2].Y != 24 && Enemies[2].X == 50)
-						{
-							Enemies[2].Y++;
+						Enemies[2].X++;
+					}
+					break;
+				}
+				case 3:
+				{
+					if ((mapSize[Enemies[2].X][Enemies[2].Y - 1] != '#') &&
+						Enemies[2].Y != 19 && Enemies[2].X == 62)
+					{
+						Enemies[2].Y--;
+					}
+					break;
+				}
+				case 4:
+				{
+					if ((mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#') &&
+						Enemies[2].X != 56 && Enemies[2].Y == 19)
+					{
+						Enemies[2].X--;
+					}
+					break;
+				}
 
-						}
-						break;
-					}
-					case 2:
-					{
-						if ((mapSize[Enemies[2].X + 1][Enemies[2].Y] != '#') &&
-							Enemies[2].X != 70 && Enemies[2].Y == 23)
-						{
+				if (loop == 4)
+				{
+					loop = 1;
+				}
 
-							Enemies[2].X++;
-						}
-						break;
-					}
-					case 3:
-					{
-						if ((mapSize[Enemies[2].X][Enemies[2].Y - 1] != '#') &&
-							Enemies[2].Y != 17 && Enemies[2].X == 69)
-						{
-							Enemies[2].Y--;
-
-						}
-						break;
-					}
-					case 4:
-					{
-						if ((mapSize[Enemies[i].X - 1][Enemies[i].Y] != '#') &&
-							Enemies[2].X != 50 && Enemies[2].Y == 17)
-						{
-							Enemies[2].X--;
-
-						}
-						break;
-					}
-						
-					if (loop == 4)
-					{
-						loop = 1;
-					}
-
-					}
 				}
 			}
 		}
+	
 		if ((Enemies[i].X == g_sChar.m_cLocation.X) && (Enemies[i].Y == g_sChar.m_cLocation.Y)
 			&& encounterCheck[i] == 0)
 			{
@@ -167,8 +166,8 @@ void enemiesSpawn1()
 	Enemies[1].X = 18; // enemy 2 spawn location
 	Enemies[1].Y = 10;
 
-	Enemies[2].X = 50; // enemy 3 spawn location
-	Enemies[2].Y = 17;
+	Enemies[2].X = 56; // enemy 3 spawn location
+	Enemies[2].Y = 19; 
 
 }
 void enemiesSpawn2()
