@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include "RenderHighScore.h"
+#include "game.h"
 
 using namespace std;
 

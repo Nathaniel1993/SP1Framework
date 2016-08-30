@@ -125,6 +125,7 @@ void getInput(void)
 	g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_ENTER] = isKeyPressed(VK_RETURN);
 	g_abKeyPressed[K_LEFTCONTROL] = isKeyPressed(VK_LCONTROL);
+	g_abKeyPressed[K_BACK] = isKeyPressed(VK_BACK);
 	g_abKeyPressed[K_ONE] = isKeyPressed(0x31);
 	g_abKeyPressed[K_TWO] = isKeyPressed(0x32);
 	g_abKeyPressed[K_THREE] = isKeyPressed(0x33);
