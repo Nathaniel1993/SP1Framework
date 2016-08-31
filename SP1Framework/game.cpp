@@ -30,8 +30,7 @@ int Score = 0;
 int numkey=0;
 extern char mapSize[80][31];
 bool launchVicScreen = false;
-bool launchDefScreen = false;;
-
+bool launchDefScreen = false;
 
 double aiBounceTime1;
 double aiBounceTime2;
@@ -75,7 +74,9 @@ void init(void)
 	/*-----------------------------------------------------------*/
 	// sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
+	
 	PlaySound(TEXT("Temple.wav"), NULL, SND_ASYNC | SND_LOOP);
+
 	g_sChar.m_cLocation.X = g_Console.getConsoleSize().X - 2;
 	g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 
@@ -86,7 +87,7 @@ void init(void)
 
 	g_sChar.m_bActive = true;
 	// sets the width, height and the font name to use in the console
-	g_Console.setConsoleFont(0, 16, L"Consolas");
+	g_Console.setConsoleFont(0, 16, L"Arial");
 }
 
 //--------------------------------------------------------------
@@ -214,11 +215,3 @@ void render()
 	renderFramerate();  // renders debug information, frame rate, elapsed time, etc
 	renderToScreen();   // dump the contents of the buffer to the screen, one frame worth of game
 }
-
-
-
-
-
-
-
-

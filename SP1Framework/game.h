@@ -114,4 +114,6 @@ void BoulderIn();
 void renderScore();
 void renderSight();
 
+void renderLegend();
+
 #endif // _GAME_H

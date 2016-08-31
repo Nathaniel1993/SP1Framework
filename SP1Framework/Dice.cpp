@@ -4,12 +4,12 @@
 #include "loadfile.h"
 #include <time.h>
 
-extern char dice1[80][31];
-extern char dice2[80][31];
-extern char dice3[80][31];
-extern char dice4[80][31];
-extern char dice5[80][31];
-extern char dice6[80][31];
+extern char dice1[100][31];
+extern char dice2[100][31];
+extern char dice3[100][31];
+extern char dice4[100][31];
+extern char dice5[100][31];
+extern char dice6[100][31];
 
 extern bool g_abKeyPressed[K_COUNT];
 bool launchDice = false;

@@ -98,7 +98,7 @@ void BossAi()
 			coordSave[0] = c;
 		}
 	}
-	Bounce.bossBounceTime = g_dElapsedTime + 0.2;
+	Bounce.bossBounceTime = g_dElapsedTime + 0.17;
 }
 void bossHealthAi()
 {
@@ -125,7 +125,7 @@ void bossHealthAi()
 	}
 
 
-	Bounce.bossHealthBounceTime = g_dElapsedTime + 0.125;
+	Bounce.bossHealthBounceTime = g_dElapsedTime + 0.2;
 }
 void renderBossHealth()
 {

@@ -23,6 +23,8 @@ extern bool	   launchDice;
 extern bool splashScreenload;
 extern bool torchPossession;
 
+extern bool soundOn;
+
 extern int g_MapNo;
 extern int Score;
 int keys = 4;
@@ -67,6 +69,8 @@ void splashScreenWait()    // waits for time to pass in splash screen
 		g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y - 2;
 		g_eGameState = S_GAME;
 		g_MapNo = 1;
+		PlaySound(TEXT("Temple.wav"), NULL, SND_ASYNC | SND_LOOP);
+	
 		mapLoader = true;
 	}
 	if (g_abKeyPressed[K_LEFTCONTROL])
@@ -98,10 +102,11 @@ void gameplay()            // gameplay logic
 	moveCharacter();   // moves the character, collision detection, physics, etc
 	if (g_MapNo == 1)
 	{
-		for (int a = 0; a < 3; a++)
+		for (int a = 0; a <= 2; a++)
 		{
 			EnemiesAi(Enemies[a]);
 		}
+		
 	}
 	if (g_MapNo == 2)
 	{
@@ -109,9 +114,11 @@ void gameplay()            // gameplay logic
 		{
 			EnemiesAi(Enemies[a]);
 		}
+		
 	}
 	if (g_MapNo == 3)
 	{
+		
 		BossAi();
 		damageBoss();
 		healthAi();
@@ -171,13 +178,15 @@ void moveCharacter()
 	// providing a beep sound whenver we shift the character
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
-		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '|')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '#' && mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != '|'
+			&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] != 'E')
 		{
 			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == 'F')
 			{
 				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '#'
 					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'A'
-					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '|')
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != '|'
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] != 'E')
 				{
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 2] = 'F';
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] = ' ';
@@ -208,13 +217,15 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
-		if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '|')
+		if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != '|'
+			&& mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] != 'E')
 		{
 			if (mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] == 'F')
 			{
 				if (mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '#'
 					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'A'
-					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '|')
+					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != '|'
+					&& mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] != 'E')
 				{
 					mapSize[g_sChar.m_cLocation.X - 2][g_sChar.m_cLocation.Y] = 'F';
 					mapSize[g_sChar.m_cLocation.X - 1][g_sChar.m_cLocation.Y] = ' ';
@@ -245,13 +256,15 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
-		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#'&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '|')
+		if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '#'&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != '|'
+			&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] != 'E')
 		{
 			if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] == 'F')
 			{
 				if (mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '#'
 					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'A'
-					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '|')
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != '|'
+					&& mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] != 'E')
 				{
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 2] = 'F';
 					mapSize[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y + 1] = ' ';
@@ -282,13 +295,15 @@ void moveCharacter()
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '|')
+		if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '#' && mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != '|'
+			&& mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] != 'E')
 		{
 			if (mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == 'F')
 			{
 				if (mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '#'
 					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'A'
-					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '|')
+					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != '|'
+					&& mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] != 'E')
 				{
 					mapSize[g_sChar.m_cLocation.X + 2][g_sChar.m_cLocation.Y] = 'F';
 					mapSize[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] = ' ';

@@ -284,6 +284,10 @@ void renderSight()
 				}
 				else
 				{
+					if (mapSize[VisionX][VisionY] == 'X')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
+					}
 					if (mapSize[VisionX][VisionY] == 'T')
 					{
 						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0E);
@@ -358,6 +362,10 @@ void renderSight()
 				}
 				else
 				{
+					if (mapSize[VisionX][VisionY] == 'X')
+					{
+						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
+					}
 					if (mapSize[VisionX][VisionY] == '.')
 					{
 						g_Console.writeToBuffer(c, mapSize[VisionX][VisionY], 0x0A);
