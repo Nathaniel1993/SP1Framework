@@ -110,7 +110,7 @@ void gameplay()            // gameplay logic
 	}
 	if (g_MapNo == 2)
 	{
-		for (int a = 3; a < 9; a++)
+		for (int a = 3; a <= 8; a++)
 		{
 			EnemiesAi(Enemies[a]);
 		}

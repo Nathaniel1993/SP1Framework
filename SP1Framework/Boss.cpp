@@ -125,7 +125,7 @@ void bossHealthAi()
 	}
 
 
-	Bounce.bossHealthBounceTime = g_dElapsedTime + 0.2;
+	Bounce.bossHealthBounceTime = g_dElapsedTime + 0.225;
 }
 void renderBossHealth()
 {
