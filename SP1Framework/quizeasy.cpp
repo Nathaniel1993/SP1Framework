@@ -145,19 +145,22 @@ void renderEasyQuestion1()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Which is the heaviest? 100g feathers,", 0x0A);
+	g_Console.writeToBuffer(l, "Which is the heaviest? ", 0x0A);
 	l.X = 46;
 	l.Y = 4;
-	g_Console.writeToBuffer(l, " 100g bricks or 100g stones ?", 0x0A);
-	l.Y = 6;
+	g_Console.writeToBuffer(l, "100g bricks, 100g stones ", 0x0A);
+	l.X = 46;
+	l.Y = 5;
+	g_Console.writeToBuffer(l, "100g feathers?", 0x0A);
+	l.Y = 7;
 	g_Console.writeToBuffer(l, "1: Stones", 0x0B);
-	l.Y = 8;
+	l.Y = 9;
 	g_Console.writeToBuffer(l, "2: Bricks", 0x0B);
-	l.Y = 10;
+	l.Y = 11;
 	g_Console.writeToBuffer(l, "3: Feathers", 0x0B);
-	l.Y = 12;
+	l.Y = 13;
 	g_Console.writeToBuffer(l, "4: All of the above" ,0x0B);
-	l.Y = 14;
+	l.Y = 15;
 	g_Console.writeToBuffer(l, "5: None of the above", 0x0B);
 }
 
@@ -223,9 +226,11 @@ void renderEasyQuestion5()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "What is a chicken classified under?", 0x0A);
+	g_Console.writeToBuffer(l, "What is a chicken classified ", 0x0A);
 	l.X = 46;
 	l.Y = 4;
+	g_Console.writeToBuffer(l, "under?", 0x0A);
+	l.Y = 6;
 	g_Console.writeToBuffer(l, "1: Insects", 0x0B);
 	l.Y = 8;
 	g_Console.writeToBuffer(l, "2: Mammals", 0x0B);
