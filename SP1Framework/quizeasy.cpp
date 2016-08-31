@@ -17,7 +17,7 @@ void EasyQuestion1()
 		return;
 	}
 	Bounce.easyQuizBounceTime = 0.0;
-	if (g_abKeyPressed[K_THREE])
+	if (g_abKeyPressed[K_FIVE])
 	{
 		giveScore = true;
 		g_eGameState = S_GAME;
@@ -145,20 +145,20 @@ void renderEasyQuestion1()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Who is the richest man in the", 0x0A);
+	g_Console.writeToBuffer(l, "Which is the heaviest? 100g feathers,", 0x0A);
 	l.X = 46;
 	l.Y = 4;
-	g_Console.writeToBuffer(l, "world?", 0x0A);
+	g_Console.writeToBuffer(l, " 100g bricks or 100g stones ?", 0x0A);
 	l.Y = 6;
-	g_Console.writeToBuffer(l, "1: Tim Cook", 0x0B);
+	g_Console.writeToBuffer(l, "1: Stones", 0x0B);
 	l.Y = 8;
-	g_Console.writeToBuffer(l, "2: Warren Buffet", 0x0B);
+	g_Console.writeToBuffer(l, "2: Bricks", 0x0B);
 	l.Y = 10;
-	g_Console.writeToBuffer(l, "3: Bill Gates", 0x0B);
+	g_Console.writeToBuffer(l, "3: Feathers", 0x0B);
 	l.Y = 12;
-	g_Console.writeToBuffer(l, "4: Mark Zuckerberg", 0x0B);
+	g_Console.writeToBuffer(l, "4: All of the above" ,0x0B);
 	l.Y = 14;
-	g_Console.writeToBuffer(l, "5: Lee Byung Chul", 0x0B);
+	g_Console.writeToBuffer(l, "5: None of the above", 0x0B);
 }
 
 void renderEasyQuestion2()
@@ -187,20 +187,17 @@ void renderEasyQuestion3()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Which is the most subscribed", 0x0A);
-	l.X = 46;
-	l.Y = 4;
-	g_Console.writeToBuffer(l, "channel in YouTube?", 0x0A);
+	g_Console.writeToBuffer(l, "Which is a predator?", 0x0A);
 	l.Y = 6;
-	g_Console.writeToBuffer(l, "1: Smosh", 0x0B);
+	g_Console.writeToBuffer(l, "1: Earthworm", 0x0B);
 	l.Y = 8;
-	g_Console.writeToBuffer(l, "2: Pewdiepie", 0x0B);
+	g_Console.writeToBuffer(l, "2: Snake", 0x0B);
 	l.Y = 10;
-	g_Console.writeToBuffer(l, "3: YOGSCAST Lewis & Simon", 0x0B);
+	g_Console.writeToBuffer(l, "3: Caterpillar", 0x0B);
 	l.Y = 12;
-	g_Console.writeToBuffer(l, "4: LoL Esports", 0x0B);
+	g_Console.writeToBuffer(l, "4: Giraffe", 0x0B);
 	l.Y = 14;
-	g_Console.writeToBuffer(l, "5: Sky Does Minecraft", 0x0B);
+	g_Console.writeToBuffer(l, "5: None of the above", 0x0B);
 }
 
 void renderEasyQuestion4()
@@ -208,17 +205,17 @@ void renderEasyQuestion4()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Who is the first football legend?", 0x0A);
+	g_Console.writeToBuffer(l, "Red + Blue what colour do you get?", 0x0A);
 	l.Y = 6;
-	g_Console.writeToBuffer(l, "1: Cristiano Ronaldo", 0x0B);
+	g_Console.writeToBuffer(l, "1: Green", 0x0B);
 	l.Y = 8;
-	g_Console.writeToBuffer(l, "2: Lionel Messi", 0x0B);
+	g_Console.writeToBuffer(l, "2: Yellow", 0x0B);
 	l.Y = 10;
-	g_Console.writeToBuffer(l, "3: Diego Maradona", 0x0B);
+	g_Console.writeToBuffer(l, "3: Pink", 0x0B);
 	l.Y = 12;
-	g_Console.writeToBuffer(l, "4: Peter Schmeichel", 0x0B);
+	g_Console.writeToBuffer(l, "4: Orange", 0x0B);
 	l.Y = 14;
-	g_Console.writeToBuffer(l, "5: Pele", 0x0B);
+	g_Console.writeToBuffer(l, "5: Purple", 0x0B);
 }
 
 void renderEasyQuestion5()
@@ -226,18 +223,16 @@ void renderEasyQuestion5()
 	COORD l;
 	l.X = 46;
 	l.Y = 3;
-	g_Console.writeToBuffer(l, "Where is the first youth olympics", 0x0A);
+	g_Console.writeToBuffer(l, "What is a chicken classified under?", 0x0A);
 	l.X = 46;
 	l.Y = 4;
-	g_Console.writeToBuffer(l, "held?", 0x0A);
-	l.Y = 6;
-	g_Console.writeToBuffer(l, "1: Brazil", 0x0B);
+	g_Console.writeToBuffer(l, "1: Insects", 0x0B);
 	l.Y = 8;
-	g_Console.writeToBuffer(l, "2: U.S.A", 0x0B);
+	g_Console.writeToBuffer(l, "2: Mammals", 0x0B);
 	l.Y = 10;
-	g_Console.writeToBuffer(l, "3: China", 0x0B);
+	g_Console.writeToBuffer(l, "3: Amphibians", 0x0B);
 	l.Y = 12;
-	g_Console.writeToBuffer(l, "4: Singapore", 0x0B);
+	g_Console.writeToBuffer(l, "4: Birds", 0x0B);
 	l.Y = 14;
-	g_Console.writeToBuffer(l, "5: Australia", 0x0B);
+	g_Console.writeToBuffer(l, "5: Fishes", 0x0B);
 }

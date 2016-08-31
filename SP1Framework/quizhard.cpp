@@ -144,25 +144,25 @@ void renderHardQuestion1()
 	COORD l;
 	l.X = 45;
 	l.Y = 7;
-	g_Console.writeToBuffer(l, "Who wrote the 'Sword Art Online'", 0x0A);
+	g_Console.writeToBuffer(l, "How many stars are in ", 0x0A);
 	l.X = 45;
 	l.Y = 8;
-	g_Console.writeToBuffer(l, "series?", 0x0A);
+	g_Console.writeToBuffer(l, "the American flag?", 0x0A);
 	l.Y = 28;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "1: Reki Kawahara", 0x0B);
+	g_Console.writeToBuffer(l, "1: 50", 0x0B);
 	l.Y = 28;
 	l.X = 50;
-	g_Console.writeToBuffer(l, "2: Sui Ishida", 0x0B);
+	g_Console.writeToBuffer(l, "2: 49", 0x0B);
 	l.Y = 29;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "3: Yuto Tsukuda", 0x0B);
+	g_Console.writeToBuffer(l, "3: 48", 0x0B);
 	l.Y = 29;
 	l.X = 50;
-	g_Console.writeToBuffer(l, "4: Eiichiro Oda", 0x0B);
+	g_Console.writeToBuffer(l, "4: 40", 0x0B);
 	l.Y = 30;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "5: Tite Kubo", 0x0B);
+	g_Console.writeToBuffer(l, "5: 51", 0x0B);
 }
 
 void renderHardQuestion2()
@@ -196,25 +196,22 @@ void renderHardQuestion3()
 	COORD l;
 	l.X = 50;
 	l.Y = 7;
-	g_Console.writeToBuffer(l, "What is the game that inspired", 0x0A);
-	l.X = 50;
-	l.Y = 8;
-	g_Console.writeToBuffer(l, "making of MOBA games?", 0x0A);
+	g_Console.writeToBuffer(l, "What is Newton's 1st law?", 0x0A);
 	l.Y = 28;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "1: League of Legends", 0x0B);
+	g_Console.writeToBuffer(l, "1: Force = mass x acceleration", 0x0B);
 	l.Y = 28;
 	l.X = 50;
-	g_Console.writeToBuffer(l, "2: Dota 2", 0x0B);
+	g_Console.writeToBuffer(l, "2: Action = reaction", 0x0B);
 	l.Y = 29;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "3: Warcraft 3", 0x0B);
+	g_Console.writeToBuffer(l, "3: What is in motion stays in motion", 0x0B);
 	l.Y = 29;
 	l.X = 50;
-	g_Console.writeToBuffer(l, "4: Starcraft", 0x0B);
+	g_Console.writeToBuffer(l, "4: Gravity", 0x0B);
 	l.Y = 30;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "5: Dota", 0x0B);
+	g_Console.writeToBuffer(l, "5: None of the above", 0x0B);
 }
 
 void renderHardQuestion4()
@@ -222,25 +219,22 @@ void renderHardQuestion4()
 	COORD l;
 	l.X = 50;
 	l.Y = 7;
-	g_Console.writeToBuffer(l, "How are Pokemon game versions", 0x0A);
-	l.X = 50;
-	l.Y = 8;
-	g_Console.writeToBuffer(l, "named after?", 0x0A);
+	g_Console.writeToBuffer(l, "What did Peter piper picked?", 0x0A);
 	l.Y = 28;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "1: Main antagonist of the game", 0x0B);
+	g_Console.writeToBuffer(l, "1: Corn", 0x0B);
 	l.Y = 28;
 	l.X = 40;
-	g_Console.writeToBuffer(l, "2: Randomly think of a name", 0x0B);
+	g_Console.writeToBuffer(l, "2: Apples", 0x0B);
 	l.Y = 29;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "3: The name of the region", 0x0B);
+	g_Console.writeToBuffer(l, "3: Oranges", 0x0B);
 	l.Y = 29;
 	l.X = 40;
-	g_Console.writeToBuffer(l, "4: Main protagonist in the manga", 0x0B);
+	g_Console.writeToBuffer(l, "4: Pickled peppers", 0x0B);
 	l.Y = 30;
 	l.X = 3;
-	g_Console.writeToBuffer(l, "5: The anime title of the region", 0x0B);
+	g_Console.writeToBuffer(l, "5: Flowers", 0x0B);
 }
 
 void renderHardQuestion5()
